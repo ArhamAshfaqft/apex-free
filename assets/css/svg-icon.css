@@ -1,0 +1,139 @@
+/* ==========================================================================
+   APEX ADDONS - SVG & ICON WIDGET STYLES
+   ========================================================================== */
+
+.eas-svg-icon-wrap {
+	width: 100%;
+}
+
+.eas-svg-icon-container {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: var(--eas-svg-size, 50px);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transform: rotate(var(--eas-svg-rotate, 0deg));
+	box-sizing: border-box;
+	text-decoration: none;
+}
+
+.eas-svg-icon-container i {
+	font-size: var(--eas-svg-size, 50px);
+	width: var(--eas-svg-size, 50px);
+	height: var(--eas-svg-size, 50px);
+	line-height: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.eas-svg-icon-container svg {
+	display: block;
+	width: var(--eas-svg-size, 50px);
+	height: var(--eas-svg-size, 50px);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	fill: currentColor;
+}
+
+.eas-svg-icon-container img {
+	display: block;
+	width: var(--eas-svg-size, 50px);
+	height: var(--eas-svg-size, 50px);
+	object-fit: contain;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.eas-svg-icon-container svg * {
+	transition: fill 0.3s ease, stroke 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+}
+
+/* --- Default View --- */
+.eas-svg-icon-wrap.eas-view-default .eas-svg-icon-container {
+	color: var(--eas-svg-primary-color, #6366f1);
+	background: transparent;
+	border: none;
+}
+
+/* Force Fill Mode */
+.eas-svg-icon-wrap.eas-view-default.eas-mode-fill .eas-svg-icon-container svg,
+.eas-svg-icon-wrap.eas-view-default.eas-mode-fill .eas-svg-icon-container svg * {
+	fill: var(--eas-svg-primary-color, #6366f1) !important;
+}
+
+/* Force Stroke Mode */
+.eas-svg-icon-wrap.eas-view-default.eas-mode-stroke .eas-svg-icon-container svg,
+.eas-svg-icon-wrap.eas-view-default.eas-mode-stroke .eas-svg-icon-container svg * {
+	stroke: var(--eas-svg-primary-color, #6366f1) !important;
+	fill: none !important;
+}
+
+/* Force Both Mode */
+.eas-svg-icon-wrap.eas-view-default.eas-mode-both .eas-svg-icon-container svg,
+.eas-svg-icon-wrap.eas-view-default.eas-mode-both .eas-svg-icon-container svg * {
+	fill: var(--eas-svg-primary-color, #6366f1) !important;
+	stroke: var(--eas-svg-primary-color, #6366f1) !important;
+}
+
+
+/* --- Stacked View --- */
+.eas-svg-icon-wrap.eas-view-stacked .eas-svg-icon-container {
+	background-color: var(--eas-svg-primary-color, #6366f1);
+	color: var(--eas-svg-secondary-color, #ffffff);
+	padding: var(--eas-svg-padding, 15px);
+	border-radius: var(--eas-svg-border-radius, 50%);
+	border: none;
+}
+
+/* Force Fill Mode */
+.eas-svg-icon-wrap.eas-view-stacked.eas-mode-fill .eas-svg-icon-container svg,
+.eas-svg-icon-wrap.eas-view-stacked.eas-mode-fill .eas-svg-icon-container svg * {
+	fill: var(--eas-svg-secondary-color, #ffffff) !important;
+}
+
+/* Force Stroke Mode */
+.eas-svg-icon-wrap.eas-view-stacked.eas-mode-stroke .eas-svg-icon-container svg,
+.eas-svg-icon-wrap.eas-view-stacked.eas-mode-stroke .eas-svg-icon-container svg * {
+	stroke: var(--eas-svg-secondary-color, #ffffff) !important;
+	fill: none !important;
+}
+
+/* Force Both Mode */
+.eas-svg-icon-wrap.eas-view-stacked.eas-mode-both .eas-svg-icon-container svg,
+.eas-svg-icon-wrap.eas-view-stacked.eas-mode-both .eas-svg-icon-container svg * {
+	fill: var(--eas-svg-secondary-color, #ffffff) !important;
+	stroke: var(--eas-svg-secondary-color, #ffffff) !important;
+}
+
+
+/* --- Framed View --- */
+.eas-svg-icon-wrap.eas-view-framed .eas-svg-icon-container {
+	border-style: solid;
+	border-width: var(--eas-svg-border-width, 3px);
+	border-color: var(--eas-svg-primary-color, #6366f1);
+	background-color: var(--eas-svg-secondary-color, transparent);
+	color: var(--eas-svg-primary-color, #6366f1);
+	padding: var(--eas-svg-padding, 15px);
+	border-radius: var(--eas-svg-border-radius, 50%);
+}
+
+/* Force Fill Mode */
+.eas-svg-icon-wrap.eas-view-framed.eas-mode-fill .eas-svg-icon-container svg,
+.eas-svg-icon-wrap.eas-view-framed.eas-mode-fill .eas-svg-icon-container svg * {
+	fill: var(--eas-svg-primary-color, #6366f1) !important;
+}
+
+/* Force Stroke Mode */
+.eas-svg-icon-wrap.eas-view-framed.eas-mode-stroke .eas-svg-icon-container svg,
+.eas-svg-icon-wrap.eas-view-framed.eas-mode-stroke .eas-svg-icon-container svg * {
+	stroke: var(--eas-svg-primary-color, #6366f1) !important;
+	fill: none !important;
+}
+
+/* Force Both Mode */
+.eas-svg-icon-wrap.eas-view-framed.eas-mode-both .eas-svg-icon-container svg,
+.eas-svg-icon-wrap.eas-view-framed.eas-mode-both .eas-svg-icon-container svg * {
+	fill: var(--eas-svg-primary-color, #6366f1) !important;
+	stroke: var(--eas-svg-primary-color, #6366f1) !important;
+}

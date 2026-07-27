@@ -1,0 +1,143 @@
+/* Apex Horizontal Storytelling: complete Free baseline. */
+.eas-hscroll-track {
+	position: relative;
+	display: block;
+	width: 100vw;
+	max-width: 100vw;
+	margin-inline: calc(50% - 50vw);
+	box-sizing: border-box;
+}
+
+.eas-container-hscroll-active {
+	--eas-hscroll-accent: #7c3aed;
+	--eas-hscroll-progress-size: 4px;
+	--eas-hscroll-height: 100svh;
+}
+
+.eas-container-hscroll-active.eas-hscroll-ready {
+	position: sticky !important;
+	top: 0 !important;
+	width: 100vw !important;
+	max-width: 100vw !important;
+	height: var(--eas-hscroll-height) !important;
+	min-height: var(--eas-hscroll-height) !important;
+	overflow: hidden !important;
+	box-sizing: border-box !important;
+	isolation: isolate;
+}
+
+.eas-container-hscroll-active .eas-hscroll-inner {
+	display: flex !important;
+	flex-flow: row nowrap !important;
+	align-items: stretch;
+	width: max-content !important;
+	height: 100% !important;
+	max-width: none !important;
+	margin: 0 !important;
+	gap: 0 !important;
+	will-change: transform;
+	backface-visibility: hidden;
+	box-sizing: border-box !important;
+}
+
+.eas-container-hscroll-active.eas-hscroll-is-rtl .eas-hscroll-inner {
+	flex-direction: row-reverse !important;
+}
+
+.eas-container-hscroll-active .eas-hscroll-panel {
+	position: relative;
+	flex: 0 0 100vw !important;
+	width: 100vw !important;
+	max-width: 100vw !important;
+	height: 100% !important;
+	min-height: 100% !important;
+	margin: 0 !important;
+	box-sizing: border-box !important;
+	backface-visibility: hidden;
+}
+
+.eas-hscroll-progress {
+	position: absolute;
+	inset: 0 0 auto;
+	z-index: 30;
+	height: var(--eas-hscroll-progress-size);
+	background: color-mix(in srgb, var(--eas-hscroll-accent) 20%, transparent);
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.eas-hscroll-progress > span {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: var(--eas-hscroll-accent);
+	transform: scaleX(0);
+	transform-origin: left center;
+	will-change: transform;
+}
+
+.eas-hscroll-is-rtl .eas-hscroll-progress > span { transform-origin: right center; }
+
+.eas-hscroll-track.eas-hscroll-fallback {
+	width: 100%;
+	max-width: 100%;
+	height: auto !important;
+	margin-inline: 0;
+}
+
+.eas-hscroll-track.eas-hscroll-fallback .eas-container-hscroll-active.eas-hscroll-ready {
+	position: relative !important;
+	top: auto !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	height: auto !important;
+	min-height: 0 !important;
+	overflow: visible !important;
+}
+
+.eas-hscroll-fallback-vertical .eas-hscroll-inner {
+	flex-direction: column !important;
+	width: 100% !important;
+	height: auto !important;
+	transform: none !important;
+}
+
+.eas-hscroll-fallback-vertical .eas-hscroll-panel {
+	flex: 0 0 auto !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	height: auto !important;
+	min-height: 0 !important;
+	transform: none !important;
+}
+
+.eas-hscroll-fallback-swipe.eas-hscroll-ready {
+	overflow-x: auto !important;
+	overflow-y: hidden !important;
+	scroll-snap-type: x mandatory;
+	overscroll-behavior-inline: contain;
+	-webkit-overflow-scrolling: touch;
+}
+
+.eas-hscroll-fallback-swipe .eas-hscroll-inner {
+	height: auto !important;
+	transform: none !important;
+}
+
+.eas-hscroll-fallback-swipe .eas-hscroll-panel {
+	min-height: min(100svh, 800px) !important;
+	scroll-snap-align: start;
+	transform: none !important;
+}
+
+.elementor-editor-active .eas-hscroll-progress { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+	.eas-container-hscroll-active *,
+	.eas-container-hscroll-active *::before,
+	.eas-container-hscroll-active *::after {
+		scroll-behavior: auto !important;
+		transition-duration: .01ms !important;
+		animation-duration: .01ms !important;
+	}
+}

@@ -1,0 +1,28 @@
+/* Site Logo CSS */
+.eas-site-logo-wrap {
+    display: inline-block;
+    max-width: 100%;
+}
+
+.eas-site-logo-container {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.eas-site-logo-img {
+    height: auto;
+    max-width: 100%;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.eas-site-logo-text {
+    font-family: inherit;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}

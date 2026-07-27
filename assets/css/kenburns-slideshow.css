@@ -1,0 +1,249 @@
+/* ==========================================================================
+   APEX ADDONS - CINEMATIC BACKGROUND SLIDESHOW CSS
+   ========================================================================== */
+
+.eas-has-kb-slideshow {
+	position: relative !important;
+	z-index: 1; /* Establish local stacking context */
+}
+
+/* Slideshow Container */
+.eas-kb-slideshow-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	z-index: 0; /* Behind section content */
+	pointer-events: none; /* Let pointer events pass through to content */
+}
+
+/* Individual Slides */
+.eas-kb-slide {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	z-index: 1;
+	transition: opacity var(--eas-kb-trans, 1.5s) ease-in-out;
+}
+
+.eas-kb-slide.eas-kb-slide-active {
+	opacity: 1;
+	z-index: 2;
+}
+
+.eas-kb-slide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transform-origin: center center;
+	will-change: transform;
+	backface-visibility: hidden;
+}
+
+/* Ken Burns Keyframes Trigger Classes */
+.eas-kb-slide-active.eas-kb-zoom-in img,
+.eas-kb-slide-leaving.eas-kb-zoom-in img {
+	animation: easKenBurnsIn var(--eas-kb-dur, 5s) ease-in-out forwards;
+}
+
+.eas-kb-slide-active.eas-kb-zoom-out img,
+.eas-kb-slide-leaving.eas-kb-zoom-out img {
+	animation: easKenBurnsOut var(--eas-kb-dur, 5s) ease-in-out forwards;
+}
+
+.eas-kb-slide-active.eas-kb-pan-left img,
+.eas-kb-slide-leaving.eas-kb-pan-left img {
+	animation: easKenBurnsLeft var(--eas-kb-dur, 5s) ease-in-out forwards;
+}
+
+.eas-kb-slide-active.eas-kb-pan-right img,
+.eas-kb-slide-leaving.eas-kb-pan-right img {
+	animation: easKenBurnsRight var(--eas-kb-dur, 5s) ease-in-out forwards;
+}
+
+/* Background Overlay */
+.eas-kb-slideshow-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 5; /* Pinned on top of slides but behind content */
+	background-color: rgba(0, 0, 0, 0.25); /* Default fallback */
+	pointer-events: none;
+}
+
+/* Keyframes Definitions */
+@keyframes easKenBurnsIn {
+	0% {
+		transform: scale(1) translate(0, 0);
+	}
+	100% {
+		transform: scale(1.15) translate(-1%, -1%);
+	}
+}
+
+@keyframes easKenBurnsOut {
+	0% {
+		transform: scale(1.15) translate(1%, 1%);
+	}
+	100% {
+		transform: scale(1) translate(0, 0);
+	}
+}
+
+@keyframes easKenBurnsLeft {
+	0% {
+		transform: scale(1.1) translate(1%, 0);
+	}
+	100% {
+		transform: scale(1.12) translate(-2%, 0);
+	}
+}
+
+@keyframes easKenBurnsRight {
+	0% {
+		transform: scale(1.1) translate(-1%, 0);
+	}
+	100% {
+		transform: scale(1.12) translate(2%, 0);
+	}
+}
+
+/* Pinned Right-Side Navigation Overlay */
+.eas-kb-dots {
+	position: absolute;
+	right: 24px;
+	top: 50%;
+	transform: translateY(-50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 12px;
+	z-index: 10;
+	pointer-events: auto; /* Enable cursor interactions */
+}
+
+/* Common Dot Base Styles */
+.eas-kb-dot {
+	cursor: pointer;
+	border: none;
+	outline: none;
+	padding: 0;
+	margin: 0;
+	background: none;
+}
+
+/* 1. Sleek Dots Style */
+.eas-kb-nav-dots .eas-kb-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0.3);
+	transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+	            background-color 0.3s ease, 
+	            box-shadow 0.3s ease;
+}
+
+.eas-kb-nav-dots .eas-kb-dot:hover {
+	transform: scale(1.2);
+}
+
+.eas-kb-nav-dots .eas-kb-dot.eas-kb-dot-active {
+	transform: scale(1.4);
+	background-color: #ffffff;
+	box-shadow: 0 0 8px #ffffff;
+}
+
+/* 2. Scaling Lines Style */
+.eas-kb-nav-lines .eas-kb-dot {
+	width: 3px;
+	height: 12px;
+	border-radius: 2px;
+	background-color: rgba(255, 255, 255, 0.3);
+	transition: height 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+	            background-color 0.3s ease, 
+	            box-shadow 0.3s ease;
+}
+
+.eas-kb-nav-lines .eas-kb-dot:hover {
+	background-color: rgba(255, 255, 255, 0.6);
+}
+
+.eas-kb-nav-lines .eas-kb-dot.eas-kb-dot-active {
+	height: 24px;
+	background-color: #ffffff;
+	box-shadow: 0 0 6px #ffffff;
+}
+
+/* 3. Stacked Numbers Style */
+.eas-kb-nav-numbers .eas-kb-dot {
+	font-size: 11px;
+	font-weight: 500;
+	font-family: 'Space Mono', monospace, sans-serif;
+	color: rgba(255, 255, 255, 0.4);
+	border: 1px solid transparent;
+	padding: 4px;
+	transition: color 0.3s ease, 
+	            transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.eas-kb-nav-numbers .eas-kb-dot:hover {
+	color: rgba(255, 255, 255, 0.8);
+	transform: scale(1.1);
+}
+
+.eas-kb-nav-numbers .eas-kb-dot.eas-kb-dot-active {
+	color: #ffffff;
+	transform: scale(1.25);
+	font-weight: 700;
+	text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* 4. Ring and Dot Style */
+.eas-kb-nav-ring .eas-kb-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0.4);
+	position: relative;
+	transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.eas-kb-nav-ring .eas-kb-dot:hover {
+	transform: scale(1.2);
+}
+
+.eas-kb-nav-ring .eas-kb-dot:after {
+	content: '';
+	position: absolute;
+	top: -5px;
+	left: -5px;
+	right: -5px;
+	bottom: -5px;
+	border: 1.5px solid currentColor;
+	border-radius: 50%;
+	opacity: 0;
+	transform: scale(0.5);
+	transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.eas-kb-nav-ring .eas-kb-dot.eas-kb-dot-active {
+	background-color: #ffffff;
+	transform: scale(1.1);
+}
+
+.eas-kb-nav-ring .eas-kb-dot.eas-kb-dot-active:after {
+	opacity: 1;
+	transform: scale(1);
+}
+
+

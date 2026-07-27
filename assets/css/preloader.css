@@ -1,0 +1,94 @@
+#eas-preloader-wrap {
+	align-items: center;
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	left: 0;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	z-index: 999999;
+}
+
+.eas-preloader-panel {
+	background: var(--eas-preloader-bg, #fff);
+	position: absolute;
+	transition: transform var(--eas-preloader-transition, 0.6s) cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.eas-transition-split_vertical .eas-panel-left { height: 100%; left: 0; top: 0; width: 50%; }
+.eas-transition-split_vertical .eas-panel-right { height: 100%; right: 0; top: 0; width: 50%; }
+.eas-preloader-wrap-loaded.eas-transition-split_vertical .eas-panel-left { transform: translateX(-100%); }
+.eas-preloader-wrap-loaded.eas-transition-split_vertical .eas-panel-right { transform: translateX(100%); }
+
+.eas-preloader-center-content {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: relative;
+	transition: opacity 0.3s ease;
+	z-index: 2;
+}
+
+.eas-preloader-wrap-loaded .eas-preloader-center-content { opacity: 0; }
+body.eas-preloader-active { overflow: hidden !important; }
+
+.eas-preloader-spinner {
+	border: max(2px, calc(var(--eas-preloader-size, 50px) / 12)) solid rgba(0, 0, 0, 0.08);
+	border-radius: 50%;
+	border-top-color: var(--eas-preloader-accent, #0f172a);
+	height: var(--eas-preloader-size, 50px);
+	width: var(--eas-preloader-size, 50px);
+	animation: eas-spin 1s linear infinite;
+}
+
+.eas-preloader-bar-container {
+	background: rgba(0, 0, 0, 0.08);
+	height: 4px;
+	overflow: hidden;
+	position: relative;
+	width: var(--eas-preloader-size, 200px);
+}
+
+.eas-preloader-bar {
+	animation: eas-bar-grow 1.8s ease-in-out infinite;
+	background: var(--eas-preloader-accent, #0f172a);
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 0;
+}
+
+.eas-preloader-logo { animation: eas-logo-pulse 1.5s ease-in-out infinite; display: block; max-width: 100%; }
+.eas-preloader-percent { color: var(--eas-preloader-text, #0f172a); font-size: 36px; font-weight: 700; }
+.eas-preloader-text-label { color: var(--eas-preloader-text, #0f172a); margin-top: 15px; text-align: center; }
+.eas-preloader-ripple { height: var(--eas-preloader-size, 50px); position: relative; width: var(--eas-preloader-size, 50px); }
+.eas-preloader-ripple span { animation: eas-ripple 1.2s cubic-bezier(0, 0.2, 0.8, 1) infinite; border: 3px solid var(--eas-preloader-accent, #0f172a); border-radius: 50%; box-sizing: border-box; position: absolute; }
+.eas-preloader-ripple span:nth-child(2) { animation-delay: -0.6s; }
+.eas-preloader-wave { align-items: center; display: flex; gap: 6px; height: var(--eas-preloader-size, 50px); }
+.eas-preloader-wave span { animation: eas-wave 1.2s ease-in-out infinite; background: var(--eas-preloader-accent, #0f172a); border-radius: 3px; height: 45%; width: 6px; }
+.eas-preloader-wave span:nth-child(2) { animation-delay: -0.3s; }
+.eas-preloader-wave span:nth-child(3) { animation-delay: -0.2s; }
+.eas-preloader-wave span:nth-child(4) { animation-delay: -0.1s; }
+.eas-preloader-orbit { animation: eas-spin 1.2s linear infinite; height: var(--eas-preloader-size, 50px); position: relative; width: var(--eas-preloader-size, 50px); }
+.eas-preloader-orbit span { background: var(--eas-preloader-accent, #0f172a); border-radius: 50%; height: 10px; left: calc(50% - 5px); position: absolute; top: 0; transform-origin: 5px calc(var(--eas-preloader-size, 50px) / 2); width: 10px; }
+.eas-preloader-orbit span:nth-child(2) { transform: rotate(45deg); }
+.eas-preloader-orbit span:nth-child(3) { transform: rotate(90deg); }
+.eas-preloader-orbit span:nth-child(4) { transform: rotate(135deg); }
+.eas-preloader-orbit span:nth-child(5) { transform: rotate(180deg); }
+.eas-preloader-orbit span:nth-child(6) { transform: rotate(225deg); }
+.eas-preloader-orbit span:nth-child(7) { transform: rotate(270deg); }
+.eas-preloader-orbit span:nth-child(8) { transform: rotate(315deg); }
+
+@keyframes eas-spin { to { transform: rotate(360deg); } }
+@keyframes eas-bar-grow { 0% { left: 0; width: 0; } 50% { left: 0; width: 100%; } 100% { left: 100%; width: 0; } }
+@keyframes eas-logo-pulse { 0%, 100% { opacity: 0.8; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.05); } }
+@keyframes eas-ripple { 0% { height: 0; left: 50%; opacity: 1; top: 50%; width: 0; } 100% { height: 100%; left: 0; opacity: 0; top: 0; width: 100%; } }
+@keyframes eas-wave { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(2.2); } }
+
+@media (prefers-reduced-motion: reduce) {
+	#eas-preloader-wrap * { animation-duration: 0.01ms !important; }
+}

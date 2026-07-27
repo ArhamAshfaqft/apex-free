@@ -1,0 +1,285 @@
+/**
+ * Interactive Image Hotspots Widget Styles
+ * Scoped to .apexadfo-hotspots-wrapper
+ *
+ * @package ApexAddonsForElementor
+ */
+
+.apexadfo-hotspots-wrapper {
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.apexadfo-hotspots-container {
+	position: relative;
+	width: 100%;
+	overflow: visible; /* Prevent clipping tooltips near image boundaries */
+	display: block;
+	box-sizing: border-box;
+}
+
+.apexadfo-hotspots-base-img {
+	display: block;
+	width: 100%;
+	height: auto;
+	max-width: 100%;
+	margin: 0 auto;
+	box-sizing: border-box;
+	border-radius: inherit;
+}
+
+/* Hotspot item container */
+.apexadfo-hotspot-item {
+	position: absolute;
+	z-index: 5;
+	transform: translate(-50%, -50%);
+	pointer-events: auto;
+}
+
+.apexadfo-hotspot-item.apexadfo-is-active {
+	z-index: 50;
+}
+
+/* Hotspot pin button */
+.apexadfo-hotspot-pin {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	padding: 0;
+	background-color: #3b82f6;
+	color: #ffffff;
+	border: 2px solid #ffffff;
+	border-radius: 50%;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+	cursor: pointer;
+	outline: none;
+	user-select: none;
+	transition: transform 0.25s ease, background-color 0.25s ease;
+	box-sizing: border-box;
+}
+
+.apexadfo-hotspot-pin:hover,
+.apexadfo-hotspot-pin:focus {
+	transform: scale(1.15);
+	background-color: #2563eb;
+}
+
+.apexadfo-hotspot-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	line-height: 1;
+}
+
+.apexadfo-hotspot-icon svg {
+	width: 14px;
+	height: 14px;
+	fill: currentColor;
+}
+
+.apexadfo-hotspot-badge {
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+/* Pulse animation element */
+.apexadfo-hotspot-pulse {
+	position: absolute;
+	top: -6px;
+	left: -6px;
+	right: -6px;
+	bottom: -6px;
+	border-radius: 50%;
+	border: 2px solid #3b82f6;
+	animation: apexadfo-hotspot-pulse-anim 2s infinite ease-out;
+	pointer-events: none;
+}
+
+@keyframes apexadfo-hotspot-pulse-anim {
+	0% {
+		transform: scale(0.8);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(1.8);
+		opacity: 0;
+	}
+}
+
+/* Tooltip card base */
+.apexadfo-hotspot-tooltip {
+	position: absolute;
+	width: 260px;
+	padding: 16px;
+	background-color: #ffffff;
+	border-radius: 10px;
+	box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.2);
+	border: 1px solid #f3f4f6;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+	z-index: 100;
+	box-sizing: border-box;
+}
+
+.apexadfo-hotspot-item.apexadfo-is-active .apexadfo-hotspot-tooltip {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+}
+
+/* Tooltip arrow */
+.apexadfo-tooltip-arrow {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-style: solid;
+}
+
+/* Placement Positions */
+.apexadfo-tooltip-top {
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-12px);
+	margin-bottom: 8px;
+}
+.apexadfo-hotspot-item.apexadfo-is-active .apexadfo-tooltip-top {
+	transform: translateX(-50%) translateY(0);
+}
+.apexadfo-tooltip-top .apexadfo-tooltip-arrow {
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	border-width: 8px 8px 0 8px;
+	border-color: #ffffff transparent transparent transparent;
+}
+
+.apexadfo-tooltip-bottom {
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%) translateY(12px);
+	margin-top: 8px;
+}
+.apexadfo-hotspot-item.apexadfo-is-active .apexadfo-tooltip-bottom {
+	transform: translateX(-50%) translateY(0);
+}
+.apexadfo-tooltip-bottom .apexadfo-tooltip-arrow {
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	border-width: 0 8px 8px 8px;
+	border-color: transparent transparent #ffffff transparent;
+}
+
+.apexadfo-tooltip-left {
+	right: 100%;
+	top: 50%;
+	transform: translateY(-50%) translateX(-12px);
+	margin-right: 8px;
+}
+.apexadfo-hotspot-item.apexadfo-is-active .apexadfo-tooltip-left {
+	transform: translateY(-50%) translateX(0);
+}
+.apexadfo-tooltip-left .apexadfo-tooltip-arrow {
+	left: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	border-width: 8px 0 8px 8px;
+	border-color: transparent transparent transparent #ffffff;
+}
+
+.apexadfo-tooltip-right {
+	left: 100%;
+	top: 50%;
+	transform: translateY(-50%) translateX(12px);
+	margin-left: 8px;
+}
+.apexadfo-hotspot-item.apexadfo-is-active .apexadfo-tooltip-right {
+	transform: translateY(-50%) translateX(0);
+}
+.apexadfo-tooltip-right .apexadfo-tooltip-arrow {
+	right: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	border-width: 8px 8px 8px 0;
+	border-color: transparent #ffffff transparent transparent;
+}
+
+/* Tooltip internal content */
+.apexadfo-tooltip-close {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 20px;
+	height: 20px;
+	line-height: 18px;
+	text-align: center;
+	background: transparent;
+	border: none;
+	font-size: 18px;
+	color: #9ca3af;
+	cursor: pointer;
+	padding: 0;
+}
+.apexadfo-tooltip-close:hover {
+	color: #111827;
+}
+
+.apexadfo-tooltip-media img {
+	width: 100%;
+	height: auto;
+	border-radius: 6px;
+	margin-bottom: 10px;
+	display: block;
+}
+
+.apexadfo-tooltip-title {
+	margin: 0 0 6px 0;
+	font-size: 16px;
+	font-weight: 700;
+	color: #111827;
+	line-height: 1.3;
+}
+
+.apexadfo-tooltip-desc {
+	margin: 0 0 12px 0;
+	font-size: 13px;
+	color: #4b5563;
+	line-height: 1.4;
+}
+
+.apexadfo-tooltip-btn {
+	display: inline-block;
+	padding: 6px 14px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #ffffff;
+	background-color: #3b82f6;
+	border-radius: 6px;
+	text-decoration: none;
+	transition: background-color 0.2s ease;
+}
+.apexadfo-tooltip-btn:hover {
+	background-color: #2563eb;
+	color: #ffffff;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+	.apexadfo-hotspot-pin,
+	.apexadfo-hotspot-tooltip,
+	.apexadfo-tooltip-btn {
+		transition: none !important;
+	}
+	.apexadfo-hotspot-pulse {
+		animation: none !important;
+	}
+}

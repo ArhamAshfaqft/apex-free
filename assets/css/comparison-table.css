@@ -1,0 +1,414 @@
+/**
+ * Comparison Table Widget Styles
+ * Scoped to .apexadfo-comparison-table-wrapper
+ *
+ * @package ApexAddonsForElementor
+ */
+
+.apexadfo-comparison-table-wrapper {
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.apexadfo-comparison-table-container {
+	position: relative;
+	width: 100%;
+	padding-top: 14px; /* Space for top ribbon badge */
+	box-sizing: border-box;
+}
+
+.apexadfo-comparison-table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	margin: 0;
+	background-color: #ffffff;
+	border-radius: 12px;
+	box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+	border: 1px solid #e5e7eb;
+}
+
+/* Rounded corners for table cells */
+.apexadfo-comparison-table tr:first-child th:first-child {
+	border-top-left-radius: 12px;
+}
+
+.apexadfo-comparison-table tr:first-child th:last-child {
+	border-top-right-radius: 12px;
+}
+
+.apexadfo-comparison-table tr:last-child td:first-child {
+	border-bottom-left-radius: 12px;
+}
+
+.apexadfo-comparison-table tr:last-child td:last-child {
+	border-bottom-right-radius: 12px;
+}
+
+/* ----------------------------------------------------
+ * TABLE HEADER & PLAN COLUMNS
+ * ---------------------------------------------------- */
+.apexadfo-table-th {
+	padding: 28px 16px 24px 16px;
+	text-align: center;
+	vertical-align: top;
+	background-color: #f9fafb;
+	border-bottom: 2px solid #e5e7eb;
+	position: relative;
+	box-sizing: border-box;
+}
+
+.apexadfo-th-feature {
+	text-align: left;
+	width: 25%;
+	background-color: #ffffff;
+}
+
+.apexadfo-th-plan {
+	position: relative;
+	transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Featured / Highlighted Column Header */
+.apexadfo-th-plan.apexadfo-is-featured {
+	background-color: #eff6ff;
+	border-bottom-color: #3b82f6;
+}
+
+/* Badge / Ribbon */
+.apexadfo-plan-ribbon {
+	position: absolute;
+	top: -12px;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 4px 14px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	color: #ffffff;
+	background-color: #3b82f6;
+	border-radius: 20px;
+	box-shadow: 0 4px 10px rgba(59, 130, 246, 0.35);
+	white-space: nowrap;
+	z-index: 10;
+}
+
+.apexadfo-plan-title {
+	margin: 0 0 6px 0;
+	font-size: 20px;
+	font-weight: 700;
+	color: #111827;
+	line-height: 1.2;
+}
+
+.apexadfo-plan-subtitle {
+	margin: 0 0 12px 0;
+	font-size: 13px;
+	color: #6b7280;
+	line-height: 1.4;
+}
+
+/* Price Formatting */
+.apexadfo-plan-price-wrap {
+	display: flex;
+	align-items: baseline;
+	justify-content: center;
+	gap: 2px;
+	margin-bottom: 16px;
+}
+
+.apexadfo-plan-currency {
+	font-size: 18px;
+	font-weight: 600;
+	color: #374151;
+}
+
+.apexadfo-plan-amount {
+	font-size: 36px;
+	font-weight: 800;
+	color: #111827;
+	line-height: 1;
+}
+
+.apexadfo-plan-period {
+	font-size: 13px;
+	color: #6b7280;
+	font-weight: 500;
+}
+
+/* Header Action Button */
+.apexadfo-plan-cta-btn {
+	display: inline-block;
+	width: 100%;
+	max-width: 180px;
+	padding: 10px 20px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #ffffff;
+	background-color: #3b82f6;
+	border-radius: 8px;
+	text-decoration: none;
+	transition: background-color 0.2s ease, transform 0.2s ease;
+	box-sizing: border-box;
+}
+
+.apexadfo-plan-cta-btn:hover {
+	background-color: #2563eb;
+	color: #ffffff;
+	transform: translateY(-2px);
+}
+
+.apexadfo-is-featured .apexadfo-plan-cta-btn {
+	background-color: #2563eb;
+}
+
+/* ----------------------------------------------------
+ * FEATURE ROWS & CELL CONTENT
+ * ---------------------------------------------------- */
+.apexadfo-table-tr {
+	transition: background-color 0.2s ease;
+}
+
+.apexadfo-table-tr:nth-child(even) {
+	background-color: #f9fafb;
+}
+
+.apexadfo-table-tr:hover {
+	background-color: #f3f4f6;
+}
+
+.apexadfo-table-td {
+	padding: 16px;
+	vertical-align: middle;
+	border-bottom: 1px solid #e5e7eb;
+	font-size: 14px;
+	color: #374151;
+	box-sizing: border-box;
+}
+
+.apexadfo-table-tr:last-child .apexadfo-table-td {
+	border-bottom: none;
+}
+
+.apexadfo-td-feature {
+	text-align: left;
+	font-weight: 600;
+	color: #111827;
+}
+
+.apexadfo-td-value {
+	text-align: center;
+}
+
+/* Highlighted Column Cells */
+.apexadfo-td-value.apexadfo-is-featured {
+	background-color: rgba(239, 246, 255, 0.4);
+	font-weight: 600;
+}
+
+.apexadfo-table-tr:nth-child(even) .apexadfo-td-value.apexadfo-is-featured {
+	background-color: rgba(219, 234, 254, 0.4);
+}
+
+/* Icons in Cells */
+.apexadfo-cell-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+	line-height: 1;
+}
+
+.apexadfo-cell-icon svg {
+	width: 20px;
+	height: 20px;
+	fill: currentColor;
+}
+
+.apexadfo-cell-icon-check {
+	color: #10b981;
+}
+
+.apexadfo-cell-icon-cross {
+	color: #9ca3af;
+}
+
+.apexadfo-cell-text {
+	display: inline-block;
+	line-height: 1.4;
+}
+
+/* ----------------------------------------------------
+ * INTERACTIVE TOOLTIPS
+ * ---------------------------------------------------- */
+.apexadfo-tooltip-wrap {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	margin-left: 6px;
+	cursor: pointer;
+}
+
+.apexadfo-tooltip-trigger {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 18px;
+	height: 18px;
+	font-size: 11px;
+	font-weight: 700;
+	color: #6b7280;
+	background-color: #e5e7eb;
+	border-radius: 50%;
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.apexadfo-tooltip-wrap:hover .apexadfo-tooltip-trigger,
+.apexadfo-tooltip-wrap:focus .apexadfo-tooltip-trigger {
+	background-color: #3b82f6;
+	color: #ffffff;
+}
+
+.apexadfo-tooltip-bubble {
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-8px);
+	width: 220px;
+	padding: 10px 14px;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 1.4;
+	color: #ffffff;
+	background-color: #1f2937;
+	border-radius: 8px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+	pointer-events: none;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+	z-index: 100;
+	text-align: left;
+}
+
+.apexadfo-tooltip-bubble::after {
+	content: '';
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+	border-width: 6px;
+	border-style: solid;
+	border-color: #1f2937 transparent transparent transparent;
+}
+
+.apexadfo-tooltip-wrap:hover .apexadfo-tooltip-bubble,
+.apexadfo-tooltip-wrap:focus-within .apexadfo-tooltip-bubble,
+.apexadfo-tooltip-wrap.apexadfo-is-active .apexadfo-tooltip-bubble {
+	opacity: 1;
+	visibility: visible;
+	transform: translateX(-50%) translateY(-4px);
+}
+
+/* ----------------------------------------------------
+ * VIEWPORT BREAKPOINT VISIBILITY RULES
+ * ---------------------------------------------------- */
+
+/* Desktop & Tablet (768px+): ALWAYS hide mobile stack cards wrapper */
+@media (min-width: 768px) {
+	.apexadfo-mobile-stack-cards-wrapper {
+		display: none !important;
+	}
+	.apexadfo-comparison-table {
+		display: table !important;
+	}
+}
+
+/* Mobile (767px & smaller) */
+@media (max-width: 767px) {
+	/* Stack Mode: Hide standard table, show plan cards */
+	.apexadfo-mobile-stack .apexadfo-comparison-table {
+		display: none !important;
+	}
+	.apexadfo-mobile-stack .apexadfo-mobile-stack-cards-wrapper {
+		display: block !important;
+	}
+
+	/* Scroll Mode: Show standard table with overflow scroll, hide plan cards */
+	.apexadfo-mobile-scroll .apexadfo-comparison-table {
+		display: table !important;
+		min-width: 600px;
+	}
+	.apexadfo-mobile-scroll .apexadfo-mobile-stack-cards-wrapper {
+		display: none !important;
+	}
+
+	/* Mobile Cards Styling */
+	.apexadfo-mobile-stack-cards-wrapper {
+		padding-top: 14px;
+	}
+
+	.apexadfo-mobile-plan-card {
+		margin-bottom: 24px;
+		background-color: #ffffff;
+		border: 1px solid #e5e7eb;
+		border-radius: 12px;
+		overflow: visible;
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+		position: relative;
+	}
+
+	.apexadfo-mobile-plan-card.apexadfo-has-ribbon {
+		margin-top: 16px;
+	}
+
+	.apexadfo-mobile-plan-header {
+		padding: 28px 16px 20px 16px;
+		text-align: center;
+		background-color: #f9fafb;
+		border-bottom: 2px solid #e5e7eb;
+		position: relative;
+		border-top-left-radius: 11px;
+		border-top-right-radius: 11px;
+	}
+
+	.apexadfo-mobile-plan-header.apexadfo-is-featured {
+		background-color: #eff6ff;
+		border-bottom-color: #3b82f6;
+		padding-top: 32px;
+	}
+
+	.apexadfo-mobile-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 14px 16px;
+		border-bottom: 1px solid #e5e7eb;
+		font-size: 14px;
+	}
+
+	.apexadfo-mobile-row:last-child {
+		border-bottom: none;
+	}
+
+	.apexadfo-mobile-feature-name {
+		font-weight: 600;
+		color: #111827;
+	}
+
+	.apexadfo-mobile-feature-value {
+		text-align: right;
+	}
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+	.apexadfo-tooltip-bubble,
+	.apexadfo-plan-cta-btn,
+	.apexadfo-table-tr {
+		transition: none !important;
+	}
+}

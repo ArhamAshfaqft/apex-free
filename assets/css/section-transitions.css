@@ -1,0 +1,51 @@
+.eas-section-transition-ready {
+	--eas-transition-x: 0px;
+	--eas-transition-y: 0px;
+	--eas-transition-scale: 1;
+	--eas-transition-opacity: 1;
+	--eas-transition-radius: 0px;
+	position: relative;
+	z-index: 2;
+	translate: var(--eas-transition-x) var(--eas-transition-y);
+	scale: var(--eas-transition-scale);
+	opacity: var(--eas-transition-opacity);
+	clip-path: inset(0 round var(--eas-transition-radius));
+	will-change: translate, scale, opacity, clip-path;
+	backface-visibility: hidden;
+	transform-style: preserve-3d;
+}
+
+.eas-section-transition-source {
+	translate: var(--eas-transition-source-x, 0px) var(--eas-transition-source-y, 0px);
+	scale: var(--eas-transition-source-scale, 1);
+	opacity: var(--eas-transition-source-opacity, 1);
+	filter: var(--eas-transition-source-base-filter, ) blur(var(--eas-transition-source-blur, 0px));
+	will-change: translate, scale, opacity, filter;
+	backface-visibility: hidden;
+}
+
+/* Pin the previous section only while its reveal is actively crossing the
+ * viewport. Once progress completes, it must return to normal document flow
+ * so it cannot cover unrelated sections farther down the page. */
+.eas-section-transition-source.eas-section-transition-source-active {
+	position: sticky;
+	top: var(--eas-transition-pin-top, 0px);
+	z-index: 1;
+}
+
+.eas-section-transition-ready.eas-section-transition-complete {
+	clip-path: var(--eas-transition-base-clip, none);
+	will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.eas-section-transition-ready,
+	.eas-section-transition-source {
+		translate: none !important;
+		scale: 1 !important;
+		opacity: 1 !important;
+		filter: none !important;
+		clip-path: none !important;
+		will-change: auto !important;
+	}
+}

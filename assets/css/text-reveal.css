@@ -1,0 +1,11 @@
+/* Apex base text scroll reveal. Premium visual modes are supplied by Pro. */
+.eas-text-reveal-active { opacity: 1 !important; }
+
+.eas-text-reveal-span,
+.eas-tr-unit {
+	display: inline;
+	position: relative;
+	color: var(--eas-tr-inactive-color, rgba(255, 255, 255, .25));
+	transition: color .15s cubic-bezier(.25, 1, .5, 1);
+	will-change: color;
+}

@@ -1,0 +1,211 @@
+/* ==========================================================================
+   APEX ADDONS - FLEX ACCORDION WIDGET CSS
+   ========================================================================== */
+
+/* Main Accordion Container */
+.eas-flex-accordion {
+	display: flex;
+	width: 100%;
+	height: var(--eas-fa-height, 500px);
+	gap: var(--eas-fa-gap, 16px);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	box-sizing: border-box;
+}
+
+/* Horizontal Layout */
+.eas-flex-accordion-horizontal {
+	flex-direction: row;
+}
+
+/* Vertical Layout */
+.eas-flex-accordion-vertical {
+	flex-direction: column;
+}
+
+/* Individual Card Item */
+.eas-flex-accordion-item {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	flex: 1 1 0%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	overflow: hidden;
+	border-radius: var(--eas-fa-radius, 16px);
+	cursor: pointer;
+	box-sizing: border-box;
+	transition: flex 0.65s cubic-bezier(0.25, 1, 0.3, 1),
+	            box-shadow 0.3s ease;
+	will-change: flex, transform;
+}
+
+/* Active / Expanded Item State */
+.eas-flex-accordion-item.eas-active {
+	flex: 3.5 1 0%;
+}
+
+/* Shadow Hover Effects */
+.eas-flex-accordion-item:hover {
+	box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+}
+
+/* Dark Background Overlay for Text Contrast */
+.eas-flex-accordion-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+	z-index: 1;
+	transition: opacity 0.4s ease;
+}
+
+.eas-flex-accordion-item.eas-active .eas-flex-accordion-overlay {
+	background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.85) 100%);
+}
+
+/* Content Container wrapper */
+.eas-flex-accordion-content {
+	position: relative;
+	z-index: 2;
+	padding: 30px;
+	width: 100%;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	height: 100%;
+}
+
+/* Top Detail / Item Identifier (Number or Icon) */
+.eas-flex-accordion-meta-wrap {
+	display: flex;
+	align-items: center;
+	margin-bottom: 12px;
+	opacity: 0.8;
+	transition: opacity 0.3s ease;
+}
+
+.eas-flex-accordion-number {
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: #ffffff;
+}
+
+.eas-flex-accordion-icon {
+	font-size: 1.2rem;
+	color: #ffffff;
+	line-height: 1;
+}
+
+/* Title (Stays visible in both collapsed and expanded states) */
+.eas-flex-accordion-title {
+	color: #ffffff;
+	font-size: 1.8rem;
+	font-weight: 700;
+	margin: 0;
+	line-height: 1.2;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	transition: font-size 0.4s ease, color 0.3s ease;
+}
+
+.eas-flex-accordion-item.eas-active .eas-flex-accordion-title {
+	font-size: 2.2rem;
+	white-space: normal;
+}
+
+/* Collapsed title styling helper for horizontal views */
+.eas-flex-accordion-horizontal .eas-flex-accordion-item:not(.eas-active) .eas-flex-accordion-title {
+	/* Truncate aggressively to keep clean layout */
+	max-width: 100%;
+}
+
+/* Collapsed state hidden details (Description & Buttons) */
+.eas-flex-accordion-details {
+	opacity: 0;
+	max-height: 0;
+	overflow: hidden;
+	transform: translateY(15px);
+	transition: opacity 0.35s cubic-bezier(0.25, 1, 0.3, 1),
+	            max-height 0.4s cubic-bezier(0.25, 1, 0.3, 1),
+	            transform 0.45s cubic-bezier(0.25, 1, 0.3, 1);
+	will-change: opacity, transform, max-height;
+}
+
+/* Expanded state revealed details */
+.eas-flex-accordion-item.eas-active .eas-flex-accordion-details {
+	opacity: 1;
+	max-height: 300px; /* Safe upper bound for slide animation */
+	transform: translateY(0);
+	margin-top: 15px;
+}
+
+/* Description text inside expanded details */
+.eas-flex-accordion-desc {
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 1rem;
+	line-height: 1.5;
+	margin: 0 0 20px 0;
+}
+
+/* Call to Action Button */
+.eas-flex-accordion-btn {
+	display: inline-block;
+	background-color: #ffffff;
+	color: #1e1e1e;
+	padding: 10px 24px;
+	border-radius: 30px;
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-decoration: none;
+	align-self: flex-start;
+	transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.eas-flex-accordion-btn:hover {
+	background-color: #a855f7;
+	color: #ffffff;
+	transform: translateY(-2px);
+}
+
+/* --------------------------------==========================================
+   RESPONSIVE DESIGN ADAPTATIONS
+   ========================================================================== */
+@media (max-width: 768px) {
+	.eas-flex-accordion {
+		/* Always vertical on mobile for readability */
+		flex-direction: column !important;
+		height: auto;
+		min-height: 600px;
+	}
+	
+	.eas-flex-accordion-item {
+		flex: 1 1 70px;
+		height: 120px;
+	}
+
+	.eas-flex-accordion-item.eas-active {
+		flex: 4 1 280px;
+		height: 320px;
+	}
+
+	.eas-flex-accordion-title {
+		font-size: 1.4rem;
+	}
+
+	.eas-flex-accordion-item.eas-active .eas-flex-accordion-title {
+		font-size: 1.6rem;
+	}
+
+	.eas-flex-accordion-content {
+		padding: 20px;
+	}
+}

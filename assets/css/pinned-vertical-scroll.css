@@ -1,0 +1,80 @@
+/* Apex Pinned Vertical Scroll - complete Free baseline. */
+.apexadfo-pvs-active {
+	position: relative;
+	min-width: 0;
+}
+
+.apexadfo-pvs-stage {
+	position: sticky !important;
+	top: var(--apexadfo-pvs-top, 0px);
+	height: var(--apexadfo-pvs-stage-height, 100vh);
+	min-height: 240px;
+	overflow: hidden;
+	min-width: 0;
+	width: 100%;
+	align-self: flex-start;
+}
+
+.apexadfo-pvs-track {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	width: 100%;
+	gap: var(--apexadfo-pvs-gap, 24px);
+	transform: translate3d(0, var(--apexadfo-pvs-translate, 0px), 0);
+	will-change: transform;
+	backface-visibility: hidden;
+}
+
+.apexadfo-pvs-panel {
+	position: relative;
+	flex: 0 0 auto !important;
+	min-width: 0;
+}
+
+.apexadfo-pvs-fallback {
+	height: auto !important;
+	min-height: 0 !important;
+}
+
+.apexadfo-pvs-fallback .apexadfo-pvs-stage {
+	position: relative !important;
+	top: auto !important;
+	height: auto !important;
+	min-height: 0;
+	overflow: visible;
+}
+
+.apexadfo-pvs-fallback .apexadfo-pvs-track {
+	transform: none !important;
+	will-change: auto;
+}
+
+.apexadfo-pvs-editor-preview::before {
+	content: "Pinned Vertical Scroll - natural editor layout";
+	display: block;
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	z-index: 999;
+	padding: 4px 8px;
+	border-radius: 4px;
+	background: rgba(17, 24, 39, .82);
+	color: #fff;
+	font: 500 10px/1.3 system-ui, sans-serif;
+	pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.apexadfo-pvs-active,
+	.apexadfo-pvs-stage,
+	.apexadfo-pvs-track {
+		height: auto !important;
+		min-height: 0 !important;
+		position: relative !important;
+		top: auto !important;
+		transform: none !important;
+		overflow: visible !important;
+		will-change: auto !important;
+	}
+}

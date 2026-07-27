@@ -1,0 +1,309 @@
+/* ==========================================================================
+   APEX ADDONS - TEAM MEMBER SHOWCASE CSS
+   ========================================================================== */
+
+/* Main Container Wrapper */
+.eas-team-member-showcase {
+	position: relative;
+	width: 100%;
+}
+
+/* Grid Layout */
+.eas-team-member-grid {
+	display: grid;
+	grid-template-columns: repeat(var(--eas-tm-cols, 3), 1fr);
+	gap: var(--eas-tm-gap, 30px);
+	width: 100%;
+}
+
+/* Single Team Card */
+.eas-team-member-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	position: relative;
+	box-sizing: border-box;
+}
+
+/* Photo Wrapper */
+.eas-team-member-photo-wrap {
+	position: relative;
+	width: var(--eas-tm-photo-width, 240px);
+	height: var(--eas-tm-photo-height, 240px);
+	overflow: hidden;
+	border-radius: var(--eas-tm-photo-radius, 50%);
+	margin-bottom: 20px;
+	box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+	background-color: #f3f4f6; /* Fallback background for placeholder */
+	will-change: transform;
+	transform: translateZ(0); /* Promotes to hardware GPU layer */
+	backface-visibility: hidden;
+}
+
+/* Fallback user silhouette profile placeholder */
+.eas-team-member-photo-wrap::before {
+	content: '';
+	position: absolute;
+	top: 32%;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 25%;
+	height: 25%;
+	background-color: #d1d5db;
+	border-radius: 50%;
+	box-shadow: 0 26px 0 12px #d1d5db;
+	opacity: 0.7;
+	z-index: 0;
+}
+
+/* Main Image */
+.eas-team-member-photo-wrap img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	position: relative;
+	z-index: 1; /* Render above placeholder silhouette */
+	transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+	            filter 0.5s ease;
+	will-change: transform, filter;
+}
+
+/* --------------------------------------------------------------------------
+   HOVER OVERLAYS & PRESETS
+-------------------------------------------------------------------------- */
+
+/* Base Overlay Screen */
+.eas-team-member-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--eas-tm-overlay-bg, linear-gradient(180deg, rgba(168, 85, 247, 0.2) 0%, rgba(168, 85, 247, 0.8) 100%));
+	opacity: 0;
+	z-index: 2;
+	transition: opacity 0.4s ease;
+	will-change: opacity;
+	pointer-events: none; /* Let pointer events reach links inside */
+}
+
+/* Social Links Center Floating Bar */
+.eas-team-member-socials {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+	z-index: 3;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.4s ease;
+}
+
+.eas-team-member-card:hover .eas-team-member-overlay {
+	opacity: 1;
+}
+
+.eas-team-member-card:hover .eas-team-member-socials {
+	opacity: 1;
+	pointer-events: auto; /* Enable clicks on hover */
+}
+
+/* Individual Social Icon Button */
+.eas-team-member-social-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--eas-tm-social-size, 38px);
+	height: var(--eas-tm-social-size, 38px);
+	background-color: var(--eas-tm-social-bg, #ffffff);
+	color: var(--eas-tm-social-color, #1e1e1e);
+	border-radius: var(--eas-tm-social-radius, 50%);
+	text-decoration: none;
+	transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.25),
+	            background-color 0.3s ease,
+	            color 0.3s ease;
+	will-change: transform;
+}
+
+.eas-team-member-social-link:hover {
+	background-color: var(--eas-tm-social-hover-bg, #1e1e1e);
+	color: var(--eas-tm-social-hover-color, #ffffff);
+	transform: scale(1.1) translateY(-2px);
+}
+
+.eas-team-member-social-link i {
+	font-size: 0.95rem;
+	line-height: 1;
+}
+
+/* ──────── PRESET 1: FADE ──────── */
+.eas-tm-preset-fade .eas-team-member-social-link {
+	transform: scale(0.7);
+	transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.25);
+}
+
+.eas-team-member-card:hover .eas-tm-preset-fade .eas-team-member-social-link {
+	transform: scale(1);
+}
+
+/* Staggered delay for socials reveal */
+.eas-tm-preset-fade .eas-team-member-social-link:nth-child(1) { transition-delay: 0.05s; }
+.eas-tm-preset-fade .eas-team-member-social-link:nth-child(2) { transition-delay: 0.1s; }
+.eas-tm-preset-fade .eas-team-member-social-link:nth-child(3) { transition-delay: 0.15s; }
+.eas-tm-preset-fade .eas-team-member-social-link:nth-child(4) { transition-delay: 0.2s; }
+
+
+/* ──────── PRESET 2: REVEAL (Grayscale to Color + Slide Up) ──────── */
+.eas-tm-preset-reveal img {
+	filter: grayscale(100%);
+}
+
+.eas-team-member-card:hover .eas-tm-preset-reveal img {
+	filter: grayscale(0%);
+}
+
+.eas-tm-preset-reveal .eas-team-member-social-link {
+	transform: translateY(25px);
+	opacity: 0;
+	transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+}
+
+.eas-team-member-card:hover .eas-tm-preset-reveal .eas-team-member-social-link {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.eas-tm-preset-reveal .eas-team-member-social-link:nth-child(1) { transition-delay: 0.05s; }
+.eas-tm-preset-reveal .eas-team-member-social-link:nth-child(2) { transition-delay: 0.1s; }
+.eas-tm-preset-reveal .eas-team-member-social-link:nth-child(3) { transition-delay: 0.15s; }
+.eas-tm-preset-reveal .eas-team-member-social-link:nth-child(4) { transition-delay: 0.2s; }
+
+
+/* ──────── PRESET 3: ZOOM (Zoom Photo + Rotate Icons) ──────── */
+.eas-team-member-card:hover .eas-tm-preset-zoom img {
+	transform: scale(1.12);
+}
+
+.eas-tm-preset-zoom .eas-team-member-social-link {
+	transform: rotate(-60deg) scale(0.6);
+	opacity: 0;
+	transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+}
+
+.eas-team-member-card:hover .eas-tm-preset-zoom .eas-team-member-social-link {
+	transform: rotate(0deg) scale(1);
+	opacity: 1;
+}
+
+.eas-tm-preset-zoom .eas-team-member-social-link:nth-child(1) { transition-delay: 0.05s; }
+.eas-tm-preset-zoom .eas-team-member-social-link:nth-child(2) { transition-delay: 0.1s; }
+.eas-tm-preset-zoom .eas-team-member-social-link:nth-child(3) { transition-delay: 0.15s; }
+.eas-tm-preset-zoom .eas-team-member-social-link:nth-child(4) { transition-delay: 0.2s; }
+
+
+/* --------------------------------------------------------------------------
+   TEXT & DETAILS STYLES
+-------------------------------------------------------------------------- */
+.eas-team-member-name {
+	font-size: 1.35rem;
+	font-weight: 700;
+	color: #1e1e1e;
+	margin: 0 0 4px 0;
+	line-height: 1.25;
+	transition: color 0.3s ease;
+}
+
+.eas-team-member-designation {
+	font-size: 0.9rem;
+	font-weight: 500;
+	color: #666666;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin: 0;
+}
+
+
+/* --------------------------------------------------------------------------
+   SWIPER CAROUSEL STYLE OVERRIDES
+-------------------------------------------------------------------------- */
+.eas-team-member-carousel-wrap {
+	position: relative;
+	width: 100%;
+}
+
+.eas-team-member-carousel-wrap .swiper-container {
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+}
+
+/* Navigation Arrows */
+.eas-tm-arrow {
+	position: absolute;
+	top: calc(50% - 40px);
+	width: 44px;
+	height: 44px;
+	border: 1px solid;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	z-index: 10;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+	transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.2s;
+}
+
+.eas-tm-arrow:hover {
+	transform: scale(1.05);
+}
+
+.eas-tm-arrow-prev {
+	left: -22px;
+}
+
+.eas-tm-arrow-next {
+	right: -22px;
+}
+
+/* Dots Pagination */
+.eas-tm-dots {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+.eas-tm-dots .swiper-pagination-bullet {
+	cursor: pointer;
+	transition: background-color 0.3s, transform 0.3s;
+}
+
+.eas-tm-dots .swiper-pagination-bullet-active {
+	/* Colors and scale driven by Elementor controls */
+}
+
+/* ──────── RESPONSIVE ──────── */
+@media (max-width: 1024px) {
+	.eas-team-member-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.eas-tm-arrow-prev { left: -10px; }
+	.eas-tm-arrow-next { right: -10px; }
+}
+
+@media (max-width: 768px) {
+	.eas-team-member-grid {
+		grid-template-columns: 1fr;
+	}
+	.eas-team-member-photo-wrap {
+		width: 200px;
+		height: 200px;
+	}
+}

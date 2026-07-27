@@ -1,0 +1,36 @@
+/* ==========================================================================
+   APEX ADDONS - SCROLL PARALLAX TEXT WIDGET STYLES
+   ========================================================================== */
+
+.eas-scroll-parallax-text-wrap {
+	width: 100%;
+	overflow: hidden;
+	display: block;
+	position: relative;
+	box-sizing: border-box;
+	line-height: 1.2;
+}
+
+.eas-scroll-parallax-text-inner {
+	display: flex;
+	align-items: center;
+	white-space: nowrap;
+	width: max-content;
+	will-change: transform;
+	transform-origin: center;
+}
+
+.eas-parallax-text-item {
+	display: inline-block;
+	margin-right: var(--eas-spt-gap, 40px);
+}
+
+.eas-parallax-text-item:last-child {
+	margin-right: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.eas-scroll-parallax-text-inner {
+		transform: none !important;
+	}
+}

@@ -1,0 +1,115 @@
+/* Author Box Layouts & Structural Styles */
+.eas-author-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+/* Image Above Layout */
+.eas-author-layout-above .eas-author-box {
+    flex-direction: column;
+}
+
+/* Image Right Layout */
+.eas-author-layout-right .eas-author-box {
+    flex-direction: row-reverse;
+}
+
+/* Avatar Styling with Safe Defaults */
+.eas-author-avatar {
+    flex-shrink: 0;
+    display: inline-flex;
+}
+.eas-author-avatar img,
+.eas-author-avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.eas-author-avatar-placeholder {
+    background-color: #e2e8f0;
+    font-size: 40px;
+}
+.eas-author-avatar-placeholder i {
+    color: #94a3b8;
+    display: block;
+    line-height: 1;
+}
+
+/* Content Area styling */
+.eas-author-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.eas-author-layout-above .eas-author-content {
+    width: 100%;
+}
+
+/* Layout Centering helper for Layout Above */
+.eas-author-layout-above.eas-author-align-left .eas-author-box {
+    align-items: flex-start;
+}
+.eas-author-layout-above.eas-author-align-center .eas-author-box {
+    align-items: center;
+}
+.eas-author-layout-above.eas-author-align-right .eas-author-box {
+    align-items: flex-end;
+}
+
+/* Text alignment mappings */
+.eas-author-align-left .eas-author-content {
+    text-align: left;
+    align-items: flex-start;
+}
+.eas-author-align-center .eas-author-content {
+    text-align: center;
+    align-items: center;
+}
+.eas-author-align-right .eas-author-content {
+    text-align: right;
+    align-items: flex-end;
+}
+
+/* Typography elements */
+.eas-author-name {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+}
+.eas-author-name a {
+    color: inherit;
+    text-decoration: none;
+}
+.eas-author-bio {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #475569;
+}
+.eas-author-archive-wrap {
+    display: block;
+    margin-top: 5px;
+}
+.eas-author-archive-button {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background-color: #0f172a;
+    color: #ffffff;
+    transition: all 0.2s;
+}
+.eas-author-archive-button:hover {
+    background-color: #334155;
+}

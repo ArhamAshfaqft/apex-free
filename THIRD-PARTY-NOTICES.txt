@@ -1,0 +1,106 @@
+THIRD-PARTY NOTICES
+===================
+
+Apex Addons for Elementor includes the following open-source icon-font
+components. Their CSS, catalog JSON, and font files are located under
+assets/css, assets/js/icons, and assets/fonts. Copyright remains with the
+respective authors. Trademark glyphs identify their owners and do not imply
+endorsement.
+
+Themify Icons
+Copyright Themify
+Source: https://github.com/lykmapipo/themify-icons
+License: MIT
+
+Linearicons Free
+Copyright Perxis
+Source: https://linearicons.com/free
+License: CC BY-SA 4.0
+
+Simple Line Icons
+Copyright Sabbir and contributors
+Source: https://github.com/simplelineicons/simplelineicons.github.io
+License: MIT
+
+Line Awesome
+Copyright Icons8
+Source: https://github.com/icons8/line-awesome
+License: Icons CC BY 4.0; font SIL OFL 1.1; code MIT
+
+Ionicons
+Copyright Ionic
+Source: https://github.com/ionic-team/ionicons
+License: MIT
+
+Material Design Icons
+Copyright Pictogrammers contributors
+Source: https://github.com/Templarian/MaterialDesign-Webfont
+License: Apache-2.0
+
+Elegant Icon Font
+Copyright Elegant Themes
+Source: https://www.elegantthemes.com/blog/resources/elegant-icon-font
+License: GPL-2.0 and MIT (dual licensed)
+
+Elusive Icons
+Copyright Team Redux
+Source: https://github.com/dovy/elusive-icons
+License: Fonts under SIL OFL 1.1; CSS under MIT
+
+IcoFont
+Copyright IcoFont
+Source: https://icofont.com/
+License: Icons under CC BY 4.0; fonts under SIL OFL 1.1; CSS under MIT
+
+IcoMoon Free
+Copyright Keyamoon
+Source: https://icomoon.io/#icons-icomoon
+License: GPL (the upstream pack offers GPL or CC BY 4.0)
+
+Iconic
+Copyright P. J. Onori
+Source: https://github.com/somerandomdude/Iconic
+License: Fonts under SIL OFL 1.1; code under MIT
+
+Devicons
+Copyright Theodore Vorillas and contributors
+Source: https://github.com/vorillaz/devicons
+License: MIT
+
+Open Iconic
+Copyright Iconic
+Source: https://github.com/iconic/open-iconic
+License: MIT
+
+LineIcons Free
+Copyright Lineicons
+Source: https://github.com/LineiconsHQ/Lineicons
+License: MIT
+
+Phosphor Icons
+Copyright Phosphor Icons
+Source: https://github.com/phosphor-icons/web
+License: MIT
+
+Poppins Font
+Copyright Indian Type Foundry
+Source: https://github.com/itfoundry/Poppins
+License: SIL OFL 1.1
+
+Lenis 1.1.9
+Copyright Studio Freight and Lenis contributors
+Source: https://github.com/darkroomengineering/lenis
+License: MIT
+
+The full text of the MIT License is available at
+https://opensource.org/license/mit/.
+
+The full text of the Apache License 2.0 is available at
+https://www.apache.org/licenses/LICENSE-2.0.
+
+The full text of the SIL Open Font License 1.1 is available at
+https://openfontlicense.org/open-font-license-official-text/.
+
+The full text of CC BY 4.0 and CC BY-SA 4.0 is available at
+https://creativecommons.org/licenses/by/4.0/ and
+https://creativecommons.org/licenses/by-sa/4.0/.

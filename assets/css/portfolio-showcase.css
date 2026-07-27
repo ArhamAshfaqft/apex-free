@@ -1,0 +1,177 @@
+/* ==========================================================================
+   APEX ADDONS - PORTFOLIO HOVER SHOWCASE
+   ========================================================================== */
+
+/* Main Container */
+.eas-portfolio-showcase-wrap {
+	position: relative;
+	width: 100%;
+}
+
+/* List Structure */
+.eas-portfolio-showcase-list {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* Single Item Row */
+.eas-portfolio-showcase-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+	width: 100%;
+	padding: 24px 0;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	text-decoration: none;
+	transition: border-color 0.3s ease, padding 0.3s ease;
+}
+
+.eas-portfolio-showcase-item:first-child {
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.eas-portfolio-showcase-item:hover {
+	border-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Left / Text Content Wrapper */
+.eas-portfolio-showcase-content-left {
+	display: flex;
+	align-items: baseline;
+	gap: 20px;
+	flex: 1;
+	min-width: 0; /* Prevents overflow */
+}
+
+/* Row Title */
+.eas-portfolio-showcase-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: #1e1e1e;
+	margin: 0;
+	transition: color 0.3s ease, transform 0.3s ease;
+	line-height: 1.1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* Text Stroke Hover Effect Variant */
+.eas-portfolio-showcase-wrap[data-hover-style="stroke"] .eas-portfolio-showcase-item:hover .eas-portfolio-showcase-title {
+	color: transparent;
+	-webkit-text-stroke: 1px currentColor;
+}
+
+/* Subtitle / Category Label */
+.eas-portfolio-showcase-category {
+	font-size: 0.95rem;
+	color: #666666;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	transition: color 0.3s ease;
+}
+
+/* Meta Data / Right Side Label */
+.eas-portfolio-showcase-meta {
+	font-size: 0.95rem;
+	color: #999999;
+	margin-left: 20px;
+	transition: color 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   FLOATING HOVER PREVIEW CONTAINER
+-------------------------------------------------------------------------- */
+.eas-portfolio-showcase-preview-container {
+	position: fixed; /* Fixed viewport reference for zero layout thrashing */
+	top: 0;
+	left: 0;
+	pointer-events: none; /* Let clicks pass right through */
+	z-index: 9999;
+	width: 320px;
+	height: 200px;
+	overflow: hidden;
+	border-radius: 12px;
+	opacity: 0;
+	transform: scale(0.8) translate3d(0, 0, 0);
+	transform-origin: center center;
+	transition: opacity 0.35s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.35s cubic-bezier(0.215, 0.61, 0.355, 1);
+	will-change: transform, opacity;
+	backface-visibility: hidden;
+}
+
+/* Active Preview State */
+.eas-portfolio-showcase-preview-container.eas-active {
+	opacity: 1;
+	transform: scale(1) translate3d(0, 0, 0);
+}
+
+/* Inner Media Wrapper */
+.eas-portfolio-showcase-media-wrap {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background: #1a1a1a;
+}
+
+/* Single Media Slide Item */
+.eas-portfolio-showcase-media-item {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transform: scale(1.15);
+	transition: opacity 0.4s cubic-bezier(0.215, 0.61, 0.355, 1), transform 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+	will-change: transform, opacity;
+}
+
+/* Active Media Slide */
+.eas-portfolio-showcase-media-item.eas-active {
+	opacity: 1;
+	transform: scale(1);
+	z-index: 2;
+}
+
+/* Media Elements */
+.eas-portfolio-showcase-media-item img,
+.eas-portfolio-showcase-media-item video {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN PRESETS
+-------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+	.eas-portfolio-showcase-title {
+		font-size: 2rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.eas-portfolio-showcase-content-left {
+		flex-direction: column;
+		gap: 4px;
+	}
+	.eas-portfolio-showcase-title {
+		font-size: 1.5rem;
+		white-space: normal;
+	}
+	.eas-portfolio-showcase-item {
+		padding: 18px 0;
+	}
+	
+	/* Static/Inline Fallback for Mobile (Optional, triggered by responsive checks) */
+	.eas-portfolio-showcase-wrap.eas-disable-mobile-hover .eas-portfolio-showcase-preview-container {
+		display: none !important;
+	}
+}

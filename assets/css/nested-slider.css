@@ -1,0 +1,178 @@
+/* Apex Nested Motion Carousel */
+.elementor-widget-eas-nested-slider {
+	--eas-carousel-slides-view: 3;
+	--eas-carousel-gap: 20px;
+	min-width: 0;
+	max-width: 100%;
+}
+
+.eas-nested-carousel {
+	--eas-pagination-x: 0px;
+	--eas-pagination-y: -24px;
+	--eas-carousel-easing: cubic-bezier(.22, 1, .36, 1);
+	--eas-carousel-gap-color: #fff;
+	position: relative;
+	width: 100%;
+	min-width: 0;
+	isolation: isolate;
+}
+
+.eas-carousel-viewport {
+	position: relative;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+	overflow: hidden;
+}
+
+.eas-slider-slides {
+	display: flex;
+	align-items: stretch;
+	box-sizing: border-box;
+	transition-timing-function: var(--eas-carousel-easing) !important;
+}
+
+.eas-slider-slide-item {
+	position: relative;
+	flex-shrink: 0;
+	min-width: 0;
+	height: auto;
+	box-sizing: border-box;
+	overflow: visible;
+}
+
+.eas-slider-slide-item > .e-con {
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+.eas-nested-carousel:not(.eas-carousel-vertical).eas-carousel-equal-height .eas-slider-slide-item,
+.eas-nested-carousel:not(.eas-carousel-vertical).eas-carousel-equal-height .eas-slider-slide-item > .e-con {
+	height: auto;
+	min-height: 100%;
+}
+
+/* Ensure Swiper initialized state disables pre-init flex gap to prevent double gap calculation */
+.eas-nested-carousel.eas-carousel-initialized .eas-slider-slides,
+.eas-nested-carousel.eas-carousel-ready .eas-slider-slides {
+	gap: 0 !important;
+}
+
+/* Accurate pre-initialization/editor fallback. Four slides with a setting of
+   three produce exactly three visible columns and one clipped/scrollable slide. */
+.eas-nested-carousel:not(.eas-carousel-initialized):not(.eas-carousel-ready) .eas-slider-slides,
+.eas-carousel-css-fallback .eas-slider-slides {
+	gap: var(--eas-carousel-gap);
+	overflow: visible;
+}
+
+.eas-nested-carousel:not(.eas-carousel-initialized):not(.eas-carousel-ready) .eas-slider-slide-item,
+.eas-carousel-css-fallback .eas-slider-slide-item {
+	flex: 0 0 calc((100% - (var(--eas-carousel-slides-view) - 1) * var(--eas-carousel-gap)) / var(--eas-carousel-slides-view));
+	width: calc((100% - (var(--eas-carousel-slides-view) - 1) * var(--eas-carousel-gap)) / var(--eas-carousel-slides-view));
+}
+
+.eas-carousel-arrow {
+	position: absolute;
+	top: 50%;
+	z-index: 20;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	margin: 0;
+	padding: 0;
+	color: #111827;
+	background: rgba(255, 255, 255, .94);
+	border: 0;
+	border-radius: 999px;
+	box-shadow: 0 10px 30px rgba(15, 23, 42, .14);
+	font-size: 18px;
+	line-height: 1;
+	cursor: pointer;
+	transform: translateY(-50%);
+	transition: transform .25s ease, color .25s ease, background-color .25s ease, opacity .25s ease, box-shadow .25s ease;
+}
+
+.eas-carousel-arrow svg {
+	width: 1em;
+	height: 1em;
+	fill: currentColor;
+}
+
+.eas-carousel-prev { left: 16px; }
+.eas-carousel-next { right: 16px; }
+.eas-carousel-arrow:hover { transform: translateY(-50%) scale(1.06); }
+.eas-carousel-arrow:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.eas-carousel-arrow.swiper-button-disabled { opacity: .35; cursor: not-allowed; pointer-events: none; }
+.eas-carousel-arrow::after { content: none !important; }
+
+.eas-carousel-pagination.swiper-pagination {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: auto;
+	bottom: 0;
+	z-index: 20;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: auto;
+	gap: 8px;
+	transform: translate(var(--eas-pagination-x), var(--eas-pagination-y));
+	pointer-events: none;
+}
+
+.eas-carousel-pagination .swiper-pagination-bullet {
+	width: 9px;
+	height: 9px;
+	margin: 0 !important;
+	padding: 0;
+	background: rgba(15, 23, 42, .28);
+	border: 0;
+	border-radius: 999px;
+	opacity: 1;
+	pointer-events: auto;
+	transition: width .28s ease, transform .28s ease, background-color .28s ease, opacity .28s ease;
+}
+
+.eas-carousel-pagination .swiper-pagination-bullet-active {
+	width: 24px;
+	background: #111827;
+}
+.eas-carousel-pagination .swiper-pagination-bullet[hidden] { display: none !important; }
+
+.eas-carousel-pagination.swiper-pagination-fraction {
+	color: #111827;
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.eas-carousel-pagination.swiper-pagination-progressbar {
+	top: auto;
+	bottom: 0;
+	height: 4px;
+	background: rgba(15, 23, 42, .14);
+}
+
+.eas-carousel-pagination .swiper-pagination-progressbar-fill { background: #111827; }
+
+
+@media (max-width: 1024px) {
+	.elementor-widget-eas-nested-slider { --eas-carousel-slides-view: 2; }
+}
+
+@media (max-width: 767px) {
+	.elementor-widget-eas-nested-slider { --eas-carousel-slides-view: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.eas-nested-carousel *, .eas-nested-carousel *::before, .eas-nested-carousel *::after {
+		scroll-behavior: auto !important;
+		transition-duration: .01ms !important;
+		animation-duration: .01ms !important;
+	}
+}

@@ -1,0 +1,140 @@
+/* ==========================================================================
+   APEX ADDONS - PREMIUM CUSTOM CURSOR STYLES
+   ========================================================================== */
+
+/* Utility to hide native cursor when custom cursor is active */
+.eas-cursor-hide-native,
+.eas-cursor-hide-native * {
+	cursor: none !important;
+}
+
+/* Custom Cursor wrapper (base) */
+.eas-custom-cursor {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 16px;
+	height: 16px;
+	margin-left: -8px;
+	margin-top: -8px;
+	border-radius: 50%;
+	background-color: var(--eas-cursor-color, #a855f7);
+	pointer-events: none;
+	z-index: 99999999;
+	will-change: transform;
+	transition: width 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+				height 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+				margin-left 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+				margin-top 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+				background-color 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+				opacity 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Magnified state when hovering interactive elements */
+.eas-custom-cursor.hovering {
+	width: 40px;
+	height: 40px;
+	margin-left: -20px;
+	margin-top: -20px;
+	background-color: rgba(168, 85, 247, 0.3);
+	border: 1px solid rgba(168, 85, 247, 0.8);
+}
+
+/* Blend Difference cursor style */
+.eas-custom-cursor--difference {
+	background-color: #ffffff !important;
+	mix-blend-mode: difference !important;
+	width: 32px;
+	height: 32px;
+	margin-left: -16px;
+	margin-top: -16px;
+}
+
+.eas-custom-cursor--difference.hovering {
+	width: 64px;
+	height: 64px;
+	margin-left: -32px;
+	margin-top: -32px;
+	border: none !important;
+	background-color: #ffffff !important;
+}
+
+/* ----------------------------------------------------
+   RING & DOT FOLLOWER
+   ---------------------------------------------------- */
+.eas-cursor-dot {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 6px;
+	height: 6px;
+	margin-left: -3px;
+	margin-top: -3px;
+	border-radius: 50%;
+	background-color: var(--eas-cursor-color, #a855f7);
+	pointer-events: none;
+	z-index: 99999999;
+	will-change: transform;
+	transition: opacity 0.2s ease;
+}
+
+.eas-cursor-ring {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 36px;
+	height: 36px;
+	margin-left: -18px;
+	margin-top: -18px;
+	border-radius: 50%;
+	border: 1px solid var(--eas-cursor-color, #a855f7);
+	pointer-events: none;
+	z-index: 99999998;
+	will-change: transform;
+	transition: width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+				height 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+				margin-left 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+				margin-top 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+				background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Hovering states for Ring & Dot */
+.eas-cursor-dot.hovering {
+	opacity: 0;
+}
+
+.eas-cursor-ring.hovering {
+	width: 56px;
+	height: 56px;
+	margin-left: -28px;
+	margin-top: -28px;
+	background-color: rgba(168, 85, 247, 0.15);
+}
+
+/* ----------------------------------------------------
+   GLOW BLOB CURSOR
+   ---------------------------------------------------- */
+.eas-cursor-glow-blob {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 250px;
+	height: 250px;
+	margin-left: -125px;
+	margin-top: -125px;
+	border-radius: 50%;
+	background: radial-gradient(circle, var(--eas-cursor-color, rgba(168, 85, 247, 0.4)) 0%, rgba(168, 85, 247, 0) 70%);
+	filter: blur(30px);
+	-webkit-filter: blur(30px);
+	pointer-events: none;
+	z-index: 99999995;
+	will-change: transform;
+	opacity: 0.65;
+	mix-blend-mode: screen;
+	transition: transform 0.1s ease-out, opacity 0.3s ease;
+}
+
+.eas-cursor-glow-blob.hovering {
+	opacity: 0.95;
+	transform: scale(1.2);
+}

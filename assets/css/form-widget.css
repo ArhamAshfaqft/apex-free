@@ -1,0 +1,804 @@
+/* ====================================================================
+   APEX ADDONS - FORM WIDGET STYLES
+   ==================================================================== */
+
+.eas-form-wrap {
+	width: 100%;
+	position: relative;
+	box-sizing: border-box;
+}
+
+.eas-form-wrap *, .eas-form-wrap *::before, .eas-form-wrap *::after {
+	box-sizing: border-box;
+}
+
+/* Form Grid */
+.eas-form-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+.eas-form-field-wrap {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Width columns with precise flex gap math */
+.eas-form-width-100 { flex: 0 0 100%; max-width: 100%; width: 100%; }
+.eas-form-width-80  { flex: 0 0 calc(80% - 4px); max-width: calc(80% - 4px); width: calc(80% - 4px); }
+.eas-form-width-75  { flex: 0 0 calc(75% - 5px); max-width: calc(75% - 5px); width: calc(75% - 5px); }
+.eas-form-width-66  { flex: 0 0 calc(66.666% - 6.666px); max-width: calc(66.666% - 6.666px); width: calc(66.666% - 6.666px); }
+.eas-form-width-60  { flex: 0 0 calc(60% - 8px); max-width: calc(60% - 8px); width: calc(60% - 8px); }
+.eas-form-width-50  { flex: 0 0 calc(50% - 10px); max-width: calc(50% - 10px); width: calc(50% - 10px); }
+.eas-form-width-40  { flex: 0 0 calc(40% - 12px); max-width: calc(40% - 12px); width: calc(40% - 12px); }
+.eas-form-width-33  { flex: 0 0 calc(33.333% - 13.333px); max-width: calc(33.333% - 13.333px); width: calc(33.333% - 13.333px); }
+.eas-form-width-25  { flex: 0 0 calc(25% - 15px); max-width: calc(25% - 15px); width: calc(25% - 15px); }
+.eas-form-width-20  { flex: 0 0 calc(20% - 16px); max-width: calc(20% - 16px); width: calc(20% - 16px); }
+
+/* Label styling */
+.eas-form-label {
+	font-weight: 600;
+	margin-bottom: 8px;
+	font-size: 14px;
+	color: #334155;
+	display: inline-block;
+}
+
+.eas-form-required-mark {
+	color: #ef4444;
+	margin-left: 4px;
+}
+
+/* Inputs styling */
+.eas-form-wrap .eas-form-control {
+	width: 100%;
+	padding: 12px 16px;
+	border: 1px solid #cbd5e1;
+	border-radius: 8px;
+	font-size: 14px;
+	color: #0f172a;
+	background-color: #ffffff;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	outline: none;
+	line-height: 1.4;
+	height: 46px;
+	box-sizing: border-box;
+}
+
+.eas-form-wrap .eas-form-control:focus {
+	outline: none;
+}
+
+.eas-form-wrap .eas-form-control::placeholder {
+	color: #94a3b8;
+}
+
+/* Textarea specific */
+.eas-form-wrap textarea.eas-form-control {
+	min-height: 120px;
+	height: auto;
+	resize: vertical;
+}
+
+/* Radio & Checkbox grids */
+.eas-form-option-list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 4px 0;
+}
+
+.eas-form-option-item {
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	font-size: 14px;
+	color: #334155;
+}
+
+.eas-form-option-item input[type="radio"],
+.eas-form-option-item input[type="checkbox"] {
+	margin-right: 8px;
+	cursor: pointer;
+	width: 16px;
+	height: 16px;
+}
+
+/* -----------------------------------------------
+   SIGNATURE FIELD
+----------------------------------------------- */
+.eas-form-sig-pad-wrap {
+	border: 1px dashed #cbd5e1;
+	border-radius: 8px;
+	background: #f8fafc;
+	position: relative;
+	overflow: hidden;
+}
+
+.eas-form-sig-canvas {
+	display: block;
+	width: 100%;
+	height: 180px;
+	cursor: crosshair;
+	touch-action: none; /* Prevents scrolling when signing on mobile */
+}
+
+.eas-form-sig-actions {
+	position: absolute;
+	bottom: 12px;
+	right: 12px;
+	display: flex;
+	gap: 8px;
+	z-index: 5;
+}
+
+.eas-form-sig-btn {
+	background: rgba(255, 255, 255, 0.9);
+	border: 1px solid #e2e8f0;
+	color: #475569;
+	font-size: 11px;
+	font-weight: 600;
+	padding: 5px 10px;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	outline: none;
+}
+
+.eas-form-sig-btn:hover {
+	background: #ffffff;
+	color: #0f172a;
+	border-color: #cbd5e1;
+}
+
+/* -----------------------------------------------
+   COUNTRY TELEPHONE SELECTOR
+----------------------------------------------- */
+.eas-form-wrap .eas-form-tel-wrap {
+	display: flex;
+	position: relative;
+	align-items: stretch;
+}
+
+.eas-form-wrap .eas-form-tel-prefix-selector {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	padding: 0 14px;
+	background: #f8fafc;
+	border: 1px solid #cbd5e1;
+	border-right: none;
+	border-radius: 8px 0 0 8px;
+	cursor: pointer;
+	user-select: none;
+	font-size: 14px;
+	color: #475569;
+	transition: all 0.3s ease;
+	box-sizing: border-box;
+}
+
+.eas-form-wrap .eas-form-tel-prefix-selector:hover {
+	background: #f1f5f9;
+}
+
+.eas-form-wrap .eas-form-tel-arrow {
+	font-size: 8px;
+	transition: transform 0.2s ease;
+}
+
+.eas-form-wrap .eas-form-tel-prefix-selector.active .eas-form-tel-arrow {
+	transform: rotate(180deg);
+}
+
+.eas-form-wrap .eas-form-tel-input {
+	border-radius: 0 8px 8px 0;
+	flex: 1;
+}
+
+/* Dropdown list */
+.eas-form-tel-dropdown {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	width: 260px;
+	max-height: 220px;
+	overflow-y: auto;
+	margin-top: 4px;
+	display: none;
+	animation: easDropdownFade 0.2s ease;
+}
+
+@keyframes easDropdownFade {
+	from { opacity: 0; transform: translateY(-4px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+.eas-form-tel-dropdown-search-wrap {
+	padding: 8px;
+	position: sticky;
+	top: 0;
+	background: #ffffff;
+	border-bottom: 1px solid #f1f5f9;
+	z-index: 2;
+}
+
+.eas-form-tel-search {
+	width: 100%;
+	padding: 6px 10px;
+	font-size: 12px;
+	border: 1px solid #cbd5e1;
+	border-radius: 6px;
+	outline: none;
+}
+
+.eas-form-tel-search:focus {
+	border-color: #6366f1;
+}
+
+.eas-form-tel-option {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 8px 12px;
+	cursor: pointer;
+	font-size: 13px;
+	color: #334155;
+	transition: background 0.2s ease;
+}
+
+.eas-form-tel-option:hover {
+	background: #f8fafc;
+	color: #0f172a;
+}
+
+.eas-form-tel-flag {
+	font-size: 16px;
+}
+
+.eas-form-tel-code {
+	color: #94a3b8;
+	margin-left: auto;
+	font-weight: 500;
+}
+
+/* -----------------------------------------------
+   MULTI-STEP FORMS
+----------------------------------------------- */
+.eas-form-step {
+	display: none;
+	width: 100%;
+}
+
+.eas-form-step.active {
+	display: block;
+	animation: easStepFadeIn 0.4s ease;
+}
+
+@keyframes easStepFadeIn {
+	from { opacity: 0; transform: translateY(4px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+/* Steps progress indicators */
+.eas-form-steps-indicator {
+	width: 100%;
+	margin-bottom: 32px;
+}
+
+/* Progress bar style */
+.eas-form-steps-progress-bar-wrap {
+	width: 100%;
+	height: 6px;
+	background: #e2e8f0;
+	border-radius: 3px;
+	overflow: hidden;
+	position: relative;
+}
+
+.eas-form-steps-progress-bar-fill {
+	height: 100%;
+	width: 0%;
+	background: #6366f1;
+	transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	border-radius: 3px;
+}
+
+/* Steps circles style */
+.eas-form-steps-circles {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: relative;
+}
+
+.eas-form-steps-circles::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background: #e2e8f0;
+	z-index: 1;
+	transform: translateY(-50%);
+}
+
+.eas-form-steps-circles-progress {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	height: 2px;
+	background: #6366f1;
+	z-index: 1;
+	transform: translateY(-50%);
+	width: 0%;
+	transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.eas-form-steps-circle-item {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	background: #ffffff;
+	border: 2px solid #e2e8f0;
+	color: #64748b;
+	font-weight: 700;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	z-index: 2;
+	transition: all 0.3s ease;
+}
+
+.eas-form-steps-circle-item.active {
+	border-color: #6366f1;
+	color: #6366f1;
+	box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.eas-form-steps-circle-item.completed {
+	background: #6366f1;
+	border-color: #6366f1;
+	color: #ffffff;
+}
+
+.eas-form-steps-circle-label {
+	position: absolute;
+	top: calc(100% + 6px);
+	font-size: 11px;
+	font-weight: 600;
+	color: #64748b;
+	white-space: nowrap;
+	transform: translateX(-0%);
+}
+
+.eas-form-steps-circle-item.active .eas-form-steps-circle-label {
+	color: #0f172a;
+}
+
+/* Next / Prev Step buttons navigation inside step footer */
+.eas-form-step-actions {
+	display: flex;
+	gap: 12px;
+	margin-top: 10px;
+}
+
+/* -----------------------------------------------
+   SUBMIT BUTTONS & ALIGNMENTS
+----------------------------------------------- */
+.eas-form-field-wrap--submit {
+	justify-content: flex-end;
+}
+
+.eas-form-submit-wrap {
+	display: flex;
+	width: 100%;
+}
+
+.eas-form-btn-align-justify .eas-form-btn-submit,
+.eas-form-btn-align-tablet-justify .eas-form-btn-submit,
+.eas-form-btn-align-mobile-justify .eas-form-btn-submit,
+.eas-form-submit-wrap[style*="stretch"] .eas-form-btn-submit {
+	width: 100%;
+}
+
+.eas-form-btn-submit,
+.eas-form-btn-next,
+.eas-form-btn-prev {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	font-size: 14px;
+	padding: 12px 28px;
+	border-radius: 8px;
+	cursor: pointer;
+	border: 1px solid transparent;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	outline: none;
+}
+
+.eas-form-btn-submit {
+	background: #6366f1;
+	color: #ffffff;
+}
+
+.eas-form-btn-submit:hover {
+	background: #4f46e5;
+}
+
+.eas-form-btn-next {
+	background: #6366f1;
+	color: #ffffff;
+}
+
+.eas-form-btn-next:hover {
+	background: #4f46e5;
+}
+
+.eas-form-btn-prev {
+	background: #f1f5f9;
+	color: #475569;
+	border: 1px solid #e2e8f0;
+}
+
+.eas-form-btn-prev:hover {
+	background: #e2e8f0;
+	color: #0f172a;
+}
+
+/* -----------------------------------------------
+   ALERTS / MESSAGES FEEDBACK
+----------------------------------------------- */
+.eas-form-message {
+	width: 100%;
+	padding: 14px 18px;
+	border-radius: 8px;
+	font-size: 13px;
+	font-weight: 500;
+	line-height: 1.5;
+	margin-top: 16px;
+	display: none;
+}
+
+.eas-form-message-success {
+	background-color: #ecfdf5;
+	color: #065f46;
+	border: 1px solid #a7f3d0;
+}
+
+.eas-form-message-error {
+	background-color: #fef2f2;
+	color: #991b1b;
+	border: 1px solid #fca5a5;
+}
+
+/* -----------------------------------------------
+   SUCCESS ANIMATION OVERLAY
+----------------------------------------------- */
+.eas-form-success-overlay {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.92);
+	backdrop-filter: blur(6px);
+	z-index: 50;
+	opacity: 0;
+	animation: eas-fade-in 0.4s ease forwards;
+	border-radius: inherit;
+}
+
+.eas-form-success-checkmark {
+	width: 72px;
+	height: 72px;
+	margin-bottom: 16px;
+}
+
+.eas-form-success-circle {
+	fill: none;
+	stroke: #10b981;
+	stroke-width: 3;
+	stroke-dasharray: 166;
+	stroke-dashoffset: 166;
+	animation: eas-circle-draw 0.6s 0.15s ease forwards;
+}
+
+.eas-form-success-check {
+	fill: none;
+	stroke: #10b981;
+	stroke-width: 4;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-dasharray: 48;
+	stroke-dashoffset: 48;
+	animation: eas-check-draw 0.35s 0.65s ease forwards;
+}
+
+.eas-form-success-text {
+	font-size: 15px;
+	font-weight: 600;
+	color: #065f46;
+	letter-spacing: -0.01em;
+}
+
+@keyframes eas-fade-in {
+	from { opacity: 0; transform: scale(0.95); }
+	to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes eas-circle-draw {
+	to { stroke-dashoffset: 0; }
+}
+
+@keyframes eas-check-draw {
+	to { stroke-dashoffset: 0; }
+}
+
+/* -----------------------------------------------
+   SLIDER RANGE FIELD
+----------------------------------------------- */
+.eas-form-wrap .eas-form-range-wrap {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	width: 100%;
+	padding: 8px 0;
+	box-sizing: border-box;
+}
+
+.eas-form-wrap .eas-form-range-slider {
+	-webkit-appearance: none;
+	appearance: none;
+	flex: 1;
+	height: 6px;
+	border-radius: 99px;
+	background: #e2e8f0;
+	outline: none;
+	margin: 0;
+	cursor: pointer;
+	transition: background 0.2s ease;
+	position: relative;
+	z-index: 5;
+}
+
+.eas-form-wrap .eas-form-range-slider:focus {
+	background: #cbd5e1;
+}
+
+/* Webkit Thumb */
+.eas-form-wrap .eas-form-range-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: #6366f1; /* Theme purple/indigo */
+	border: 2px solid #ffffff;
+	box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.eas-form-wrap .eas-form-range-slider::-webkit-slider-thumb:hover {
+	transform: scale(1.15);
+	background: #4f46e5;
+}
+
+/* Firefox Thumb */
+.eas-form-wrap .eas-form-range-slider::-moz-range-thumb {
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: #6366f1;
+	border: 2px solid #ffffff;
+	box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4), 0 2px 4px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.eas-form-wrap .eas-form-range-slider::-moz-range-thumb:hover {
+	transform: scale(1.15);
+	background: #4f46e5;
+}
+
+/* Value Badge Pill on Right */
+.eas-form-wrap .eas-form-range-val {
+	min-width: 48px;
+	text-align: center;
+	background: #f8fafc;
+	border: 1px solid #e2e8f0;
+	padding: 5px 12px;
+	border-radius: 6px;
+	font-weight: 600;
+	font-size: 13px;
+	color: #475569;
+	user-select: none;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+/* -----------------------------------------------
+   iOS TOGGLE SWITCH STYLE
+----------------------------------------------- */
+.eas-form-wrap .eas-form-toggle-switch {
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	position: relative;
+	user-select: none;
+	gap: 12px;
+}
+
+/* Hide native default checkboxes */
+.eas-form-wrap .eas-form-toggle-switch input[type="checkbox"] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+	margin: 0;
+}
+
+/* Toggle Slider Track */
+.eas-form-wrap .eas-form-toggle-switch .eas-form-toggle-slider {
+	position: relative;
+	display: inline-block;
+	width: 44px;
+	height: 24px;
+	background-color: #cbd5e1;
+	border-radius: 99px;
+	transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+	box-sizing: border-box;
+}
+
+/* Toggle slider knob circle */
+.eas-form-wrap .eas-form-toggle-switch .eas-form-toggle-slider::before {
+	content: "";
+	position: absolute;
+	height: 18px;
+	width: 18px;
+	left: 3px;
+	bottom: 3px;
+	background-color: #ffffff;
+	border-radius: 50%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+	transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Checked Switch State */
+.eas-form-wrap .eas-form-toggle-switch input[type="checkbox"]:checked + .eas-form-toggle-slider {
+	background-color: #6366f1; /* Theme violet */
+}
+
+.eas-form-wrap .eas-form-toggle-switch input[type="checkbox"]:checked + .eas-form-toggle-slider::before {
+	transform: translateX(20px);
+}
+
+/* Focus outline ring */
+.eas-form-wrap .eas-form-toggle-switch input[type="checkbox"]:focus-visible + .eas-form-toggle-slider {
+	box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.4);
+}
+
+/* -----------------------------------------------
+   INTERACTIVE RATING FIELD STYLE
+----------------------------------------------- */
+.eas-form-wrap .eas-form-rating-wrap {
+	display: inline-block;
+	padding: 5px 0;
+}
+
+.eas-form-wrap .eas-form-rating-stars {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.eas-form-wrap .eas-form-rating-item {
+	font-size: 28px;
+	cursor: pointer;
+	color: #e2e8f0;
+	transition: color 0.15s ease, transform 0.1s ease;
+	user-select: none;
+	line-height: 1;
+}
+
+.eas-form-wrap .eas-form-rating-item:hover {
+	transform: scale(1.2);
+}
+
+/* Amber Gold Star and Smile active colors */
+.eas-form-wrap .eas-form-rating-wrap[data-icon="star"] .eas-form-rating-item.active,
+.eas-form-wrap .eas-form-rating-wrap[data-icon="star"] .eas-form-rating-item.hovered,
+.eas-form-wrap .eas-form-rating-wrap[data-icon="smile"] .eas-form-rating-item.active,
+.eas-form-wrap .eas-form-rating-wrap[data-icon="smile"] .eas-form-rating-item.hovered {
+	color: #f59e0b;
+}
+
+/* Red Heart active colors */
+.eas-form-wrap .eas-form-rating-wrap[data-icon="heart"] .eas-form-rating-item.active,
+.eas-form-wrap .eas-form-rating-wrap[data-icon="heart"] .eas-form-rating-item.hovered {
+	color: #ef4444;
+}
+
+/* -----------------------------------------------
+   IMAGE SELECT CHOICE CARDS STYLE
+----------------------------------------------- */
+.eas-form-wrap .eas-form-image-select-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+	gap: 15px;
+	width: 100%;
+	box-sizing: border-box;
+	margin-top: 5px;
+}
+
+.eas-form-wrap .eas-form-image-select-card {
+	background: #ffffff;
+	border: 2px solid #e2e8f0;
+	border-radius: 10px;
+	padding: 12px;
+	text-align: center;
+	cursor: pointer;
+	transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+	box-sizing: border-box;
+}
+
+.eas-form-wrap .eas-form-image-select-card:hover {
+	border-color: #cbd5e1;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.eas-form-wrap .eas-form-image-select-card.active {
+	border-color: #6366f1;
+	background: #f8fafc;
+	box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.1), 0 4px 6px -2px rgba(99, 102, 241, 0.05);
+}
+
+.eas-form-wrap .eas-form-image-select-img-wrap {
+	width: 100%;
+	height: 90px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	border-radius: 6px;
+	background: #f1f5f9;
+	margin-bottom: 8px;
+}
+
+.eas-form-wrap .eas-form-image-select-img-wrap img {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: cover;
+	transition: transform 0.25s ease;
+}
+
+.eas-form-wrap .eas-form-image-select-card.active img {
+	transform: scale(1.05);
+}
+
+.eas-form-wrap .eas-form-image-select-card-title {
+	font-size: 13px;
+	font-weight: 600;
+	color: #334155;
+	line-height: 1.3;
+}
+
+.eas-form-wrap .eas-form-image-select-card.active .eas-form-image-select-card-title {
+	color: #4f46e5;
+}
+

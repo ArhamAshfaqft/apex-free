@@ -1,0 +1,496 @@
+/**
+ * Advanced Timeline Widget Styles
+ * Scoped to .apexadfo-timeline-wrapper
+ *
+ * @package ApexAddonsForElementor
+ */
+
+.apexadfo-timeline-wrapper {
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.apexadfo-timeline-container {
+	position: relative;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/* ----------------------------------------------------
+ * VERTICAL TIMELINE LAYOUT
+ * ---------------------------------------------------- */
+.apexadfo-layout-vertical {
+	position: relative;
+	padding: 20px 0;
+}
+
+/* Background Connector Line */
+.apexadfo-layout-vertical .apexadfo-timeline-line {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 4px;
+	background-color: #e5e7eb;
+	box-sizing: border-box;
+	z-index: 1;
+}
+
+/* Progress Fill Line (Scroll Driven) */
+.apexadfo-layout-vertical .apexadfo-timeline-line-progress {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 0%; /* Updated via JS on scroll */
+	background-color: #3b82f6;
+	transition: height 0.1s linear;
+}
+
+/* Timeline Item Rows Base */
+.apexadfo-layout-vertical .apexadfo-timeline-item {
+	position: relative;
+	display: flex;
+	align-items: center;
+	margin-bottom: 40px;
+	z-index: 2;
+}
+
+.apexadfo-layout-vertical .apexadfo-timeline-item:last-child {
+	margin-bottom: 0;
+}
+
+/* ----------------------------------------------------
+ * RESPONSIVE VERTICAL ALIGNMENTS (Desktop, Tablet, Mobile)
+ * ---------------------------------------------------- */
+
+/* --- DESKTOP (min-width: 1025px) --- */
+@media (min-width: 1025px) {
+	/* Alternating */
+	.apexadfo-layout-vertical.apexadfo-align-desktop-alternating .apexadfo-timeline-line {
+		left: 50%;
+		right: auto;
+		transform: translateX(-50%);
+	}
+	.apexadfo-layout-vertical.apexadfo-align-desktop-alternating .apexadfo-timeline-item-left {
+		flex-direction: row-reverse;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-desktop-alternating .apexadfo-timeline-item-left .apexadfo-timeline-content-wrap {
+		width: 45%;
+		text-align: right;
+		margin-right: auto;
+		margin-left: 0;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-desktop-alternating .apexadfo-timeline-item-right .apexadfo-timeline-content-wrap {
+		width: 45%;
+		text-align: left;
+		margin-left: auto;
+		margin-right: 0;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-desktop-alternating .apexadfo-timeline-node-wrap {
+		position: absolute;
+		left: 50%;
+		right: auto;
+		transform: translateX(-50%);
+	}
+
+	/* All Left */
+	.apexadfo-layout-vertical.apexadfo-align-desktop-left .apexadfo-timeline-line {
+		left: 24px;
+		right: auto;
+		transform: none;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-desktop-left .apexadfo-timeline-item {
+		flex-direction: row;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-desktop-left .apexadfo-timeline-node-wrap {
+		position: absolute;
+		left: 24px;
+		right: auto;
+		transform: translateX(-50%);
+	}
+	.apexadfo-layout-vertical.apexadfo-align-desktop-left .apexadfo-timeline-content-wrap {
+		width: calc(100% - 64px);
+		margin-left: 64px;
+		margin-right: 0;
+	}
+
+	/* All Right */
+	.apexadfo-layout-vertical.apexadfo-align-desktop-right .apexadfo-timeline-line {
+		right: 24px;
+		left: auto;
+		transform: none;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-desktop-right .apexadfo-timeline-item {
+		flex-direction: row;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-desktop-right .apexadfo-timeline-node-wrap {
+		position: absolute;
+		right: 24px;
+		left: auto;
+		transform: translateX(50%);
+	}
+	.apexadfo-layout-vertical.apexadfo-align-desktop-right .apexadfo-timeline-content-wrap {
+		width: calc(100% - 64px);
+		margin-right: 64px;
+		margin-left: 0;
+	}
+}
+
+/* --- TABLET (min-width: 768px) and (max-width: 1024px) --- */
+@media (min-width: 768px) and (max-width: 1024px) {
+	/* Alternating */
+	.apexadfo-layout-vertical.apexadfo-align-tablet-alternating .apexadfo-timeline-line {
+		left: 50%;
+		right: auto;
+		transform: translateX(-50%);
+	}
+	.apexadfo-layout-vertical.apexadfo-align-tablet-alternating .apexadfo-timeline-item-left {
+		flex-direction: row-reverse;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-tablet-alternating .apexadfo-timeline-item-left .apexadfo-timeline-content-wrap {
+		width: 45%;
+		text-align: right;
+		margin-right: auto;
+		margin-left: 0;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-tablet-alternating .apexadfo-timeline-item-right .apexadfo-timeline-content-wrap {
+		width: 45%;
+		text-align: left;
+		margin-left: auto;
+		margin-right: 0;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-tablet-alternating .apexadfo-timeline-node-wrap {
+		position: absolute;
+		left: 50%;
+		right: auto;
+		transform: translateX(-50%);
+	}
+
+	/* All Left */
+	.apexadfo-layout-vertical.apexadfo-align-tablet-left .apexadfo-timeline-line {
+		left: 24px;
+		right: auto;
+		transform: none;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-tablet-left .apexadfo-timeline-item {
+		flex-direction: row;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-tablet-left .apexadfo-timeline-node-wrap {
+		position: absolute;
+		left: 24px;
+		right: auto;
+		transform: translateX(-50%);
+	}
+	.apexadfo-layout-vertical.apexadfo-align-tablet-left .apexadfo-timeline-content-wrap {
+		width: calc(100% - 64px);
+		margin-left: 64px;
+		margin-right: 0;
+	}
+
+	/* All Right */
+	.apexadfo-layout-vertical.apexadfo-align-tablet-right .apexadfo-timeline-line {
+		right: 24px;
+		left: auto;
+		transform: none;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-tablet-right .apexadfo-timeline-item {
+		flex-direction: row;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-tablet-right .apexadfo-timeline-node-wrap {
+		position: absolute;
+		right: 24px;
+		left: auto;
+		transform: translateX(50%);
+	}
+	.apexadfo-layout-vertical.apexadfo-align-tablet-right .apexadfo-timeline-content-wrap {
+		width: calc(100% - 64px);
+		margin-right: 64px;
+		margin-left: 0;
+	}
+}
+
+/* --- MOBILE (max-width: 767px) --- */
+@media (max-width: 767px) {
+	/* Alternating (Collapses cleanly to Left on mobile) */
+	.apexadfo-layout-vertical.apexadfo-align-mobile-alternating .apexadfo-timeline-line {
+		left: 20px;
+		right: auto;
+		transform: none;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-mobile-alternating .apexadfo-timeline-item {
+		flex-direction: row;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-mobile-alternating .apexadfo-timeline-node-wrap {
+		position: absolute;
+		left: 20px;
+		right: auto;
+		transform: translateX(-50%);
+	}
+	.apexadfo-layout-vertical.apexadfo-align-mobile-alternating .apexadfo-timeline-content-wrap {
+		width: calc(100% - 56px);
+		margin-left: 56px;
+		margin-right: 0;
+	}
+
+	/* All Left */
+	.apexadfo-layout-vertical.apexadfo-align-mobile-left .apexadfo-timeline-line {
+		left: 20px;
+		right: auto;
+		transform: none;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-mobile-left .apexadfo-timeline-item {
+		flex-direction: row;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-mobile-left .apexadfo-timeline-node-wrap {
+		position: absolute;
+		left: 20px;
+		right: auto;
+		transform: translateX(-50%);
+	}
+	.apexadfo-layout-vertical.apexadfo-align-mobile-left .apexadfo-timeline-content-wrap {
+		width: calc(100% - 56px);
+		margin-left: 56px;
+		margin-right: 0;
+	}
+
+	/* All Right */
+	.apexadfo-layout-vertical.apexadfo-align-mobile-right .apexadfo-timeline-line {
+		right: 20px;
+		left: auto;
+		transform: none;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-mobile-right .apexadfo-timeline-item {
+		flex-direction: row;
+	}
+	.apexadfo-layout-vertical.apexadfo-align-mobile-right .apexadfo-timeline-node-wrap {
+		position: absolute;
+		right: 20px;
+		left: auto;
+		transform: translateX(50%);
+	}
+	.apexadfo-layout-vertical.apexadfo-align-mobile-right .apexadfo-timeline-content-wrap {
+		width: calc(100% - 56px);
+		margin-right: 56px;
+		margin-left: 0;
+	}
+}
+
+/* Node Pin Styling */
+.apexadfo-timeline-node {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	background-color: #ffffff;
+	color: #3b82f6;
+	border: 3px solid #3b82f6;
+	border-radius: 50%;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	z-index: 3;
+	transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.apexadfo-timeline-item.apexadfo-is-active .apexadfo-timeline-node {
+	background-color: #3b82f6;
+	color: #ffffff;
+	transform: scale(1.1);
+}
+
+.apexadfo-timeline-node-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 16px;
+	line-height: 1;
+}
+
+.apexadfo-timeline-node-icon svg {
+	width: 18px;
+	height: 18px;
+	fill: currentColor;
+}
+
+.apexadfo-timeline-node-text {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.apexadfo-timeline-pulse {
+	position: absolute;
+	top: -6px;
+	left: -6px;
+	right: -6px;
+	bottom: -6px;
+	border-radius: 50%;
+	border: 2px solid #3b82f6;
+	opacity: 0.8;
+	animation: apexadfo-timeline-pulse-anim 2s infinite ease-out;
+}
+
+@keyframes apexadfo-timeline-pulse-anim {
+	0% { transform: scale(0.7); opacity: 0.9; }
+	100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Timeline Card Content */
+.apexadfo-timeline-card {
+	position: relative;
+	padding: 24px;
+	background-color: #ffffff;
+	border-radius: 12px;
+	box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+	border: 1px solid #f3f4f6;
+	box-sizing: border-box;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.apexadfo-timeline-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 14px 30px -5px rgba(0, 0, 0, 0.12);
+}
+
+/* Date / Subtitle Badge */
+.apexadfo-timeline-date {
+	display: inline-block;
+	padding: 4px 12px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	color: #3b82f6;
+	background-color: #eff6ff;
+	border-radius: 20px;
+	text-transform: uppercase;
+}
+
+/* Card Title */
+.apexadfo-timeline-title {
+	margin: 0 0 10px 0;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 1.3;
+	color: #111827;
+}
+
+/* Card Description */
+.apexadfo-timeline-desc {
+	margin: 0 0 14px 0;
+	font-size: 14px;
+	line-height: 1.6;
+	color: #4b5563;
+}
+
+.apexadfo-timeline-desc:last-child {
+	margin-bottom: 0;
+}
+
+/* Card Media Image */
+.apexadfo-timeline-media {
+	margin-bottom: 14px;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.apexadfo-timeline-media img {
+	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+/* Action Button */
+.apexadfo-timeline-btn {
+	display: inline-block;
+	padding: 8px 18px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #ffffff;
+	background-color: #3b82f6;
+	border-radius: 6px;
+	text-decoration: none;
+	transition: background-color 0.2s ease;
+}
+
+.apexadfo-timeline-btn:hover {
+	background-color: #2563eb;
+	color: #ffffff;
+}
+
+/* ----------------------------------------------------
+ * HORIZONTAL TIMELINE LAYOUT
+ * ---------------------------------------------------- */
+.apexadfo-layout-horizontal {
+	overflow-x: auto;
+	padding: 30px 10px;
+	scroll-snap-type: x mandatory;
+}
+
+.apexadfo-layout-horizontal .apexadfo-timeline-stream {
+	position: relative;
+	display: flex;
+	align-items: flex-start;
+	gap: 40px;
+	min-width: max-content;
+}
+
+.apexadfo-layout-horizontal .apexadfo-timeline-line {
+	position: absolute;
+	top: calc(var(--apexadfo-node-size, 40px) / 2);
+	transform: translateY(-50%);
+	left: 0;
+	right: 0;
+	height: 4px;
+	background-color: #e5e7eb;
+	z-index: 1;
+}
+
+.apexadfo-layout-horizontal .apexadfo-timeline-line-progress {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 0%;
+	background-color: #3b82f6;
+}
+
+.apexadfo-layout-horizontal .apexadfo-timeline-item {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 300px;
+	scroll-snap-align: start;
+}
+
+.apexadfo-layout-horizontal .apexadfo-timeline-node-wrap {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--apexadfo-node-size, 40px);
+	height: var(--apexadfo-node-size, 40px);
+	margin-bottom: 20px;
+	z-index: 3;
+}
+
+.apexadfo-layout-horizontal .apexadfo-timeline-content-wrap {
+	width: 100%;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+	.apexadfo-timeline-pulse {
+		animation: none !important;
+	}
+	.apexadfo-timeline-card,
+	.apexadfo-timeline-node {
+		transition: none !important;
+	}
+}

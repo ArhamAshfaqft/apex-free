@@ -1,0 +1,553 @@
+/* ==========================================================================
+   Apex Nav Menu Widget
+   ========================================================================== */
+
+/* Main Menu Wrappers */
+.eas-nav-menu-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.eas-nav-menu {
+    position: relative;
+    width: 100%;
+}
+
+/* Nav Menu List (UL) */
+.eas-nav-menu-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: relative;
+    width: 100%;
+}
+
+.eas-nav-menu-list li {
+    position: relative;
+    display: inline-block;
+}
+
+.eas-nav-menu-list a.eas-menu-item-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    padding: 12px 18px;
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Horizontal & Vertical Layouts */
+.eas-menu-layout-horizontal .eas-nav-menu-list {
+    flex-direction: row;
+}
+.eas-menu-layout-vertical .eas-nav-menu-list {
+    flex-direction: column;
+    align-items: stretch;
+}
+.eas-menu-layout-vertical .eas-nav-menu-list li {
+    display: block;
+    width: 100%;
+}
+
+/* Desktop Alignment (matches both .eas-nav-menu-align-right and .eas-nav-menu-alignright-) */
+.eas-nav-menu-alignleft- .eas-nav-menu-wrapper,
+.eas-nav-menu-align-left .eas-nav-menu-wrapper { justify-content: flex-start; }
+.eas-nav-menu-alignleft- .eas-nav-menu-list,
+.eas-nav-menu-align-left .eas-nav-menu-list { justify-content: flex-start; }
+
+.eas-nav-menu-aligncenter- .eas-nav-menu-wrapper,
+.eas-nav-menu-align-center .eas-nav-menu-wrapper { justify-content: center; }
+.eas-nav-menu-aligncenter- .eas-nav-menu-list,
+.eas-nav-menu-align-center .eas-nav-menu-list { justify-content: center; }
+
+.eas-nav-menu-alignright- .eas-nav-menu-wrapper,
+.eas-nav-menu-align-right .eas-nav-menu-wrapper { justify-content: flex-end; }
+.eas-nav-menu-alignright- .eas-nav-menu-list,
+.eas-nav-menu-align-right .eas-nav-menu-list { justify-content: flex-end; }
+
+.eas-nav-menu-alignjustify- .eas-nav-menu-wrapper,
+.eas-nav-menu-align-justify .eas-nav-menu-wrapper { justify-content: space-between; }
+.eas-nav-menu-alignjustify- .eas-nav-menu-list,
+.eas-nav-menu-align-justify .eas-nav-menu-list { justify-content: space-between; }
+
+/* Submenu Indicators */
+.eas-submenu-indicator-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+    font-size: 0.8em;
+    transition: transform 0.3s ease;
+}
+.eas-submenu-indicator-icon svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    display: inline-block;
+    vertical-align: middle;
+}
+.eas-submenu-indicator-icon i {
+    display: block;
+}
+
+/* Submenu Dropdowns */
+.eas-nav-menu ul.sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+    min-width: 200px;
+    margin: 0;
+    padding: 10px 0;
+    list-style: none;
+    background: #ffffff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.eas-nav-menu ul.sub-menu ul.sub-menu {
+    top: 0;
+    left: 100%;
+}
+
+.eas-nav-menu ul.sub-menu li {
+    display: block;
+    width: 100%;
+}
+
+.eas-nav-menu ul.sub-menu a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: #444;
+}
+.eas-nav-menu ul.sub-menu a:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+    color: #000;
+}
+
+/* Submenu Triggers */
+/* Hover Trigger */
+.eas-trigger-hover li:hover > ul.sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+/* Click Trigger */
+.eas-trigger-click li.eas-submenu-open > ul.sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Submenu Animations */
+.eas-submenu-animation-none ul.sub-menu {
+    transition: none !important;
+}
+.eas-submenu-animation-fade ul.sub-menu {
+    transform: none;
+}
+.eas-submenu-animation-slide-up ul.sub-menu {
+    transform: translateY(15px);
+}
+.eas-submenu-animation-slide-up li:hover > ul.sub-menu,
+.eas-submenu-animation-slide-up li.eas-submenu-open > ul.sub-menu {
+    transform: translateY(0);
+}
+.eas-submenu-animation-zoom ul.sub-menu {
+    transform: scale(0.85);
+}
+.eas-submenu-animation-zoom li:hover > ul.sub-menu,
+.eas-submenu-animation-zoom li.eas-submenu-open > ul.sub-menu {
+    transform: scale(1);
+}
+
+/* Standard Hover Pointer Styles (Underline, Overline, Double Line) */
+.eas-pointer-underline .eas-nav-menu-list a.eas-menu-item-link::after,
+.eas-pointer-overline .eas-nav-menu-list a.eas-menu-item-link::before,
+.eas-pointer-double-line .eas-nav-menu-list a.eas-menu-item-link::before,
+.eas-pointer-double-line .eas-nav-menu-list a.eas-menu-item-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.eas-pointer-underline .eas-nav-menu-list a.eas-menu-item-link::after {
+    bottom: 0;
+}
+.eas-pointer-overline .eas-nav-menu-list a.eas-menu-item-link::before {
+    top: 0;
+}
+.eas-pointer-double-line .eas-nav-menu-list a.eas-menu-item-link::before {
+    top: 0;
+}
+.eas-pointer-double-line .eas-nav-menu-list a.eas-menu-item-link::after {
+    bottom: 0;
+}
+
+.eas-pointer-underline .eas-nav-menu-list a.eas-menu-item-link:hover::after,
+.eas-pointer-overline .eas-nav-menu-list a.eas-menu-item-link:hover::before,
+.eas-pointer-double-line .eas-nav-menu-list a.eas-menu-item-link:hover::before,
+.eas-pointer-double-line .eas-nav-menu-list a.eas-menu-item-link:hover::after,
+.eas-nav-menu-list li.current-menu-item > a.eas-menu-item-link::after,
+.eas-nav-menu-list li.current-menu-item > a.eas-menu-item-link::before {
+    transform: scaleX(1);
+}
+
+/* Premium Sliding Line/Background Indicators */
+.eas-menu-indicator {
+    position: absolute;
+    transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+}
+
+.eas-pointer-slide-line .eas-menu-indicator {
+    bottom: 0;
+    height: 3px;
+    background-color: #333;
+}
+
+.eas-pointer-slide-bg .eas-menu-indicator {
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+    z-index: -1;
+}
+
+/* Mobile Toggle */
+.eas-menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 100001;
+    transition: all 0.3s ease;
+}
+
+.eas-menu-toggle .eas-toggle-icon,
+.eas-menu-toggle .eas-close-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+/* Initially toggle is visible, close is hidden */
+.eas-menu-toggle .eas-toggle-icon {
+    display: inline-flex;
+}
+.eas-menu-toggle .eas-close-icon {
+    display: none;
+}
+
+/* Swap when active */
+.eas-menu-toggle.eas-active .eas-toggle-icon {
+    display: none;
+}
+.eas-menu-toggle.eas-active .eas-close-icon {
+    display: inline-flex;
+}
+
+.eas-menu-toggle i {
+    font-size: 24px;
+    display: block;
+    line-height: 1;
+}
+.eas-menu-toggle svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+/* Mobile elements default hidden on desktop */
+.eas-menu-toggle,
+.eas-mobile-menu-container,
+.eas-nav-menu-overlay {
+    display: none;
+}
+
+/* Breakpoint Styles */
+@media (max-width: 1024px) {
+    /* Tablet breakpoint active */
+    .eas-nav-menu-breakpoint-tablet .eas-nav-menu {
+        display: none;
+    }
+    .eas-nav-menu-breakpoint-tablet .eas-menu-toggle {
+        display: inline-flex;
+    }
+    .eas-nav-menu-breakpoint-tablet .eas-mobile-menu-container.eas-layout-dropdown {
+        display: none; /* Managed by JS slideToggle */
+    }
+    .eas-nav-menu-breakpoint-tablet .eas-mobile-menu-container.eas-layout-offcanvas-l,
+    .eas-nav-menu-breakpoint-tablet .eas-mobile-menu-container.eas-layout-offcanvas-r {
+        display: block;
+    }
+    .eas-nav-menu-breakpoint-tablet .eas-nav-menu-overlay {
+        display: block;
+    }
+
+    /* Tablet Alignment (matches both potential Elementor naming conventions) */
+    .eas-nav-menu-aligntablet-left- .eas-nav-menu-wrapper,
+    .eas-nav-menu-alignleft-tablet .eas-nav-menu-wrapper,
+    .eas-nav-menu-align-tablet-left .eas-nav-menu-wrapper { justify-content: flex-start; }
+    .eas-nav-menu-aligntablet-left- .eas-nav-menu-list,
+    .eas-nav-menu-alignleft-tablet .eas-nav-menu-list,
+    .eas-nav-menu-align-tablet-left .eas-nav-menu-list { justify-content: flex-start; }
+
+    .eas-nav-menu-aligntablet-center- .eas-nav-menu-wrapper,
+    .eas-nav-menu-aligncenter-tablet .eas-nav-menu-wrapper,
+    .eas-nav-menu-align-tablet-center .eas-nav-menu-wrapper { justify-content: center; }
+    .eas-nav-menu-aligntablet-center- .eas-nav-menu-list,
+    .eas-nav-menu-aligncenter-tablet .eas-nav-menu-list,
+    .eas-nav-menu-align-tablet-center .eas-nav-menu-list { justify-content: center; }
+
+    .eas-nav-menu-aligntablet-right- .eas-nav-menu-wrapper,
+    .eas-nav-menu-alignright-tablet .eas-nav-menu-wrapper,
+    .eas-nav-menu-align-tablet-right .eas-nav-menu-wrapper { justify-content: flex-end; }
+    .eas-nav-menu-aligntablet-right- .eas-nav-menu-list,
+    .eas-nav-menu-alignright-tablet .eas-nav-menu-list,
+    .eas-nav-menu-align-tablet-right .eas-nav-menu-list { justify-content: flex-end; }
+
+    .eas-nav-menu-aligntablet-justify- .eas-nav-menu-wrapper,
+    .eas-nav-menu-alignjustify-tablet .eas-nav-menu-wrapper,
+    .eas-nav-menu-align-tablet-justify .eas-nav-menu-wrapper { justify-content: space-between; }
+    .eas-nav-menu-aligntablet-justify- .eas-nav-menu-list,
+    .eas-nav-menu-alignjustify-tablet .eas-nav-menu-list,
+    .eas-nav-menu-align-tablet-justify .eas-nav-menu-list { justify-content: space-between; }
+}
+
+@media (max-width: 768px) {
+    /* Mobile breakpoint active */
+    .eas-nav-menu-breakpoint-mobile .eas-nav-menu {
+        display: none;
+    }
+    .eas-nav-menu-breakpoint-mobile .eas-menu-toggle {
+        display: inline-flex;
+    }
+    .eas-nav-menu-breakpoint-mobile .eas-mobile-menu-container.eas-layout-dropdown {
+        display: none; /* Managed by JS slideToggle */
+    }
+    .eas-nav-menu-breakpoint-mobile .eas-mobile-menu-container.eas-layout-offcanvas-l,
+    .eas-nav-menu-breakpoint-mobile .eas-mobile-menu-container.eas-layout-offcanvas-r {
+        display: block;
+    }
+    .eas-nav-menu-breakpoint-mobile .eas-nav-menu-overlay {
+        display: block;
+    }
+
+    /* Mobile Alignment (matches both potential Elementor naming conventions) */
+    .eas-nav-menu-alignmobile-left- .eas-nav-menu-wrapper,
+    .eas-nav-menu-alignleft-mobile .eas-nav-menu-wrapper,
+    .eas-nav-menu-align-mobile-left .eas-nav-menu-wrapper { justify-content: flex-start; }
+    .eas-nav-menu-alignmobile-left- .eas-nav-menu-list,
+    .eas-nav-menu-alignleft-mobile .eas-nav-menu-list,
+    .eas-nav-menu-align-mobile-left .eas-nav-menu-list { justify-content: flex-start; }
+
+    .eas-nav-menu-alignmobile-center- .eas-nav-menu-wrapper,
+    .eas-nav-menu-aligncenter-mobile .eas-nav-menu-wrapper,
+    .eas-nav-menu-align-mobile-center .eas-nav-menu-wrapper { justify-content: center; }
+    .eas-nav-menu-alignmobile-center- .eas-nav-menu-list,
+    .eas-nav-menu-aligncenter-mobile .eas-nav-menu-list,
+    .eas-nav-menu-align-mobile-center .eas-nav-menu-list { justify-content: center; }
+
+    .eas-nav-menu-alignmobile-right- .eas-nav-menu-wrapper,
+    .eas-nav-menu-alignright-mobile .eas-nav-menu-wrapper,
+    .eas-nav-menu-align-mobile-right .eas-nav-menu-wrapper { justify-content: flex-end; }
+    .eas-nav-menu-alignmobile-right- .eas-nav-menu-list,
+    .eas-nav-menu-alignright-mobile .eas-nav-menu-list,
+    .eas-nav-menu-align-mobile-right .eas-nav-menu-list { justify-content: flex-end; }
+
+    .eas-nav-menu-alignmobile-justify- .eas-nav-menu-wrapper,
+    .eas-nav-menu-alignjustify-mobile .eas-nav-menu-wrapper,
+    .eas-nav-menu-align-mobile-justify .eas-nav-menu-wrapper { justify-content: space-between; }
+    .eas-nav-menu-alignmobile-justify- .eas-nav-menu-list,
+    .eas-nav-menu-alignjustify-mobile .eas-nav-menu-list,
+    .eas-nav-menu-align-mobile-justify .eas-nav-menu-list { justify-content: space-between; }
+}
+
+/* Mobile Menu Layout: Dropdown (Standard) */
+.eas-mobile-menu-container.eas-layout-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background: #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    display: none; /* Controlled by JS */
+}
+
+/* Mobile Menu Layout: Off-Canvas (Left/Right) */
+.eas-mobile-menu-container.eas-layout-offcanvas-l,
+.eas-mobile-menu-container.eas-layout-offcanvas-r {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 300px;
+    max-width: 80%;
+    z-index: 100000;
+    background: #fff;
+    box-shadow: 0 0 30px rgba(0,0,0,0.15);
+    display: block; /* Rendered but transformed offscreen */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.eas-mobile-menu-container.eas-layout-offcanvas-l {
+    left: 0;
+    transform: translateX(-100%);
+}
+
+.eas-mobile-menu-container.eas-layout-offcanvas-r {
+    right: 0;
+    transform: translateX(100%);
+}
+
+/* Off-canvas active state */
+.eas-mobile-menu-container.eas-layout-offcanvas-l.eas-open {
+    transform: translateX(0);
+}
+
+.eas-mobile-menu-container.eas-layout-offcanvas-r.eas-open {
+    transform: translateX(0);
+}
+
+/* Overlay for Off-Canvas */
+.eas-nav-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.eas-nav-menu-overlay.eas-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Mobile Menu Close Button */
+.eas-menu-close {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: block;
+    text-align: right;
+    width: 100%;
+}
+.eas-menu-close svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    display: inline-block;
+    vertical-align: middle;
+}
+.eas-menu-close i {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Mobile Menu Structure */
+.eas-nav-menu-mobile .eas-nav-menu-list {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+.eas-nav-menu-mobile .eas-nav-menu-list li {
+    display: block !important;
+    width: 100% !important;
+    position: relative !important;
+}
+
+.eas-nav-menu-mobile a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Mobile Submenu toggle */
+.eas-nav-menu-mobile ul.sub-menu {
+    display: none;
+    position: static !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    box-shadow: none !important;
+    padding-left: 20px !important;
+    background: rgba(0,0,0,0.02) !important;
+    width: 100% !important;
+    transition: none !important;
+}
+
+.eas-nav-menu-mobile li.eas-submenu-open > ul.sub-menu {
+    display: block !important;
+}
+
+.eas-nav-menu-mobile .eas-submenu-indicator-icon {
+    font-size: 14px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background: rgba(0,0,0,0.03);
+    border-radius: 4px;
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eas-nav-menu-mobile li.eas-submenu-open > a > .eas-submenu-indicator-icon {
+    transform: rotate(180deg);
+}
+
+/* Prevent default browser/theme focus outline issues on toggle button */
+.eas-menu-toggle:focus,
+.eas-menu-toggle:active {
+    outline: none !important;
+    box-shadow: none !important;
+}

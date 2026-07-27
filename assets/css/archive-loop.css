@@ -1,0 +1,352 @@
+/**
+ * Apex Archive Loop Widget Styles
+ *
+ * @package ApexAddonsForElementor
+ */
+
+.apexadfo-archive-loop {
+	display: grid;
+	grid-template-columns: repeat(var(--apexadfo-archive-columns, 3), minmax(0, 1fr));
+	gap: 24px;
+	box-sizing: border-box;
+}
+
+.apexadfo-archive-loop--list {
+	grid-template-columns: 1fr;
+}
+
+.apexadfo-archive-loop--overlay {
+	display: grid;
+	grid-template-columns: repeat(var(--apexadfo-archive-columns, 3), minmax(0, 1fr));
+	gap: 24px;
+}
+
+.apexadfo-archive-loop--custom_template {
+	display: grid;
+	grid-template-columns: repeat(var(--apexadfo-archive-columns, 3), minmax(0, 1fr));
+	gap: 24px;
+}
+
+/* Custom Card Wrapper */
+.apexadfo-archive-custom-card {
+	position: relative;
+	width: 100%;
+	box-sizing: border-box;
+	transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Card Box */
+.apexadfo-archive-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	background: #ffffff;
+	border: 1px solid #e5e7eb;
+	border-radius: 12px;
+	transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, background-color 0.3s ease;
+	box-sizing: border-box;
+}
+
+.apexadfo-equal-heights .apexadfo-archive-card,
+.apexadfo-equal-heights .apexadfo-archive-custom-card {
+	height: 100%;
+}
+
+/* Card Hover Animation Classes (Configurable) */
+.apexadfo-card-hover-lift:hover {
+	transform: translateY(-6px);
+}
+
+.apexadfo-card-hover-scale:hover {
+	transform: scale(1.02);
+}
+
+.apexadfo-card-hover-shadow:hover {
+	box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.15);
+}
+
+/* List Layout Card */
+.apexadfo-archive-loop--list .apexadfo-archive-card {
+	display: grid;
+	grid-template-columns: minmax(200px, 36%) 1fr;
+	align-items: stretch;
+}
+
+/* Overlay Layout Card */
+.apexadfo-archive-loop--overlay .apexadfo-archive-card {
+	min-height: 380px;
+	justify-content: flex-end;
+}
+
+.apexadfo-archive-loop--overlay .apexadfo-archive-card__image-wrap {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	height: 100%;
+}
+
+.apexadfo-archive-loop--overlay .apexadfo-archive-card__image-wrap::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(180deg, rgba(15, 23, 42, 0) 20%, rgba(15, 23, 42, 0.85) 100%);
+	z-index: 2;
+}
+
+.apexadfo-archive-loop--overlay .apexadfo-archive-card__content {
+	position: relative;
+	z-index: 3;
+	color: #ffffff;
+}
+
+.apexadfo-archive-loop--overlay .apexadfo-archive-card__title a {
+	color: #ffffff;
+}
+
+.apexadfo-archive-loop--overlay .apexadfo-archive-card__meta,
+.apexadfo-archive-loop--overlay .apexadfo-archive-card__excerpt {
+	color: rgba(255, 255, 255, 0.85);
+}
+
+/* Image Wrap & Hover Effects */
+.apexadfo-archive-card__image-wrap {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	text-decoration: none;
+}
+
+.apexadfo-archive-card__image-wrap img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.3s ease;
+}
+
+.apexadfo-image-zoom:hover img {
+	transform: scale(1.06);
+}
+
+.apexadfo-image-slide:hover img {
+	transform: scale(1.08) rotate(1deg);
+}
+
+/* Category Badge Wrapper & Button */
+.apexadfo-archive-badge-wrap {
+	display: flex;
+	align-items: center;
+	align-self: flex-start;
+	width: auto;
+	margin-bottom: 10px;
+}
+
+.apexadfo-archive-badge {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	align-self: flex-start;
+	width: auto;
+	max-width: max-content;
+	font-weight: 600;
+	font-size: 0.75rem;
+	line-height: 1.2;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	padding: 4px 12px;
+	border-radius: 20px;
+	background: #4f46e5;
+	color: #ffffff;
+	text-decoration: none;
+	transition: all 0.2s ease;
+	box-sizing: border-box;
+	white-space: nowrap;
+	z-index: 4;
+}
+
+.apexadfo-badge-on-image {
+	position: absolute;
+	top: 14px;
+	left: 14px;
+}
+
+.apexadfo-badge-above-title {
+	position: relative;
+	margin-bottom: 10px;
+}
+
+/* Content Box */
+.apexadfo-archive-card__content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	flex-grow: 1;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.apexadfo-archive-card__title {
+	width: 100%;
+	margin: 0 0 10px;
+	font-size: 1.25rem;
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.apexadfo-archive-card__title a {
+	color: #0f172a;
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.apexadfo-archive-card__title a:hover {
+	color: #4f46e5;
+}
+
+/* Meta Data */
+.apexadfo-archive-card__meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	width: 100%;
+	gap: 8px 14px;
+	margin-bottom: 12px;
+	color: #64748b;
+	font-size: 0.85rem;
+}
+
+.apexadfo-archive-card__meta-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.apexadfo-archive-card__meta-item svg,
+.apexadfo-archive-card__meta-item i {
+	width: 14px;
+	height: 14px;
+	font-size: 14px;
+	fill: currentColor;
+}
+
+.apexadfo-meta-separator {
+	opacity: 0.4;
+}
+
+/* Excerpt */
+.apexadfo-archive-card__excerpt {
+	width: 100%;
+	color: #475569;
+	font-size: 0.925rem;
+	line-height: 1.6;
+	margin-bottom: 16px;
+}
+
+/* Read More Button */
+.apexadfo-archive-card__button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	margin-top: auto;
+	align-self: flex-start;
+	padding: 8px 18px;
+	border: 1px solid #4f46e5;
+	border-radius: 6px;
+	background: #4f46e5;
+	color: #ffffff;
+	font-size: 0.875rem;
+	font-weight: 600;
+	text-decoration: none;
+	transition: all 0.2s ease;
+	cursor: pointer;
+}
+
+.apexadfo-archive-card__button:hover {
+	background: #4338ca;
+	border-color: #4338ca;
+	color: #ffffff;
+}
+
+.apexadfo-archive-card__button-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.875em;
+	transition: transform 0.2s ease;
+}
+
+.apexadfo-archive-card__button:hover .apexadfo-archive-card__button-icon {
+	transform: translateX(3px);
+}
+
+/* Pagination */
+.apexadfo-archive-pagination {
+	margin-top: 36px;
+}
+
+.apexadfo-archive-pagination ul {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.apexadfo-archive-pagination--left ul { justify-content: flex-start; }
+.apexadfo-archive-pagination--center ul { justify-content: center; }
+.apexadfo-archive-pagination--right ul { justify-content: flex-end; }
+
+.apexadfo-archive-pagination a,
+.apexadfo-archive-pagination .current {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	height: 40px;
+	padding: 0 14px;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	background: #ffffff;
+	color: #1e293b;
+	font-size: 0.875rem;
+	font-weight: 600;
+	text-decoration: none;
+	transition: all 0.2s ease;
+}
+
+.apexadfo-archive-pagination a:hover {
+	border-color: #4f46e5;
+	color: #4f46e5;
+}
+
+.apexadfo-archive-pagination .current {
+	background: #4f46e5;
+	border-color: #4f46e5;
+	color: #ffffff;
+}
+
+/* Empty State */
+.apexadfo-archive-empty {
+	padding: 32px;
+	text-align: center;
+	background: #f8fafc;
+	border: 1px dashed #cbd5e1;
+	border-radius: 8px;
+	color: #64748b;
+	font-size: 1rem;
+}
+
+/* Responsive Overrides */
+@media (max-width: 767px) {
+	.apexadfo-archive-loop--list .apexadfo-archive-card {
+		grid-template-columns: 1fr;
+	}
+	.apexadfo-archive-loop--overlay,
+	.apexadfo-archive-loop--custom_template {
+		grid-template-columns: 1fr;
+	}
+}

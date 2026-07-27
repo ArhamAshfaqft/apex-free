@@ -1,0 +1,516 @@
+/* ==========================================================================
+   APEX ADDONS - ONBOARDING SETUP WIZARD STYLES (CLEAN ADMIN LIGHT SYSTEM)
+   ========================================================================== */
+
+#wpcontent {
+	padding-left: 0 !important;
+}
+
+body[class*="apexadfo-setup-wizard"] #wpbody-content {
+	padding-bottom: 0;
+	background: #f8fafc;
+}
+
+.apexadfo-wizard-wrap {
+	min-height: calc(100vh - 32px);
+	background: #f8fafc;
+	color: #1e293b;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	margin-left: -20px;
+	padding: 32px 40px 60px 40px;
+}
+
+/* Top Header Bar */
+.apexadfo-wizard-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #ffffff;
+	padding: 16px 28px;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	margin-bottom: 32px;
+}
+
+.apexadfo-wizard-brand {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.apexadfo-wizard-logo {
+	height: 34px;
+	width: auto;
+}
+
+.apexadfo-wizard-version {
+	font-size: 11px;
+	font-weight: 600;
+	padding: 2px 8px;
+	background: #f3e8ff;
+	color: #7c3aed;
+	border-radius: 12px;
+}
+
+.apexadfo-wizard-skip {
+	color: #64748b;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: 500;
+	transition: color 0.2s ease;
+}
+
+.apexadfo-wizard-skip:hover {
+	color: #7c3aed;
+}
+
+/* Step Progress Indicator */
+.apexadfo-wizard-nav {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 36px;
+	margin-bottom: 36px;
+}
+
+.apexadfo-wizard-step-indicator {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	opacity: 0.5;
+	transition: opacity 0.25s ease;
+}
+
+.apexadfo-wizard-step-indicator.active {
+	opacity: 1;
+}
+
+.apexadfo-step-num {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: #ffffff;
+	border: 2px solid #cbd5e1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+	font-size: 13px;
+	color: #64748b;
+	transition: all 0.25s ease;
+}
+
+.apexadfo-wizard-step-indicator.active .apexadfo-step-num {
+	background: #7c3aed;
+	border-color: #7c3aed;
+	color: #ffffff;
+	box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
+}
+
+.apexadfo-step-title {
+	font-size: 14px;
+	font-weight: 600;
+	color: #1e293b;
+}
+
+/* Wizard Body Container */
+.apexadfo-wizard-body {
+	max-width: 900px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.apexadfo-wizard-step {
+	display: none;
+	animation: apexadfoFadeIn 0.3s ease forwards;
+}
+
+.apexadfo-wizard-step.active {
+	display: block;
+}
+
+@keyframes apexadfoFadeIn {
+	from { opacity: 0; transform: translateY(6px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Section (Step 1 & 4) */
+.apexadfo-wizard-hero {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 16px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	text-align: center;
+	padding: 48px 36px;
+}
+
+.apexadfo-hero-badge {
+	display: inline-block;
+	padding: 6px 14px;
+	background: #f3e8ff;
+	border-radius: 20px;
+	color: #7c3aed;
+	font-size: 13px;
+	font-weight: 600;
+	margin-bottom: 20px;
+}
+
+.apexadfo-wizard-hero h1 {
+	font-size: 28px;
+	font-weight: 800;
+	color: #0f172a;
+	margin: 0 0 14px 0;
+	line-height: 1.3;
+}
+
+.apexadfo-wizard-hero p {
+	font-size: 15px;
+	color: #64748b;
+	max-width: 600px;
+	margin: 0 auto 32px auto;
+	line-height: 1.6;
+}
+
+/* Section Header */
+.apexadfo-wizard-section-header {
+	text-align: center;
+	margin-bottom: 32px;
+}
+
+.apexadfo-wizard-section-header h2 {
+	font-size: 24px;
+	font-weight: 700;
+	color: #0f172a;
+	margin: 0 0 8px 0;
+}
+
+.apexadfo-wizard-section-header p {
+	font-size: 14px;
+	color: #64748b;
+	margin: 0;
+}
+
+/* Preset Cards (Step 2) */
+.apexadfo-preset-cards {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px;
+	margin-bottom: 36px;
+}
+
+.apexadfo-preset-card {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	padding: 24px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.apexadfo-preset-card:hover {
+	border-color: #c084fc;
+	box-shadow: 0 4px 12px rgba(124, 58, 237, 0.08);
+	transform: translateY(-2px);
+}
+
+.apexadfo-preset-card.selected {
+	border-color: #7c3aed;
+	background: #faf5ff;
+	box-shadow: 0 4px 14px rgba(124, 58, 237, 0.12);
+}
+
+.apexadfo-preset-card input[type="radio"] {
+	display: none;
+}
+
+.apexadfo-preset-icon {
+	font-size: 26px;
+	margin-bottom: 12px;
+}
+
+.apexadfo-preset-card h3 {
+	font-size: 16px;
+	font-weight: 700;
+	color: #0f172a;
+	margin: 0 0 6px 0;
+}
+
+.apexadfo-preset-card p {
+	font-size: 13px;
+	color: #64748b;
+	margin: 0;
+	line-height: 1.5;
+}
+
+/* Elements Customization (Step 3) */
+.apexadfo-elements-container {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	margin-bottom: 36px;
+}
+
+.apexadfo-elements-group {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	padding: 20px 24px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.apexadfo-elements-group-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 14px;
+	border-bottom: 1px solid #f1f5f9;
+	margin-bottom: 16px;
+}
+
+.apexadfo-elements-group-header h3 {
+	font-size: 15px;
+	font-weight: 700;
+	color: #0f172a;
+	margin: 0;
+}
+
+.apexadfo-elements-group-actions {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 12px;
+	color: #94a3b8;
+}
+
+.apexadfo-link-btn {
+	background: none;
+	border: none;
+	color: #7c3aed;
+	cursor: pointer;
+	font-size: 12px;
+	padding: 0;
+	font-weight: 600;
+}
+
+.apexadfo-link-btn:hover {
+	text-decoration: underline;
+}
+
+.apexadfo-elements-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 12px;
+}
+
+.apexadfo-element-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #f8fafc;
+	border: 1px solid #f1f5f9;
+	padding: 12px 16px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.apexadfo-element-item:hover {
+	background: #f1f5f9;
+	border-color: #e2e8f0;
+}
+
+.apexadfo-element-name {
+	font-size: 13px;
+	color: #1e293b;
+	font-weight: 600;
+}
+
+input[type="checkbox"].apexadfo-toggle-input,
+.apexadfo-element-item input[type="checkbox"] {
+	display: none !important;
+	visibility: hidden !important;
+	opacity: 0 !important;
+	width: 0 !important;
+	height: 0 !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	position: absolute !important;
+	pointer-events: none !important;
+}
+
+.apexadfo-toggle-switch {
+	width: 38px;
+	height: 22px;
+	background: #cbd5e1;
+	border-radius: 11px;
+	position: relative;
+	transition: background 0.25s ease;
+	flex-shrink: 0;
+}
+
+.apexadfo-toggle-switch::after {
+	content: "";
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: #ffffff;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+	transition: transform 0.25s ease;
+}
+
+.apexadfo-toggle-input:checked + .apexadfo-toggle-switch {
+	background: #7c3aed;
+}
+
+.apexadfo-toggle-input:checked + .apexadfo-toggle-switch::after {
+	transform: translateX(16px);
+}
+
+/* Finish Cards (Step 4) */
+.apexadfo-finish-cards {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px;
+	max-width: 580px;
+	margin: 32px auto 0 auto;
+}
+
+.apexadfo-finish-card {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	padding: 24px;
+	text-decoration: none;
+	text-align: center;
+	transition: all 0.2s ease;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.apexadfo-finish-card:hover {
+	border-color: #7c3aed;
+	background: #faf5ff;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1);
+}
+
+.apexadfo-finish-icon {
+	font-size: 32px;
+	margin-bottom: 10px;
+}
+
+.apexadfo-finish-card h3 {
+	font-size: 16px;
+	font-weight: 700;
+	color: #0f172a;
+	margin: 0 0 4px 0;
+}
+
+.apexadfo-finish-card p {
+	font-size: 13px;
+	color: #64748b;
+	margin: 0;
+}
+
+.apexadfo-success-icon {
+	font-size: 52px;
+	margin-bottom: 16px;
+}
+
+/* Buttons & Actions */
+.apexadfo-wizard-actions {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 14px;
+	margin-top: 28px;
+}
+
+.apexadfo-btn {
+	padding: 11px 26px;
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	border: none;
+	transition: all 0.2s ease;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.apexadfo-btn-primary {
+	background: #7c3aed;
+	color: #ffffff;
+	box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+}
+
+.apexadfo-btn-primary:hover {
+	background: #6d28d9;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+}
+
+.apexadfo-btn-secondary {
+	background: #ffffff;
+	color: #475569;
+	border: 1px solid #cbd5e1;
+}
+
+.apexadfo-btn-secondary:hover {
+	background: #f8fafc;
+	color: #0f172a;
+	border-color: #94a3b8;
+}
+
+.apexadfo-spin {
+	animation: apexadfoSpinKeyframes 0.8s linear infinite;
+}
+
+@keyframes apexadfoSpinKeyframes {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.apexadfo-preset-cards,
+	.apexadfo-elements-grid,
+	.apexadfo-finish-cards {
+		grid-template-columns: 1fr;
+	}
+	.apexadfo-wizard-nav {
+		gap: 16px;
+	}
+	.apexadfo-step-title {
+		display: none;
+	}
+}
+
+/* WP Admin Sidebar Menu Brand Overrides */
+#adminmenu li.toplevel_page_apexadfo-addons.wp-has-current-submenu a.wp-has-current-submenu,
+#adminmenu li.toplevel_page_apexadfo-addons.current a.menu-top,
+#adminmenu li.toplevel_page_apexadfo-addons .wp-submenu .wp-submenu-head {
+	background: #7c3aed !important;
+	color: #ffffff !important;
+}
+
+#adminmenu li.toplevel_page_apexadfo-addons.wp-has-current-submenu a.wp-has-current-submenu .wp-menu-name,
+#adminmenu li.toplevel_page_apexadfo-addons.current a.menu-top .wp-menu-name,
+#adminmenu li.toplevel_page_apexadfo-addons div.wp-menu-image::before {
+	color: #ffffff !important;
+}
+
+#adminmenu li.toplevel_page_apexadfo-addons .wp-submenu a:hover,
+#adminmenu li.toplevel_page_apexadfo-addons .wp-submenu a:focus,
+#adminmenu li.toplevel_page_apexadfo-addons .wp-submenu li.current a {
+	color: #7c3aed !important;
+	font-weight: 600;
+}

@@ -1,0 +1,170 @@
+/* ==========================================================================
+   Apex Header Search Widget
+   ========================================================================== */
+
+.eas-header-search-wrap {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Base Trigger Button */
+.eas-search-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 40px; /* Default fallback size */
+    height: 40px; /* Default fallback size */
+    line-height: 40px;
+}
+.eas-search-trigger i {
+    font-size: 20px; /* Default fallback size */
+}
+.eas-search-trigger svg {
+    width: 20px; /* Default fallback size */
+    height: 20px; /* Default fallback size */
+    fill: currentColor;
+    display: block;
+    transition: fill 0.3s ease, color 0.3s ease;
+}
+
+/* --- 1. EXPANDABLE LAYOUT --- */
+.eas-search-expandable {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-width: 40px; /* Prevent collapse when input is closed */
+    height: 40px;
+}
+.eas-search-expandable form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+.eas-search-expandable input.search-field {
+    width: 0;
+    padding: 0;
+    border: 0px solid transparent;
+    background: transparent;
+    outline: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                opacity 0.3s ease, 
+                visibility 0.3s ease, 
+                border-color 0.3s ease, 
+                background-color 0.3s ease;
+    box-sizing: border-box;
+}
+/* Trigger button within expandable layout */
+.eas-search-expandable .eas-search-trigger {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+}
+/* Active (expanded) state */
+.eas-search-expandable.eas-active input.search-field {
+    width: 240px; /* Overridden by Elementor custom control slider if set */
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- 2. FULLSCREEN OVERLAY LAYOUT --- */
+.eas-search-overlay-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+.eas-search-overlay-container.eas-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Close Button */
+.eas-search-overlay-close {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.eas-search-overlay-close:hover {
+    transform: rotate(90deg);
+}
+
+/* Overlay Form & Input */
+.eas-search-overlay-content {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.eas-search-overlay-container.eas-open .eas-search-overlay-content {
+    transform: scale(1);
+}
+.eas-search-overlay-content form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+    transition: border-color 0.3s ease;
+}
+.eas-search-overlay-content form:focus-within {
+    border-bottom-color: #ffffff;
+}
+.eas-search-overlay-content input.search-field {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 24px;
+    padding: 12px 60px 12px 0;
+    box-sizing: border-box;
+}
+.eas-search-overlay-content input.search-field::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+.eas-search-overlay-content .search-submit-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 22px;
+    padding: 10px;
+    outline: none;
+}
+.eas-search-overlay-content .search-submit-btn svg {
+    fill: #ffffff;
+    width: 22px;
+    height: 22px;
+}

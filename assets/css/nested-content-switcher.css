@@ -1,0 +1,191 @@
+.apexadfo-nested-switcher {
+	--apexadfo-switcher-panel-gap: 24px;
+	--apexadfo-switcher-duration: 450ms;
+	--apexadfo-switcher-indicator: 3px;
+	display: flex;
+	width: 100%;
+	min-width: 0;
+}
+
+.apexadfo-nav-top { flex-direction: column; }
+.apexadfo-nav-bottom { flex-direction: column-reverse; }
+.apexadfo-nav-left { flex-direction: row; align-items: flex-start; }
+.apexadfo-nav-right { flex-direction: row-reverse; align-items: flex-start; }
+.apexadfo-nav-top .apexadfo-switcher-nav { margin-bottom: var(--apexadfo-switcher-panel-gap); }
+.apexadfo-nav-bottom .apexadfo-switcher-nav { margin-top: var(--apexadfo-switcher-panel-gap); }
+.apexadfo-nav-left .apexadfo-switcher-nav { margin-right: var(--apexadfo-switcher-panel-gap); }
+.apexadfo-nav-right .apexadfo-switcher-nav { margin-left: var(--apexadfo-switcher-panel-gap); }
+
+.apexadfo-switcher-nav {
+	display: flex;
+	align-items: center;
+	position: relative;
+	width: fit-content;
+	max-width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
+	overflow-x: auto;
+	overflow-y: visible;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+	-webkit-overflow-scrolling: touch;
+}
+
+.apexadfo-switcher-nav::-webkit-scrollbar {
+	display: none; /* Chrome, Safari, Opera */
+}
+
+.apexadfo-nav-left .apexadfo-switcher-nav,
+.apexadfo-nav-right .apexadfo-switcher-nav {
+	flex: 0 0 auto;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.apexadfo-switcher-tab {
+	appearance: none;
+	-webkit-appearance: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	min-width: max-content;
+	max-width: 100%;
+	flex: 0 0 auto;
+	border: 1px solid transparent;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	line-height: 1.2;
+	text-align: center;
+	cursor: pointer;
+	transition: color .25s ease, background-color .25s ease, border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+
+.apexadfo-switcher-tab:focus-visible {
+	outline-style: solid;
+	outline: 2px solid currentColor;
+	outline-offset: 3px;
+}
+
+.apexadfo-switcher-tab-icon { display: inline-flex; flex: 0 0 auto; line-height: 1; }
+.apexadfo-switcher-tab-icon svg { display: block; fill: currentColor; }
+.apexadfo-switcher-tab-label { min-width: 0; }
+
+.apexadfo-style-segmented .apexadfo-switcher-nav { padding: 4px; border-radius: 12px; background: #f1f3f7; }
+.apexadfo-style-segmented .apexadfo-switcher-tab[aria-selected="true"] { background: #fff; box-shadow: 0 4px 16px rgba(15, 23, 42, .12); }
+.apexadfo-style-pills .apexadfo-switcher-tab { border-radius: 999px; background: #f1f3f7; }
+.apexadfo-style-pills .apexadfo-switcher-tab[aria-selected="true"] { background: #151a2d; color: #fff; }
+.apexadfo-style-boxed .apexadfo-switcher-tab { border-color: #d9deea; background: #fff; }
+.apexadfo-style-boxed .apexadfo-switcher-tab[aria-selected="true"] { border-color: #6c3bff; box-shadow: inset 0 0 0 1px #6c3bff; }
+.apexadfo-style-minimal .apexadfo-switcher-tab { opacity: .62; }
+.apexadfo-style-minimal .apexadfo-switcher-tab[aria-selected="true"] { opacity: 1; }
+.apexadfo-style-underline .apexadfo-switcher-tab::after {
+	content: "";
+	position: absolute;
+	left: 12%;
+	right: 12%;
+	bottom: 0;
+	height: var(--apexadfo-switcher-indicator);
+	background: currentColor;
+	transform: scaleX(0);
+	transition: transform .3s ease;
+}
+.apexadfo-style-underline .apexadfo-switcher-tab[aria-selected="true"]::after { transform: scaleX(1); }
+.apexadfo-style-switch .apexadfo-switcher-nav { padding: 5px; border-radius: 999px; background: #e9edf5; }
+.apexadfo-style-switch .apexadfo-switcher-tab { z-index: 1; border-radius: 999px; }
+.apexadfo-style-switch .apexadfo-switcher-tab[aria-selected="true"] { background: #6c3bff; color: #fff; box-shadow: 0 5px 18px rgba(108, 59, 255, .28); }
+
+.apexadfo-switcher-viewport,
+.apexadfo-switcher-panels { width: 100%; min-width: 0; }
+.apexadfo-switcher-viewport { overflow: visible; transition: height var(--apexadfo-switcher-duration) cubic-bezier(.22, 1, .36, 1); }
+.apexadfo-switcher-viewport.apexadfo-is-resizing { overflow: hidden; }
+.apexadfo-switcher-panels > .e-con { width: 100%; box-sizing: border-box; transform-origin: 50% 50%; }
+.apexadfo-switcher-panels > .e-con[hidden],
+.apexadfo-switcher-panels > .e-con:not(.apexadfo-is-active) { display: none !important; }
+.apexadfo-switcher-panels > .e-con.apexadfo-is-entering { animation-duration: var(--apexadfo-switcher-duration); animation-fill-mode: both; animation-timing-function: cubic-bezier(.22, 1, .36, 1); }
+.apexadfo-transition-fade .apexadfo-is-entering { animation-name: apexadfo-switcher-fade; }
+.apexadfo-transition-slide-left .apexadfo-is-entering { animation-name: apexadfo-switcher-slide-left; }
+.apexadfo-transition-slide-up .apexadfo-is-entering { animation-name: apexadfo-switcher-slide-up; }
+.apexadfo-transition-scale .apexadfo-is-entering { animation-name: apexadfo-switcher-scale; }
+.apexadfo-transition-blur .apexadfo-is-entering { animation-name: apexadfo-switcher-blur; }
+.apexadfo-transition-flip .apexadfo-is-entering { animation-name: apexadfo-switcher-flip; backface-visibility: hidden; }
+
+@keyframes apexadfo-switcher-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes apexadfo-switcher-slide-left { from { opacity: 0; transform: translateX(36px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes apexadfo-switcher-slide-up { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes apexadfo-switcher-scale { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
+@keyframes apexadfo-switcher-blur { from { opacity: 0; filter: blur(14px); transform: scale(.98); } to { opacity: 1; filter: blur(0); transform: scale(1); } }
+@keyframes apexadfo-switcher-flip { from { opacity: 0; transform: perspective(900px) rotateX(-10deg) translateY(18px); } to { opacity: 1; transform: perspective(900px) rotateX(0) translateY(0); } }
+
+@media (max-width: 767px) {
+	.apexadfo-mobile-scroll.apexadfo-nav-left,
+	.apexadfo-mobile-scroll.apexadfo-nav-right,
+	.apexadfo-mobile-wrap.apexadfo-nav-left,
+	.apexadfo-mobile-wrap.apexadfo-nav-right,
+	.apexadfo-mobile-stack.apexadfo-nav-left,
+	.apexadfo-mobile-stack.apexadfo-nav-right { flex-direction: column; }
+	.apexadfo-mobile-scroll.apexadfo-nav-left .apexadfo-switcher-nav,
+	.apexadfo-mobile-scroll.apexadfo-nav-right .apexadfo-switcher-nav,
+	.apexadfo-mobile-wrap.apexadfo-nav-left .apexadfo-switcher-nav,
+	.apexadfo-mobile-wrap.apexadfo-nav-right .apexadfo-switcher-nav,
+	.apexadfo-mobile-stack.apexadfo-nav-left .apexadfo-switcher-nav,
+	.apexadfo-mobile-stack.apexadfo-nav-right .apexadfo-switcher-nav { margin: 0 0 var(--apexadfo-switcher-panel-gap); }
+	
+	/* Mobile Scroll mode: Smooth horizontal row without ugly native scrollbars and no left-clipping */
+	.apexadfo-mobile-scroll .apexadfo-switcher-nav {
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: flex-start !important;
+		width: 100%;
+		max-width: 100%;
+		overflow-x: auto;
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+		-webkit-overflow-scrolling: touch;
+		scroll-snap-type: x mandatory;
+		padding-left: 4px;
+		padding-right: 4px;
+	}
+	.apexadfo-mobile-scroll .apexadfo-switcher-nav::-webkit-scrollbar {
+		display: none;
+	}
+	.apexadfo-mobile-scroll .apexadfo-switcher-tab {
+		flex: 0 0 auto;
+		scroll-snap-align: start;
+	}
+
+	/* Mobile Wrap / Multi-line mode: Tabs fit as many as possible per line, then wrap to next line cleanly */
+	.apexadfo-mobile-wrap .apexadfo-switcher-nav {
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		width: 100%;
+		max-width: 100%;
+		overflow-x: visible;
+		row-gap: 8px;
+	}
+	.apexadfo-mobile-wrap .apexadfo-switcher-tab {
+		flex: 0 0 auto;
+		max-width: 100%;
+	}
+
+	/* Mobile Stack mode: Vertical full-width buttons */
+	.apexadfo-mobile-stack .apexadfo-switcher-nav {
+		flex-direction: column;
+		align-items: stretch;
+		width: 100%;
+		max-width: 100%;
+		overflow-x: visible;
+	}
+	.apexadfo-mobile-stack .apexadfo-switcher-tab {
+		width: 100%;
+		justify-content: center;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.apexadfo-switcher-viewport { transition: none; }
+	.apexadfo-switcher-panels > .e-con.apexadfo-is-entering { animation: none; }
+	.apexadfo-switcher-tab { transition: none; }
+}

@@ -1,0 +1,40 @@
+/* ==========================================================================
+   APEX ADDONS - PROGRESS TRACKER WIDGET STYLES
+   ========================================================================== */
+
+.eas-progress-tracker-wrap {
+	width: 100%;
+	background-color: #f1f5f9;
+	border-radius: 4px;
+	overflow: hidden;
+	height: 8px;
+}
+
+.eas-progress-tracker-bar {
+	height: 100%;
+	width: 0%;
+	background-color: #0f172a;
+	transition: width 0.1s ease-out;
+}
+
+/* Pinned to Top of Screen */
+.eas-progress-tracker-wrap.eas-progress-tracker-fixed-top {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 99999;
+	border-radius: 0;
+	margin: 0;
+}
+
+/* Pinned to Bottom of Screen */
+.eas-progress-tracker-wrap.eas-progress-tracker-fixed-bottom {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	z-index: 99999;
+	border-radius: 0;
+	margin: 0;
+}

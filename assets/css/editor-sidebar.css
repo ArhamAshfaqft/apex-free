@@ -1,0 +1,388 @@
+/* ==========================================================================
+   APEX ADDONS - PREMIUM GLOBAL SETTINGS SIDEBAR STYLES
+   ========================================================================== */
+
+.eas-custom-sidebar {
+	position: fixed;
+	top: 0;
+	right: -360px;
+	width: 350px;
+	height: 100vh;
+	background: rgba(20, 20, 25, 0.96);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	border-left: 1px solid rgba(255, 255, 255, 0.1);
+	box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5);
+	z-index: 9999999;
+	color: #e5e7eb;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+	display: flex;
+	flex-direction: column;
+	transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+	box-sizing: border-box;
+}
+
+.eas-custom-sidebar.active {
+	right: 0;
+}
+
+/* Header */
+.eas-custom-sidebar-header {
+	padding: 20px 24px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.eas-custom-sidebar-header h3 {
+	margin: 0;
+	font-size: 18px;
+	font-weight: 600;
+	color: #ffffff !important;
+	background: none !important;
+	-webkit-background-clip: initial !important;
+	background-clip: initial !important;
+	-webkit-text-fill-color: #ffffff !important;
+}
+
+.eas-custom-sidebar-close {
+	background: none;
+	border: none;
+	color: #9ca3af;
+	font-size: 24px;
+	cursor: pointer;
+	padding: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+	transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.eas-custom-sidebar-close:hover {
+	color: #ffffff;
+	transform: rotate(90deg);
+}
+
+/* Body / Sections */
+.eas-custom-sidebar-body {
+	flex: 1;
+	overflow-y: auto;
+	padding: 24px;
+	display: flex;
+	flex-direction: column;
+	gap: 28px;
+}
+
+.eas-sidebar-section {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.eas-sidebar-section-title {
+	font-size: 14px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: #9ca3af;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+	padding-bottom: 8px;
+	margin-bottom: 4px;
+}
+
+/* Control Fields */
+.eas-sidebar-field {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.eas-sidebar-field label {
+	font-size: 13px;
+	font-weight: 500;
+	color: #d1d5db;
+}
+
+/* Slider Style */
+.eas-sidebar-slider-wrap {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.eas-sidebar-slider-wrap input[type="range"] {
+	flex: 1;
+	height: 4px;
+	border-radius: 2px;
+	background: rgba(255, 255, 255, 0.15);
+	outline: none;
+	-webkit-appearance: none;
+}
+
+.eas-sidebar-slider-wrap input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: #a855f7;
+	cursor: pointer;
+	transition: transform 0.1s ease;
+}
+
+.eas-sidebar-slider-wrap input[type="range"]::-webkit-slider-thumb:hover {
+	transform: scale(1.2);
+}
+
+.eas-sidebar-slider-val {
+	font-size: 12px;
+	font-family: monospace;
+	background: rgba(255, 255, 255, 0.08);
+	padding: 2px 6px;
+	border-radius: 4px;
+	min-width: 28px;
+	text-align: center;
+}
+
+/* Color Picker */
+.eas-sidebar-color-wrap {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.eas-sidebar-color-wrap input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width: 32px;
+	height: 32px;
+	border-radius: 6px;
+	cursor: pointer;
+	background: none;
+}
+
+.eas-sidebar-color-wrap input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+
+.eas-sidebar-color-wrap input[type="color"]::-webkit-color-swatch {
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	border-radius: 6px;
+}
+
+.eas-sidebar-color-text {
+	flex: 1;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 6px;
+	padding: 6px 10px;
+	font-size: 13px;
+	color: #fff;
+	outline: none;
+}
+
+/* Select Control */
+.eas-sidebar-select {
+	background: rgba(255, 255, 255, 0.06) !important;
+	border: 1px solid rgba(255, 255, 255, 0.1) !important;
+	border-radius: 6px !important;
+	padding: 6px 12px !important;
+	font-size: 13px !important;
+	line-height: 1.4 !important;
+	height: 36px !important;
+	min-height: 36px !important;
+	color: #ffffff !important;
+	outline: none !important;
+	cursor: pointer !important;
+	box-sizing: border-box !important;
+	-webkit-appearance: menulist !important;
+	appearance: menulist !important;
+}
+
+.eas-sidebar-select option {
+	background: #1e293b !important;
+	color: #ffffff !important;
+	padding: 8px 12px !important;
+}
+
+/* Switcher / Toggle */
+.eas-sidebar-switch-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.eas-sidebar-switch {
+	position: relative;
+	display: inline-block;
+	width: 44px;
+	height: 24px;
+}
+
+.eas-sidebar-switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.eas-sidebar-slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(255, 255, 255, 0.15);
+	transition: .3s;
+	border-radius: 24px;
+}
+
+.eas-sidebar-slider:before {
+	position: absolute;
+	content: "";
+	height: 18px;
+	width: 18px;
+	left: 3px;
+	bottom: 3px;
+	background-color: white;
+	transition: .3s;
+	border-radius: 50%;
+}
+
+.eas-sidebar-switch input:checked + .eas-sidebar-slider {
+	background-color: #a855f7;
+}
+
+.eas-sidebar-switch input:checked + .eas-sidebar-slider:before {
+	transform: translateX(20px);
+}
+
+/* Footer */
+.eas-custom-sidebar-footer {
+	padding: 20px 24px;
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.eas-custom-sidebar-save {
+	width: 100%;
+	background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%);
+	border: none;
+	border-radius: 8px;
+	color: #ffffff;
+	padding: 12px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+	transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.eas-custom-sidebar-save:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 6px 16px rgba(168, 85, 247, 0.45);
+}
+
+.eas-custom-sidebar-save:active {
+	transform: translateY(0);
+}
+
+.eas-custom-sidebar-save.saving {
+	opacity: 0.8;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+/* Save Success Feedback Animations */
+.eas-custom-sidebar-save.success {
+	background: #10b981;
+	box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.eas-sidebar-loader {
+	width: 16px;
+	height: 16px;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-top-color: #ffffff;
+	border-radius: 50%;
+	animation: eas-spin 0.8s linear infinite;
+	display: none;
+}
+
+.eas-custom-sidebar-save.saving .eas-sidebar-loader {
+	display: block;
+}
+
+@keyframes eas-spin {
+	to { transform: rotate(360deg); }
+}
+.elementor-element[data-library-element-type^="eas-"] {
+	position: relative;
+}
+
+.elementor-element[data-library-element-type^="eas-"]::after {
+	content: "";
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 18px;
+	height: 18px;
+	background-image: url('../images/apex-menu-icon.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	pointer-events: none;
+	z-index: 1;
+	transition: transform 0.25s ease;
+}
+
+.elementor-element[data-library-element-type^="eas-"]:hover::after {
+	background-color: transparent !important;
+	border: none !important;
+	transform: scale(1.18);
+}
+
+#elementor-panel-elements-search-area {
+	z-index: 10 !important;
+	position: sticky !important;
+}
+
+#elementor-icons-manager__sidebar {
+	height: 100% !important;
+	overflow-y: auto !important;
+}
+
+.elementor-tags-list__teaser {
+	display: none !important;
+}
+
+/* Global Settings Editor Trigger Button */
+button.eas-global-settings-trigger {
+	background: transparent !important;
+	background-color: transparent !important;
+	border: none !important;
+	box-shadow: none !important;
+	padding: 2px !important;
+	min-width: auto !important;
+	cursor: pointer !important;
+}
+
+button.eas-global-settings-trigger:hover {
+	background: rgba(255, 255, 255, 0.12) !important;
+	border-radius: 6px !important;
+}
+
+button.eas-global-settings-trigger img {
+	width: 24px !important;
+	height: 24px !important;
+	border-radius: 50% !important;
+	display: block !important;
+	object-fit: contain !important;
+}
