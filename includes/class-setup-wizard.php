@@ -181,7 +181,7 @@ class Setup_Wizard {
 				'glass_card', 'conversational_funnel', 'quiz_builder', 'team_member',
 				'portfolio_showcase', 'flex_accordion', 'dual_heading', 'svg_icon',
 				'scroll_parallax_text', 'nav_menu', 'interactive_image_hotspots',
-				'singular_widgets', 'container_carousel', 'magnetic_effect',
+				'singular_widgets', 'magnetic_effect',
 				'icon_lineawesome', 'icon_materialdesign', 'icon_ion', 'icon_icofont',
 			],
 			'performance' => [
