@@ -1327,14 +1327,14 @@ body.wp-admin {
 
 /* Hero Zone */
 .eas-pro-hero {
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  background: #0f172a;
   border-radius: 16px;
   padding: 56px 48px;
   color: #ffffff;
   margin-bottom: 32px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 20px 40px -15px rgba(124, 58, 237, 0.25);
+  box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.4);
   border: 1px solid rgba(139, 92, 246, 0.3);
 }
 
