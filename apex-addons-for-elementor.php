@@ -46,6 +46,9 @@ final class Loader {
 	/** @var string WordPress hook suffix for the Theme Builder admin screen. */
 	private $theme_builder_page_hook = '';
 
+	/** @var string WordPress hook suffix for the Pro Showcase admin screen. */
+	private $pro_showcase_page_hook = '';
+
 	/** @var array|null Matching popup template IDs for the current request. */
 	private $matching_popup_templates = null;
 
@@ -588,6 +591,15 @@ final class Loader {
 			90
 		);
 
+		add_submenu_page(
+			'apexadfo-addons',
+			esc_html__( 'Dashboard', 'apex-addons-for-elementor' ),
+			esc_html__( 'Dashboard', 'apex-addons-for-elementor' ),
+			'manage_options',
+			'apexadfo-addons',
+			[ $this, 'render_settings_page' ]
+		);
+
 		$this->theme_builder_page_hook = add_submenu_page(
 			'apexadfo-addons',
 			esc_html__( 'Theme Builder', 'apex-addons-for-elementor' ),
@@ -596,6 +608,15 @@ final class Loader {
 			'apexadfo-theme-builder',
 			[ $this, 'render_theme_builder_page' ]
 		);
+
+		$this->pro_showcase_page_hook = add_submenu_page(
+			'apexadfo-addons',
+			esc_html__( 'Get Apex Pro', 'apex-addons-for-elementor' ),
+			'<span style="color: #8b5cf6; font-weight: 600;">' . esc_html__( 'Get Apex Pro ⚡', 'apex-addons-for-elementor' ) . '</span>',
+			'manage_options',
+			'apexadfo-get-pro',
+			[ $this, 'render_get_pro_page' ]
+		);
 	}
 
 	/**
@@ -603,7 +624,8 @@ final class Loader {
 	 */
 	public function enqueue_admin_assets( $hook ) {
 		$is_theme_builder = '' !== $this->theme_builder_page_hook && $this->theme_builder_page_hook === $hook;
-		if ( 'toplevel_page_apexadfo-addons' !== $hook && ! $is_theme_builder ) {
+		$is_pro_showcase  = '' !== $this->pro_showcase_page_hook && $this->pro_showcase_page_hook === $hook;
+		if ( 'toplevel_page_apexadfo-addons' !== $hook && ! $is_theme_builder && ! $is_pro_showcase ) {
 			return;
 		}
 
@@ -2266,6 +2288,29 @@ final class Loader {
 		wp_enqueue_script( 'apexadfo-nested-slider-js' );
 		wp_enqueue_style( 'apexadfo-nested-content-switcher-css' );
 		wp_enqueue_script( 'apexadfo-nested-content-switcher-js' );
+	}
+
+	/**
+	 * Enqueue Classic Stack and its live editor bridge.
+	 */
+	public function enqueue_stack_editor_assets() {
+		wp_enqueue_style( 'apexadfo-container-stack-css' );
+		wp_enqueue_script( 'apexadfo-container-stack-js' );
+		wp_enqueue_script(
+			'apexadfo-container-stack-editor-js',
+			plugins_url( 'assets/js/container-stack-editor.js', __FILE__ ),
+			[ 'jquery', 'apexadfo-container-stack-js' ],
+			APEXADFO_VERSION,
+			true
+		);
+	}
+
+	/**
+	 * Enqueue Section Transitions in Elementor's preview iframe.
+	 */
+	public function enqueue_section_transition_editor_assets() {
+		wp_enqueue_style( 'apexadfo-section-transitions-css' );
+		wp_enqueue_script( 'apexadfo-section-transitions-js' );
 	}
 
 	/**
@@ -4339,6 +4384,311 @@ final class Loader {
 		<?php
 		$theme_builder_script = ob_get_clean();
 		wp_add_inline_script( 'apexadfo-admin-dashboard-js', $theme_builder_script );
+	}
+
+	/**
+	 * Render the Get Apex Pro Showcase Page
+	 */
+	public function render_get_pro_page() {
+		$logo_url     = plugins_url( 'assets/images/apex-addons-logo.png', __FILE__ );
+		$checkout_url = apply_filters( 'apexadfo_pro_checkout_url', 'https://www.arhamashfaq.com/apex-addons-pro/' );
+
+		$pro_widgets = [
+			// 3D & Advanced Motion
+			'spatial_carousel' => [
+				'title'    => esc_html__( 'Spatial 3D Carousel', 'apex-addons-for-elementor' ),
+				'category' => 'motion',
+				'desc'     => esc_html__( 'Full 3D spatial cylinder carousel with interactive depth perspective, auto-orbit, and drag rotation.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-format-gallery',
+				'tags'     => [ '3D Motion', 'Cylinder', 'Interactive' ],
+			],
+			'coverflow_carousel' => [
+				'title'    => esc_html__( 'Coverflow 3D Carousel', 'apex-addons-for-elementor' ),
+				'category' => 'motion',
+				'desc'     => esc_html__( 'Apple-style Coverflow slider with 3D depth rotation, reflection, shadow depth, and touch swipe.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-images-alt',
+				'tags'     => [ 'Coverflow', '3D Slider', 'Swiper' ],
+			],
+			'liquid_glass' => [
+				'title'    => esc_html__( 'Liquid Glass Morphism', 'apex-addons-for-elementor' ),
+				'category' => 'motion',
+				'desc'     => esc_html__( 'Apple iOS glassmorphic blur with dynamic refraction, metallic border sheen, and mouse shine.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-admin-appearance',
+				'tags'     => [ 'Glassmorphism', 'Refraction', 'Shine' ],
+			],
+			'physics_sandbox' => [
+				'title'    => esc_html__( 'Physics Gravity Sandbox', 'apex-addons-for-elementor' ),
+				'category' => 'motion',
+				'desc'     => esc_html__( 'Real-time Matter.js physical gravity canvas. Drag, toss, bounce, and collide element badges.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-move',
+				'tags'     => [ 'Matter.js', 'Physics', 'Gravity' ],
+			],
+			'morphing_gallery' => [
+				'title'    => esc_html__( 'Morphing Gallery', 'apex-addons-for-elementor' ),
+				'category' => 'motion',
+				'desc'     => esc_html__( 'Scroll-linked organic SVG metaball morphing transitions with smooth liquid card morphs.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-shapes',
+				'tags'     => [ 'SVG Morph', 'Metaball', 'GSAP' ],
+			],
+			'motion_typography_pro' => [
+				'title'    => esc_html__( 'Motion Typography Pro', 'apex-addons-for-elementor' ),
+				'category' => 'motion',
+				'desc'     => esc_html__( 'Scroll-driven kinetic text, split-line reveal, variable font weights, and wave typography.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-editor-textcolor',
+				'tags'     => [ 'Kinetic Text', 'Typography', 'SplitType' ],
+			],
+
+			// Interactive Canvas Loaders
+			'generative_art_loader' => [
+				'title'    => esc_html__( 'Generative Art Loader', 'apex-addons-for-elementor' ),
+				'category' => 'loaders',
+				'desc'     => esc_html__( 'Procedural HTML5 canvas math loader with smooth fluid particle loops and color gradients.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-art',
+				'tags'     => [ 'Canvas', 'Generative Art', 'Loader' ],
+			],
+			'hypnotic_track_loader' => [
+				'title'    => esc_html__( 'Hypnotic Track Loader', 'apex-addons-for-elementor' ),
+				'category' => 'loaders',
+				'desc'     => esc_html__( 'Concentric spinning ring preloader with glowing neon tracks and customizable spin speeds.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-update-alt',
+				'tags'     => [ 'Hypnotic', 'Preloader', 'SVG' ],
+			],
+			'shatter_particle_loader' => [
+				'title'    => esc_html__( 'Shatter Particle Loader', 'apex-addons-for-elementor' ),
+				'category' => 'loaders',
+				'desc'     => esc_html__( 'Interactive canvas particle explosion effect that shatters into physics particles on complete.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-forms',
+				'tags'     => [ 'Explosion', 'Shatter', 'Particles' ],
+			],
+
+			// WooCommerce Single Product Suite
+			'woocommerce_single_suite' => [
+				'title'    => esc_html__( 'WooCommerce Single Product Suite', 'apex-addons-for-elementor' ),
+				'category' => 'woocommerce',
+				'desc'     => esc_html__( 'Complete suite of 8 WooCommerce single product widgets: Product Title, Gallery Images, Price Tag, AJAX Add to Cart, Star Rating, Meta, Short Description, and Data Tabs.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-cart',
+				'tags'     => [ 'WooCommerce', 'Single Product', 'AJAX Cart' ],
+			],
+
+			// Advanced UI & Docks
+			'floating_dock' => [
+				'title'    => esc_html__( 'macOS Floating Dock', 'apex-addons-for-elementor' ),
+				'category' => 'ui',
+				'desc'     => esc_html__( 'macOS-style interactive magnetic bottom dock with smooth icon magnification and tooltip badges.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-menu-alt3',
+				'tags'     => [ 'macOS Dock', 'Magnification', 'Nav' ],
+			],
+			'audio_visualizer' => [
+				'title'    => esc_html__( 'Web Audio API Visualizer', 'apex-addons-for-elementor' ),
+				'category' => 'ui',
+				'desc'     => esc_html__( 'Real-time HTML5 Web Audio API frequency bar visualizer for audio tracks, podcasts, and music.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-format-audio',
+				'tags'     => [ 'Web Audio API', 'Equalizer', 'Podcasts' ],
+			],
+			'bento_grid' => [
+				'title'    => esc_html__( 'Bento Grid Layout', 'apex-addons-for-elementor' ),
+				'category' => 'ui',
+				'desc'     => esc_html__( 'Modern Apple-style bento grid card layout with hover spotlights and variable span controls.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-grid-view',
+				'tags'     => [ 'Bento Grid', 'Apple Style', 'Spotlight' ],
+			],
+			'terminal_console' => [
+				'title'    => esc_html__( 'Retro Terminal Console', 'apex-addons-for-elementor' ),
+				'category' => 'ui',
+				'desc'     => esc_html__( 'Interactive retro command-line terminal console with typing effect, custom commands, and output logs.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-editor-code',
+				'tags'     => [ 'CLI Terminal', 'Typing FX', 'Retro' ],
+			],
+		];
+
+		$categories = [
+			'all'         => esc_html__( 'All Pro Features', 'apex-addons-for-elementor' ),
+			'motion'      => esc_html__( '3D & Motion', 'apex-addons-for-elementor' ),
+			'loaders'     => esc_html__( 'Canvas Loaders', 'apex-addons-for-elementor' ),
+			'woocommerce' => esc_html__( 'WooCommerce Suite', 'apex-addons-for-elementor' ),
+			'ui'          => esc_html__( 'Advanced UI', 'apex-addons-for-elementor' ),
+		];
+		?>
+		<div class="eas-admin-wrap eas-pro-showcase-wrap">
+			<!-- Hero Section -->
+			<div class="eas-pro-hero">
+				<div class="eas-pro-hero-content">
+					<div class="eas-pro-badge">
+						<span class="dashicons dashicons-superhero"></span>
+						<?php esc_html_e( 'UNLEASH FULL CREATIVE FREEDOM', 'apex-addons-for-elementor' ); ?>
+					</div>
+					<h1 class="eas-pro-hero-title">
+						<?php esc_html_e( 'Supercharge Elementor with ', 'apex-addons-for-elementor' ); ?>
+						<span class="eas-pro-gradient-text"><?php esc_html_e( 'Apex Addons Pro', 'apex-addons-for-elementor' ); ?></span>
+					</h1>
+					<p class="eas-pro-hero-desc">
+						<?php esc_html_e( 'Unlock 20+ cutting-edge 3D widgets, interactive canvas loaders, complete WooCommerce Single Product builder, and advanced motion extensions built for modern web designers.', 'apex-addons-for-elementor' ); ?>
+					</p>
+					<div class="eas-pro-hero-cta">
+						<a href="<?php echo esc_url( $checkout_url ); ?>" target="_blank" rel="noopener noreferrer" class="eas-pro-btn-primary">
+							<?php esc_html_e( 'Upgrade to Apex Pro →', 'apex-addons-for-elementor' ); ?>
+						</a>
+						<a href="#eas-pro-comparison" class="eas-pro-btn-secondary">
+							<?php esc_html_e( 'Compare Free vs Pro', 'apex-addons-for-elementor' ); ?>
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Key Benefits Grid -->
+			<div class="eas-pro-highlights">
+				<div class="eas-pro-highlight-card">
+					<div class="eas-pro-hl-icon"><span class="dashicons dashicons-format-gallery"></span></div>
+					<h3><?php esc_html_e( '20+ Pro Interactive Widgets', 'apex-addons-for-elementor' ); ?></h3>
+					<p><?php esc_html_e( 'Spatial 3D Cylinder Carousel, Liquid Glass, Coverflow, Physics Gravity Sandbox, Motion Typography, and macOS Dock.', 'apex-addons-for-elementor' ); ?></p>
+				</div>
+				<div class="eas-pro-highlight-card">
+					<div class="eas-pro-hl-icon"><span class="dashicons dashicons-cart"></span></div>
+					<h3><?php esc_html_e( 'WooCommerce Single Product Suite', 'apex-addons-for-elementor' ); ?></h3>
+					<p><?php esc_html_e( 'Design fully custom single product templates with AJAX Add to Cart, dynamic pricing, product galleries, and reviews.', 'apex-addons-for-elementor' ); ?></p>
+				</div>
+				<div class="eas-pro-highlight-card">
+					<div class="eas-pro-hl-icon"><span class="dashicons dashicons-art"></span></div>
+					<h3><?php esc_html_e( 'Interactive Canvas Loaders', 'apex-addons-for-elementor' ); ?></h3>
+					<p><?php esc_html_e( 'Generative Art, Hypnotic Ring Tracks, Shatter Particle Explosions, and Magnetic Text Particle preloader screens.', 'apex-addons-for-elementor' ); ?></p>
+				</div>
+				<div class="eas-pro-highlight-card">
+					<div class="eas-pro-hl-icon"><span class="dashicons dashicons-sos"></span></div>
+					<h3><?php esc_html_e( 'VIP Priority Support & Updates', 'apex-addons-for-elementor' ); ?></h3>
+					<p><?php esc_html_e( 'Direct developer assistance, instant bug fixes, priority feature requests, and monthly new widget drops.', 'apex-addons-for-elementor' ); ?></p>
+				</div>
+			</div>
+
+			<!-- Filter Tabs -->
+			<div class="eas-pro-tabs-header">
+				<h2><?php esc_html_e( 'Explore All Pro Widgets & Extensions', 'apex-addons-for-elementor' ); ?></h2>
+				<div class="eas-pro-tabs-nav">
+					<?php foreach ( $categories as $key => $label ) : ?>
+						<button class="eas-pro-tab-btn<?php echo 'all' === $key ? ' active' : ''; ?>" data-filter="<?php echo esc_attr( $key ); ?>">
+							<?php echo esc_html( $label ); ?>
+						</button>
+					<?php endforeach; ?>
+				</div>
+			</div>
+
+			<!-- Widgets Grid -->
+			<div class="eas-pro-widget-grid">
+				<?php foreach ( $pro_widgets as $id => $widget ) : ?>
+					<div class="eas-pro-widget-card" data-category="<?php echo esc_attr( $widget['category'] ); ?>">
+						<div class="eas-pro-card-header">
+							<div class="eas-pro-card-icon"><span class="dashicons <?php echo esc_attr( $widget['icon'] ); ?>"></span></div>
+							<span class="eas-pro-card-badge">PRO</span>
+						</div>
+						<h3 class="eas-pro-card-title"><?php echo esc_html( $widget['title'] ); ?></h3>
+						<p class="eas-pro-card-desc"><?php echo esc_html( $widget['desc'] ); ?></p>
+						<div class="eas-pro-card-tags">
+							<?php foreach ( $widget['tags'] as $tag ) : ?>
+								<span class="eas-pro-tag"><?php echo esc_html( $tag ); ?></span>
+							<?php endforeach; ?>
+						</div>
+						<div class="eas-pro-card-footer">
+							<a href="<?php echo esc_url( $checkout_url ); ?>" target="_blank" rel="noopener noreferrer" class="eas-pro-card-btn">
+								<?php esc_html_e( 'Get Pro Feature →', 'apex-addons-for-elementor' ); ?>
+							</a>
+						</div>
+					</div>
+				<?php endforeach; ?>
+			</div>
+
+			<!-- Comparison Table Section -->
+			<div id="eas-pro-comparison" class="eas-pro-comparison-section">
+				<div class="eas-pro-comp-header">
+					<h2><?php esc_html_e( 'Compare Free vs Pro Features', 'apex-addons-for-elementor' ); ?></h2>
+					<p><?php esc_html_e( 'See why upgrading to Apex Addons Pro is the ultimate choice for your website.', 'apex-addons-for-elementor' ); ?></p>
+				</div>
+				<table class="eas-pro-comp-table">
+					<thead>
+						<tr>
+							<th><?php esc_html_e( 'Features & Capabilities', 'apex-addons-for-elementor' ); ?></th>
+							<th class="eas-comp-free"><?php esc_html_e( 'Apex Free', 'apex-addons-for-elementor' ); ?></th>
+							<th class="eas-comp-pro"><?php esc_html_e( 'Apex Pro ⚡', 'apex-addons-for-elementor' ); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><strong><?php esc_html_e( 'Interactive Widgets', 'apex-addons-for-elementor' ); ?></strong></td>
+							<td class="eas-comp-free">15 Essential Widgets</td>
+							<td class="eas-comp-pro"><strong>35+ Advanced & 3D Widgets</strong></td>
+						</tr>
+						<tr>
+							<td><strong><?php esc_html_e( 'Spatial 3D & Motion Engine', 'apex-addons-for-elementor' ); ?></strong></td>
+							<td class="eas-comp-free"><span class="dashicons dashicons-minus"></span></td>
+							<td class="eas-comp-pro"><span class="dashicons dashicons-yes-alt"></span> Included</td>
+						</tr>
+						<tr>
+							<td><strong><?php esc_html_e( 'WooCommerce Single Product Builder', 'apex-addons-for-elementor' ); ?></strong></td>
+							<td class="eas-comp-free"><span class="dashicons dashicons-minus"></span></td>
+							<td class="eas-comp-pro"><span class="dashicons dashicons-yes-alt"></span> 8 Dedicated Widgets</td>
+						</tr>
+						<tr>
+							<td><strong><?php esc_html_e( 'Interactive Canvas Preloader Screens', 'apex-addons-for-elementor' ); ?></strong></td>
+							<td class="eas-comp-free">Basic CSS Preloaders</td>
+							<td class="eas-comp-pro"><span class="dashicons dashicons-yes-alt"></span> Generative Art & Particles</td>
+						</tr>
+						<tr>
+							<td><strong><?php esc_html_e( 'Popup Overlay Builder', 'apex-addons-for-elementor' ); ?></strong></td>
+							<td class="eas-comp-free"><span class="dashicons dashicons-minus"></span></td>
+							<td class="eas-comp-pro"><span class="dashicons dashicons-yes-alt"></span> Full Triggers & Conditions</td>
+						</tr>
+						<tr>
+							<td><strong><?php esc_html_e( 'Physics & Matter.js Sandbox', 'apex-addons-for-elementor' ); ?></strong></td>
+							<td class="eas-comp-free"><span class="dashicons dashicons-minus"></span></td>
+							<td class="eas-comp-pro"><span class="dashicons dashicons-yes-alt"></span> Included</td>
+						</tr>
+						<tr>
+							<td><strong><?php esc_html_e( 'Liquid Glass Morphism', 'apex-addons-for-elementor' ); ?></strong></td>
+							<td class="eas-comp-free"><span class="dashicons dashicons-minus"></span></td>
+							<td class="eas-comp-pro"><span class="dashicons dashicons-yes-alt"></span> Included</td>
+						</tr>
+						<tr>
+							<td><strong><?php esc_html_e( 'VIP Support & Direct Upgrades', 'apex-addons-for-elementor' ); ?></strong></td>
+							<td class="eas-comp-free">Community Forum</td>
+							<td class="eas-comp-pro"><span class="dashicons dashicons-yes-alt"></span> Priority Ticket & VIP Support</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<!-- Bottom CTA Banner -->
+			<div class="eas-pro-bottom-cta">
+				<div class="eas-pro-bottom-cta-inner">
+					<h2><?php esc_html_e( 'Ready to Transform Your Elementor Websites?', 'apex-addons-for-elementor' ); ?></h2>
+					<p><?php esc_html_e( 'Join thousands of web designers and agencies creating award-winning websites with Apex Addons Pro.', 'apex-addons-for-elementor' ); ?></p>
+					<div class="eas-pro-bottom-btn-wrap">
+						<a href="<?php echo esc_url( $checkout_url ); ?>" target="_blank" rel="noopener noreferrer" class="eas-pro-btn-primary eas-pro-btn-large">
+							<?php esc_html_e( 'Get Apex Addons Pro Now →', 'apex-addons-for-elementor' ); ?>
+						</a>
+					</div>
+					<div class="eas-pro-guarantee">
+						<span class="dashicons dashicons-shield"></span>
+						<?php esc_html_e( '14-Day Money Back Guarantee • Instant License Activation', 'apex-addons-for-elementor' ); ?>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<?php ob_start(); ?>
+		jQuery(document).ready(function($) {
+			$('.eas-pro-tab-btn').on('click', function() {
+				$('.eas-pro-tab-btn').removeClass('active');
+				$(this).addClass('active');
+				var filter = $(this).data('filter');
+				if (filter === 'all') {
+					$('.eas-pro-widget-card').show();
+				} else {
+					$('.eas-pro-widget-card').hide();
+					$('.eas-pro-widget-card[data-category="' + filter + '"]').show();
+				}
+			});
+		});
+		<?php
+		$pro_showcase_script = ob_get_clean();
+		wp_add_inline_script( 'apexadfo-admin-dashboard-js', $pro_showcase_script );
 	}
 
 	/**
