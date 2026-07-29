@@ -4488,22 +4488,6 @@ final class Loader {
 				'tags'     => [ 'Ken Burns', 'Background Slideshow', 'Zoom' ],
 			],
 
-			// Theme Builder & Popup Builder Pro
-			'popup_builder_pro' => [
-				'title'    => esc_html__( 'Popup Overlay Builder Pro', 'apex-addons-for-elementor' ),
-				'category' => 'builder',
-				'desc'     => esc_html__( 'Build modal popups with triggers (On load, scroll %, click, inactivity, exit intent) and animations.', 'apex-addons-for-elementor' ),
-				'icon'     => 'dashicons-admin-page',
-				'tags'     => [ 'Popup Builder', 'Triggers', 'Modal' ],
-			],
-			'display_conditions_pro' => [
-				'title'    => esc_html__( 'Theme Builder Display Conditions', 'apex-addons-for-elementor' ),
-				'category' => 'builder',
-				'desc'     => esc_html__( 'Apply granular display conditions (Entire Site, Singular, Archives, WooCommerce, 404) to templates.', 'apex-addons-for-elementor' ),
-				'icon'     => 'dashicons-layout',
-				'tags'     => [ 'Theme Builder', 'Conditions', 'Templates' ],
-			],
-
 			// Interactive Canvas Loaders
 			'generative_art_loader' => [
 				'title'    => esc_html__( 'Generative Art Loader', 'apex-addons-for-elementor' ),
@@ -4579,7 +4563,6 @@ final class Loader {
 			'motion'      => esc_html__( '3D & Motion', 'apex-addons-for-elementor' ),
 			'extensions'  => esc_html__( 'Pro Extensions', 'apex-addons-for-elementor' ),
 			'loaders'     => esc_html__( 'Canvas Loaders', 'apex-addons-for-elementor' ),
-			'builder'     => esc_html__( 'Theme & Popup Builder', 'apex-addons-for-elementor' ),
 			'woocommerce' => esc_html__( 'WooCommerce Suite', 'apex-addons-for-elementor' ),
 			'ui'          => esc_html__( 'Advanced UI', 'apex-addons-for-elementor' ),
 		];
@@ -4706,9 +4689,9 @@ final class Loader {
 							<td class="eas-comp-pro"><span class="dashicons dashicons-yes-alt"></span> Generative Art & Particles</td>
 						</tr>
 						<tr>
-							<td><strong><?php esc_html_e( 'Popup Overlay Builder', 'apex-addons-for-elementor' ); ?></strong></td>
-							<td class="eas-comp-free"><span class="dashicons dashicons-minus"></span></td>
-							<td class="eas-comp-pro"><span class="dashicons dashicons-yes-alt"></span> Full Triggers & Conditions</td>
+							<td><strong><?php esc_html_e( 'Theme Builder & Display Conditions Engine', 'apex-addons-for-elementor' ); ?></strong></td>
+							<td class="eas-comp-free"><span class="dashicons dashicons-yes-alt"></span> Included</td>
+							<td class="eas-comp-pro"><span class="dashicons dashicons-yes-alt"></span> Included + Pro Templates</td>
 						</tr>
 						<tr>
 							<td><strong><?php esc_html_e( 'Physics & Matter.js Sandbox', 'apex-addons-for-elementor' ); ?></strong></td>
