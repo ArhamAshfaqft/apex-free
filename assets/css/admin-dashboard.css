@@ -1722,12 +1722,13 @@ body.wp-admin {
 
 /* Bottom CTA Banner */
 .eas-pro-bottom-cta {
-  background: linear-gradient(135deg, #7c3aed 0%, #4c1d95 100%);
+  background: #0f172a;
   border-radius: 16px;
   padding: 48px 32px;
   color: #ffffff;
   text-align: center;
-  box-shadow: 0 15px 30px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 15px 30px rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(139, 92, 246, 0.3);
 }
 
 .eas-pro-bottom-cta-inner {
