@@ -4511,15 +4511,6 @@ final class Loader {
 				'tags'     => [ 'Explosion', 'Shatter', 'Particles' ],
 			],
 
-			// WooCommerce Single Product Suite
-			'woocommerce_single_suite' => [
-				'title'    => esc_html__( 'WooCommerce Single Product Suite', 'apex-addons-for-elementor' ),
-				'category' => 'woocommerce',
-				'desc'     => esc_html__( 'Complete suite of 8 WooCommerce single product widgets: Product Title, Gallery Images, Price Tag, AJAX Add to Cart, Star Rating, Meta, Short Description, and Data Tabs.', 'apex-addons-for-elementor' ),
-				'icon'     => 'dashicons-cart',
-				'tags'     => [ 'WooCommerce', 'Single Product', 'AJAX Cart' ],
-			],
-
 			// Advanced UI & Interactive
 			'floating_dock' => [
 				'title'    => esc_html__( 'macOS Floating Dock', 'apex-addons-for-elementor' ),
@@ -4563,7 +4554,6 @@ final class Loader {
 			'motion'      => esc_html__( '3D & Motion', 'apex-addons-for-elementor' ),
 			'extensions'  => esc_html__( 'Pro Extensions', 'apex-addons-for-elementor' ),
 			'loaders'     => esc_html__( 'Canvas Loaders', 'apex-addons-for-elementor' ),
-			'woocommerce' => esc_html__( 'WooCommerce Suite', 'apex-addons-for-elementor' ),
 			'ui'          => esc_html__( 'Advanced UI', 'apex-addons-for-elementor' ),
 		];
 		?>
@@ -4601,9 +4591,9 @@ final class Loader {
 					<p><?php esc_html_e( 'Spatial 3D Cylinder Carousel, Liquid Glass, Coverflow, Physics Gravity Sandbox, Motion Typography, and macOS Dock.', 'apex-addons-for-elementor' ); ?></p>
 				</div>
 				<div class="eas-pro-highlight-card">
-					<div class="eas-pro-hl-icon"><span class="dashicons dashicons-cart"></span></div>
-					<h3><?php esc_html_e( 'WooCommerce Single Product Suite', 'apex-addons-for-elementor' ); ?></h3>
-					<p><?php esc_html_e( 'Design fully custom single product templates with AJAX Add to Cart, dynamic pricing, product galleries, and reviews.', 'apex-addons-for-elementor' ); ?></p>
+					<div class="eas-pro-hl-icon"><span class="dashicons dashicons-layers"></span></div>
+					<h3><?php esc_html_e( 'Pro Container Motion FX', 'apex-addons-for-elementor' ); ?></h3>
+					<p><?php esc_html_e( 'Pinned Vertical Scroll, 3D Card Stack, Section Transitions, Magnetic Cursor, and Ken Burns Slideshow.', 'apex-addons-for-elementor' ); ?></p>
 				</div>
 				<div class="eas-pro-highlight-card">
 					<div class="eas-pro-hl-icon"><span class="dashicons dashicons-art"></span></div>
@@ -4679,9 +4669,9 @@ final class Loader {
 							<td class="eas-comp-pro"><span class="dashicons dashicons-yes-alt"></span> Included</td>
 						</tr>
 						<tr>
-							<td><strong><?php esc_html_e( 'WooCommerce Single Product Builder', 'apex-addons-for-elementor' ); ?></strong></td>
-							<td class="eas-comp-free"><span class="dashicons dashicons-minus"></span></td>
-							<td class="eas-comp-pro"><span class="dashicons dashicons-yes-alt"></span> 8 Dedicated Widgets</td>
+							<td><strong><?php esc_html_e( 'WooCommerce Single Product Suite', 'apex-addons-for-elementor' ); ?></strong></td>
+							<td class="eas-comp-free"><span class="dashicons dashicons-yes-alt"></span> 8 Dynamic Widgets Included</td>
+							<td class="eas-comp-pro"><span class="dashicons dashicons-yes-alt"></span> Included + Pro Styles</td>
 						</tr>
 						<tr>
 							<td><strong><?php esc_html_e( 'Interactive Canvas Preloader Screens', 'apex-addons-for-elementor' ); ?></strong></td>
