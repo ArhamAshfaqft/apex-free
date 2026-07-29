@@ -1531,9 +1531,9 @@ body.wp-admin {
 
 .eas-pro-tab-btn:hover,
 .eas-pro-tab-btn.active {
-  background: #7c3aed;
+  background: #0f172a;
   color: #ffffff;
-  border-color: #7c3aed;
+  border-color: #0f172a;
 }
 
 /* Widget Cards Grid */
