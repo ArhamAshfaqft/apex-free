@@ -109,6 +109,7 @@ final class Loader {
 
 		// Add admin settings page hook
 		add_action( 'admin_menu', [ $this, 'add_settings_page' ] );
+		add_action( 'admin_menu', [ $this, 'add_pro_showcase_submenu_page' ], 99 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_assets' ] );
 
 		// AJAX callbacks for settings dashboard
@@ -608,11 +609,16 @@ final class Loader {
 			'apexadfo-theme-builder',
 			[ $this, 'render_theme_builder_page' ]
 		);
+	}
 
+	/**
+	 * Add Get Apex Pro Submenu Page at priority 99 (renders at the bottom of the submenu list)
+	 */
+	public function add_pro_showcase_submenu_page() {
 		$this->pro_showcase_page_hook = add_submenu_page(
 			'apexadfo-addons',
 			esc_html__( 'Get Apex Pro', 'apex-addons-for-elementor' ),
-			'<span style="color: #8b5cf6; font-weight: 600;">' . esc_html__( 'Get Apex Pro ⚡', 'apex-addons-for-elementor' ) . '</span>',
+			'<span style="color: #a855f7; font-weight: 600;">' . esc_html__( 'Get Apex Pro ⚡', 'apex-addons-for-elementor' ) . '</span>',
 			'manage_options',
 			'apexadfo-get-pro',
 			[ $this, 'render_get_pro_page' ]
