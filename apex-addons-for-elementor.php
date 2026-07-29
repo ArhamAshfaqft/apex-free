@@ -4444,6 +4444,66 @@ final class Loader {
 				'tags'     => [ 'Kinetic Text', 'Typography', 'SplitType' ],
 			],
 
+			// Pro Extensions & Container FX
+			'pinned_vertical_scroll_pro' => [
+				'title'    => esc_html__( 'Pinned Vertical Scroll Pro', 'apex-addons-for-elementor' ),
+				'category' => 'extensions',
+				'desc'     => esc_html__( 'Pin containers in sticky viewport stages while inner elements travel vertically on scroll.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-sticky',
+				'tags'     => [ 'Sticky Pin', 'Scroll Stage', 'Container FX' ],
+			],
+			'container_stack_pro' => [
+				'title'    => esc_html__( '3D Card Scroll Stack Pro', 'apex-addons-for-elementor' ),
+				'category' => 'extensions',
+				'desc'     => esc_html__( '3D card stack container effect. Inner containers stack over each other with 3D depth and tilt.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-layer-group',
+				'tags'     => [ '3D Card Stack', 'Scroll Depth', 'Container' ],
+			],
+			'section_transitions_pro' => [
+				'title'    => esc_html__( '3D Section Transitions Pro', 'apex-addons-for-elementor' ),
+				'category' => 'extensions',
+				'desc'     => esc_html__( 'Scroll-linked page section reveals with Curtain Up, Zoom, and 3D perspective flip transitions.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-slides',
+				'tags'     => [ 'Curtain Reveal', '3D Section', 'Scroll FX' ],
+			],
+			'magnetic_effect_pro' => [
+				'title'    => esc_html__( 'Magnetic Attraction Pro', 'apex-addons-for-elementor' ),
+				'category' => 'extensions',
+				'desc'     => esc_html__( 'Magnetic cursor attraction effect for buttons, cards, and icons with custom pull radius.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-update',
+				'tags'     => [ 'Magnetic Pull', 'Cursor FX', 'Interactive' ],
+			],
+			'custom_cursor_pro' => [
+				'title'    => esc_html__( 'Custom Cursor Suite Pro', 'apex-addons-for-elementor' ),
+				'category' => 'extensions',
+				'desc'     => esc_html__( 'Spring follower, inverse color circle, ring & dot follower, glow blob, and custom SVG cursors.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-admin-cursor',
+				'tags'     => [ 'Custom Cursor', 'Spring Follower', 'Glow' ],
+			],
+			'kenburns_slideshow_pro' => [
+				'title'    => esc_html__( 'Ken Burns Slideshow Pro', 'apex-addons-for-elementor' ),
+				'category' => 'extensions',
+				'desc'     => esc_html__( 'Background pan & zoom Ken Burns slideshow for containers with sleek dot & line navigation.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-format-image',
+				'tags'     => [ 'Ken Burns', 'Background Slideshow', 'Zoom' ],
+			],
+
+			// Theme Builder & Popup Builder Pro
+			'popup_builder_pro' => [
+				'title'    => esc_html__( 'Popup Overlay Builder Pro', 'apex-addons-for-elementor' ),
+				'category' => 'builder',
+				'desc'     => esc_html__( 'Build modal popups with triggers (On load, scroll %, click, inactivity, exit intent) and animations.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-admin-page',
+				'tags'     => [ 'Popup Builder', 'Triggers', 'Modal' ],
+			],
+			'display_conditions_pro' => [
+				'title'    => esc_html__( 'Theme Builder Display Conditions', 'apex-addons-for-elementor' ),
+				'category' => 'builder',
+				'desc'     => esc_html__( 'Apply granular display conditions (Entire Site, Singular, Archives, WooCommerce, 404) to templates.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-layout',
+				'tags'     => [ 'Theme Builder', 'Conditions', 'Templates' ],
+			],
+
 			// Interactive Canvas Loaders
 			'generative_art_loader' => [
 				'title'    => esc_html__( 'Generative Art Loader', 'apex-addons-for-elementor' ),
@@ -4476,7 +4536,7 @@ final class Loader {
 				'tags'     => [ 'WooCommerce', 'Single Product', 'AJAX Cart' ],
 			],
 
-			// Advanced UI & Docks
+			// Advanced UI & Interactive
 			'floating_dock' => [
 				'title'    => esc_html__( 'macOS Floating Dock', 'apex-addons-for-elementor' ),
 				'category' => 'ui',
@@ -4505,12 +4565,21 @@ final class Loader {
 				'icon'     => 'dashicons-editor-code',
 				'tags'     => [ 'CLI Terminal', 'Typing FX', 'Retro' ],
 			],
+			'card_deck_pro' => [
+				'title'    => esc_html__( 'Interactive Card Deck', 'apex-addons-for-elementor' ),
+				'category' => 'ui',
+				'desc'     => esc_html__( 'Interactive stack card swiper. Drag, swipe, and rotate cards with smooth gesture controls.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-images-alt2',
+				'tags'     => [ 'Card Deck', 'Swiper Cards', 'Interactive' ],
+			],
 		];
 
 		$categories = [
 			'all'         => esc_html__( 'All Pro Features', 'apex-addons-for-elementor' ),
 			'motion'      => esc_html__( '3D & Motion', 'apex-addons-for-elementor' ),
+			'extensions'  => esc_html__( 'Pro Extensions', 'apex-addons-for-elementor' ),
 			'loaders'     => esc_html__( 'Canvas Loaders', 'apex-addons-for-elementor' ),
+			'builder'     => esc_html__( 'Theme & Popup Builder', 'apex-addons-for-elementor' ),
 			'woocommerce' => esc_html__( 'WooCommerce Suite', 'apex-addons-for-elementor' ),
 			'ui'          => esc_html__( 'Advanced UI', 'apex-addons-for-elementor' ),
 		];
