@@ -1412,13 +1412,13 @@ body.wp-admin {
   align-items: center;
   gap: 8px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4);
+  box-shadow: none !important;
   border: none;
 }
 
 .eas-pro-btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(124, 58, 237, 0.6);
+  box-shadow: none !important;
   background: linear-gradient(135deg, #6d28d9 0%, #9333ea 100%);
 }
 
@@ -1758,7 +1758,7 @@ body.wp-admin {
   border-radius: 10px;
   font-weight: 800;
   display: inline-block;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: none !important;
 }
 
 .eas-pro-btn-large:hover {
