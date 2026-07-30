@@ -375,7 +375,7 @@ class Setup_Wizard {
 									foreach ( $group['elements'] as $element_key => $element_data ) :
 										$element_title = is_array( $element_data ) ? $element_data['title'] : $element_data;
 										$is_pro_item   = is_array( $element_data ) ? ! empty( $element_data['pro'] ) : false;
-										$is_pro_locked = $is_pro_item && ( ! defined( 'APEXADFO_PRO_VERSION' ) || ! class_exists( '\ArhamAshfaq\ApexAddonsForElementor\Pro\Loader' ) );
+										$is_pro_locked = $is_pro_item && ( ! defined( 'APEXADFO_PRO_VERSION' ) || ! class_exists( '\ArhamAshfaq\ApexAddonsForElementor\Pro\Loader' ) || ( function_exists( 'aafe_fs' ) && ! aafe_fs()->can_use_premium_code() ) );
 										$is_checked    = $is_pro_locked ? false : ( is_null( $active_addons ) ? true : ( isset( $active_addons[ $element_key ] ) ? (bool) $active_addons[ $element_key ] : true ) );
 										?>
 										<label class="apexadfo-element-item<?php echo $is_pro_locked ? ' eas-card-pro-locked eas-pro-trigger' : ''; ?>"<?php echo $is_pro_locked ? ' data-pro-locked="1"' : ''; ?>>

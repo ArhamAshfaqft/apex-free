@@ -1283,7 +1283,7 @@ final class Loader {
 						<?php else : ?>
 							<?php foreach ( $tab['items'] as $id => $data ) : 
 								$is_pro_item   = ! empty( $data['pro'] );
-								$is_pro_locked = $is_pro_item && ( ! defined( 'APEXADFO_PRO_VERSION' ) || ! class_exists( '\ArhamAshfaq\ApexAddonsForElementor\Pro\Loader' ) );
+								$is_pro_locked = $is_pro_item && ( ! defined( 'APEXADFO_PRO_VERSION' ) || ! class_exists( '\ArhamAshfaq\ApexAddonsForElementor\Pro\Loader' ) || ( function_exists( 'aafe_fs' ) && ! aafe_fs()->can_use_premium_code() ) );
 								$is_active     = self::is_addon_active( $id );
 								$card_classes  = 'eas-admin-card' . ( $is_pro_locked ? ' eas-card-pro-locked' : '' );
 							?>
