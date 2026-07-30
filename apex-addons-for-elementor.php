@@ -1441,9 +1441,7 @@ final class Loader {
 					<button type="button" class="eas-modal-close" id="eas-pro-modal-close" aria-label="<?php esc_attr_e( 'Close', 'apex-addons-for-elementor' ); ?>">&times;</button>
 					<div class="eas-modal-header">
 						<div class="eas-modal-crown-badge">
-							<svg width="24" height="20" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M1 10H13V9.16667L10.6 3.75L7 7.08333L3.4 3.75L1 9.16667V10ZM12.4 1.25C12.4 1.94 11.84 2.5 11.15 2.5C10.46 2.5 9.9 1.94 9.9 1.25C9.9 0.56 10.46 0 11.15 0C11.84 0 12.4 0.56 12.4 1.25ZM4.1 1.25C4.1 1.94 3.54 2.5 2.85 2.5C2.16 2.5 1.6 1.94 1.6 1.25C1.6 0.56 2.16 0 2.85 0C3.54 0 4.1 0.56 4.1 1.25ZM8.25 1.25C8.25 1.94 7.69 2.5 7 2.5C6.31 2.5 5.75 1.94 5.75 1.25C5.75 0.56 6.31 0 7 0C7.69 0 8.25 0.56 8.25 1.25Z" fill="#7c3aed"/>
-							</svg>
+							<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#7c3aed" viewBox="0 0 256 256"><path d="M248,80a28,28,0,1,0-51.12,15.77l-26.79,33L146,73.4a28,28,0,1,0-36.06,0L85.91,128.74l-26.79-33a28,28,0,1,0-26.6,12L47,194.63A16,16,0,0,0,62.78,208H193.22A16,16,0,0,0,209,194.63l14.47-86.85A28,28,0,0,0,248,80ZM128,40a12,12,0,1,1-12,12A12,12,0,0,1,128,40ZM24,80A12,12,0,1,1,36,92,12,12,0,0,1,24,80ZM193.22,192H62.78L48.86,108.52,81.79,149A8,8,0,0,0,88,152a7.83,7.83,0,0,0,1.08-.07,8,8,0,0,0,6.26-4.74l29.3-67.4a27,27,0,0,0,6.72,0l29.3,67.4a8,8,0,0,0,6.26,4.74A7.83,7.83,0,0,0,168,152a8,8,0,0,0,6.21-3l32.93-40.52ZM220,92a12,12,0,1,1,12-12A12,12,0,0,1,220,92Z"></path></svg>
 						</div>
 						<h2><?php esc_html_e( 'Unlock the PRO Features', 'apex-addons-for-elementor' ); ?></h2>
 						<p><?php esc_html_e( 'Upgrade to Apex Addons PRO and gain access to advanced 3D elements, physics sandboxes, and motion extensions to build websites more efficiently.', 'apex-addons-for-elementor' ); ?></p>
