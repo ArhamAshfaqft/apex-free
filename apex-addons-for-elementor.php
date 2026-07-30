@@ -4397,7 +4397,7 @@ final class Loader {
 	 */
 	public function render_get_pro_page() {
 		$logo_url     = plugins_url( 'assets/images/apex-addons-logo.png', __FILE__ );
-		$checkout_url = apply_filters( 'apexadfo_pro_checkout_url', 'https://www.arhamashfaq.com/apex-addons-pro/' );
+		$checkout_url = apply_filters( 'apexadfo_pro_checkout_url', 'https://checkout.freemius.com/mode/dialog/plugin/36225/plan/79600/' );
 
 		$pro_widgets = [
 			// 3D & Advanced Motion
