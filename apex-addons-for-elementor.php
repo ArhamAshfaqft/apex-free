@@ -1282,7 +1282,8 @@ final class Loader {
 							<p><?php esc_html_e( 'No addons registered in this category.', 'apex-addons-for-elementor' ); ?></p>
 						<?php else : ?>
 							<?php foreach ( $tab['items'] as $id => $data ) : 
-								$is_pro_locked = ! empty( $data['pro'] ) && ! defined( 'APEXADFO_PRO_VERSION' );
+								$is_pro_item   = ! empty( $data['pro'] );
+								$is_pro_locked = $is_pro_item && ( ! defined( 'APEXADFO_PRO_VERSION' ) || ! class_exists( '\ArhamAshfaq\ApexAddonsForElementor\Pro\Loader' ) );
 								$is_active     = self::is_addon_active( $id );
 								$card_classes  = 'eas-admin-card' . ( $is_pro_locked ? ' eas-card-pro-locked' : '' );
 							?>
@@ -1295,8 +1296,8 @@ final class Loader {
 												<?php endif; ?>
 												<div>
 													<h3 class="eas-admin-card-title"><?php echo esc_html( $data['title'] ); ?></h3>
-													<?php if ( ! empty( $data['pro'] ) ) : ?>
-														<span class="eas-admin-badge eas-admin-badge-pro">PRO 👑</span>
+													<?php if ( $is_pro_item ) : ?>
+														<span class="eas-admin-badge eas-admin-badge-pro">PRO</span>
 													<?php else : ?>
 														<span class="eas-admin-badge eas-admin-badge-free"><?php esc_html_e( 'FREE', 'apex-addons-for-elementor' ); ?></span>
 													<?php endif; ?>
@@ -1312,7 +1313,11 @@ final class Loader {
 													data-addon-id="<?php echo esc_attr( $id ); ?>"
 												<?php echo $is_pro_locked ? 'disabled' : ''; ?>
 												<?php checked( $is_active && ! $is_pro_locked ); ?> />
-												<span class="eas-admin-slider<?php echo $is_pro_locked ? ' eas-slider-pro-locked' : ''; ?>"></span>
+												<span class="eas-admin-slider<?php echo $is_pro_locked ? ' eas-slider-pro-locked' : ''; ?>">
+													<?php if ( $is_pro_locked ) : ?>
+														<span class="eas-pro-knob-crown">👑</span>
+													<?php endif; ?>
+												</span>
 											</label>
 										</div>
 										<p class="eas-admin-card-desc"><?php echo esc_html( $data['desc'] ); ?></p>
