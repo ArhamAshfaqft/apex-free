@@ -1053,6 +1053,150 @@ final class Loader {
 				'pro' => false,
 				'icon_count' => '1,512 Icons',
 			],
+
+			// Pro Widgets
+			'spatial_carousel' => [
+				'title'    => esc_html__( 'Spatial 3D Carousel', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Full 3D spatial cylinder carousel with interactive depth perspective, auto-orbit, and drag rotation.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-format-gallery',
+				'pro'      => true,
+			],
+			'coverflow_carousel' => [
+				'title'    => esc_html__( 'Coverflow 3D Carousel', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Apple-style Coverflow slider with 3D depth rotation, reflection, shadow depth, and touch swipe.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-images-alt',
+				'pro'      => true,
+			],
+			'liquid_glass' => [
+				'title'    => esc_html__( 'Liquid Glass Morphism', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Apple iOS glassmorphic blur with dynamic refraction, metallic border sheen, and mouse shine.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-admin-appearance',
+				'pro'      => true,
+			],
+			'physics_sandbox' => [
+				'title'    => esc_html__( 'Physics Gravity Sandbox', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Real-time Matter.js physical gravity canvas. Drag, toss, bounce, and collide element badges.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-move',
+				'pro'      => true,
+			],
+			'morphing_gallery' => [
+				'title'    => esc_html__( 'Morphing Gallery', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Scroll-linked organic SVG metaball morphing transitions with smooth liquid card morphs.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-shapes',
+				'pro'      => true,
+			],
+			'motion_typography_pro' => [
+				'title'    => esc_html__( 'Motion Typography Pro', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Scroll-driven kinetic text, split-line reveal, variable font weights, and wave typography.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-editor-textcolor',
+				'pro'      => true,
+			],
+			'generative_art_loader' => [
+				'title'    => esc_html__( 'Generative Art Loader', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Procedural HTML5 canvas math loader with smooth fluid particle loops and color gradients.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-art',
+				'pro'      => true,
+			],
+			'hypnotic_track_loader' => [
+				'title'    => esc_html__( 'Hypnotic Track Loader', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Concentric spinning ring preloader with glowing neon tracks and customizable spin speeds.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-update-alt',
+				'pro'      => true,
+			],
+			'shatter_particle_loader' => [
+				'title'    => esc_html__( 'Shatter Particle Loader', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Interactive canvas particle explosion effect that shatters into physics particles on complete.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-forms',
+				'pro'      => true,
+			],
+			'floating_dock' => [
+				'title'    => esc_html__( 'macOS Floating Dock', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'macOS-style interactive magnetic bottom dock with smooth icon magnification and tooltip badges.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-menu-alt3',
+				'pro'      => true,
+			],
+			'audio_visualizer' => [
+				'title'    => esc_html__( 'Web Audio API Visualizer', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Real-time HTML5 Web Audio API frequency bar visualizer for audio tracks, podcasts, and music.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-format-audio',
+				'pro'      => true,
+			],
+			'bento_grid' => [
+				'title'    => esc_html__( 'Bento Grid Layout', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Modern Apple-style bento grid card layout with hover spotlights and variable span controls.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-grid-view',
+				'pro'      => true,
+			],
+			'terminal_console' => [
+				'title'    => esc_html__( 'Retro Terminal Console', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Interactive retro command-line terminal console with typing effect, custom commands, and output logs.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-editor-code',
+				'pro'      => true,
+			],
+			'card_deck_pro' => [
+				'title'    => esc_html__( 'Interactive Card Deck', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Interactive stack card swiper. Drag, swipe, and rotate cards with smooth gesture controls.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-images-alt2',
+				'pro'      => true,
+			],
+
+			// Pro Extensions
+			'pinned_vertical_scroll_pro' => [
+				'title'    => esc_html__( 'Pinned Vertical Scroll Pro', 'apex-addons-for-elementor' ),
+				'category' => 'extensions',
+				'desc'     => esc_html__( 'Pin containers in sticky viewport stages while inner elements travel vertically on scroll.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-sticky',
+				'pro'      => true,
+			],
+			'container_stack_pro' => [
+				'title'    => esc_html__( '3D Card Scroll Stack Pro', 'apex-addons-for-elementor' ),
+				'category' => 'extensions',
+				'desc'     => esc_html__( '3D card stack container effect. Inner containers stack over each other with 3D depth and tilt.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-layer-group',
+				'pro'      => true,
+			],
+			'section_transitions_pro' => [
+				'title'    => esc_html__( '3D Section Transitions Pro', 'apex-addons-for-elementor' ),
+				'category' => 'extensions',
+				'desc'     => esc_html__( 'Scroll-linked page section reveals with Curtain Up, Zoom, and 3D perspective flip transitions.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-slides',
+				'pro'      => true,
+			],
+			'magnetic_effect_pro' => [
+				'title'    => esc_html__( 'Magnetic Attraction Pro', 'apex-addons-for-elementor' ),
+				'category' => 'extensions',
+				'desc'     => esc_html__( 'Magnetic cursor attraction effect for buttons, cards, and icons with custom pull radius.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-update',
+				'pro'      => true,
+			],
+			'custom_cursor_pro' => [
+				'title'    => esc_html__( 'Custom Cursor Suite Pro', 'apex-addons-for-elementor' ),
+				'category' => 'extensions',
+				'desc'     => esc_html__( 'Spring follower, inverse color circle, ring & dot follower, glow blob, and custom SVG cursors.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-admin-cursor',
+				'pro'      => true,
+			],
+			'kenburns_slideshow_pro' => [
+				'title'    => esc_html__( 'Ken Burns Slideshow Pro', 'apex-addons-for-elementor' ),
+				'category' => 'extensions',
+				'desc'     => esc_html__( 'Background pan & zoom Ken Burns slideshow for containers with sleek dot & line navigation.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-format-image',
+				'pro'      => true,
+			],
 		];
 
 		return apply_filters( 'apexadfo_register_addons', $addons );
@@ -1073,10 +1217,6 @@ final class Loader {
 		];
 
 		foreach ( $addons as $id => $data ) {
-			// Do not advertise unavailable companion-plugin features as disabled cards.
-			if ( ! empty( $data['pro'] ) && ! defined( 'APEXADFO_PRO_VERSION' ) ) {
-				continue;
-			}
 			$cat = $data['category'] ?? 'widgets';
 			if ( isset( $categories[ $cat ] ) ) {
 				$categories[ $cat ]['items'][ $id ] = $data;
@@ -1142,10 +1282,11 @@ final class Loader {
 							<p><?php esc_html_e( 'No addons registered in this category.', 'apex-addons-for-elementor' ); ?></p>
 						<?php else : ?>
 							<?php foreach ( $tab['items'] as $id => $data ) : 
-								$is_active = self::is_addon_active( $id );
-								$card_classes = 'eas-admin-card';
+								$is_pro_locked = ! empty( $data['pro'] ) && ! defined( 'APEXADFO_PRO_VERSION' );
+								$is_active     = self::is_addon_active( $id );
+								$card_classes  = 'eas-admin-card' . ( $is_pro_locked ? ' eas-card-pro-locked' : '' );
 							?>
-								<div class="<?php echo esc_attr( $card_classes ); ?>">
+								<div class="<?php echo esc_attr( $card_classes ); ?>"<?php echo $is_pro_locked ? ' data-pro-locked="1"' : ''; ?>>
 									<div class="eas-admin-lock-container">
 										<div class="eas-admin-card-header">
 											<div class="eas-admin-card-title-group">
@@ -1154,8 +1295,8 @@ final class Loader {
 												<?php endif; ?>
 												<div>
 													<h3 class="eas-admin-card-title"><?php echo esc_html( $data['title'] ); ?></h3>
-													<?php if ( $data['pro'] ) : ?>
-														<span class="eas-admin-badge eas-admin-badge-pro"><?php esc_html_e( 'PRO', 'apex-addons-for-elementor' ); ?></span>
+													<?php if ( ! empty( $data['pro'] ) ) : ?>
+														<span class="eas-admin-badge eas-admin-badge-pro">PRO 👑</span>
 													<?php else : ?>
 														<span class="eas-admin-badge eas-admin-badge-free"><?php esc_html_e( 'FREE', 'apex-addons-for-elementor' ); ?></span>
 													<?php endif; ?>
@@ -1165,12 +1306,13 @@ final class Loader {
 												</div>
 											</div>
 											<!-- Toggle Switch -->
-											<label class="eas-admin-switch">
+											<label class="eas-admin-switch<?php echo $is_pro_locked ? ' eas-pro-trigger' : ''; ?>">
 												<input type="checkbox" 
-													class="eas-addon-toggle" 
+													class="<?php echo $is_pro_locked ? 'eas-pro-trigger-checkbox' : 'eas-addon-toggle'; ?>" 
 													data-addon-id="<?php echo esc_attr( $id ); ?>"
-												<?php checked( $is_active ); ?> />
-												<span class="eas-admin-slider"></span>
+												<?php echo $is_pro_locked ? 'disabled' : ''; ?>
+												<?php checked( $is_active && ! $is_pro_locked ); ?> />
+												<span class="eas-admin-slider<?php echo $is_pro_locked ? ' eas-slider-pro-locked' : ''; ?>"></span>
 											</label>
 										</div>
 										<p class="eas-admin-card-desc"><?php echo esc_html( $data['desc'] ); ?></p>
@@ -1287,6 +1429,53 @@ final class Loader {
 					<h3><?php esc_html_e( 'Recorded Signature', 'apex-addons-for-elementor' ); ?></h3>
 					<div class="eas-signature-modal-body" style="text-align: center;">
 						<img id="eas-sig-modal-img" src="" alt="Signature" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 8px; background: #ffffff;" />
+					</div>
+				</div>
+			</div>
+
+			<!-- Pro Upsell Modal -->
+			<div id="eas-pro-upsell-modal" class="eas-modal-overlay" style="display: none;">
+				<div class="eas-modal-container">
+					<button type="button" class="eas-modal-close" id="eas-pro-modal-close" aria-label="<?php esc_attr_e( 'Close', 'apex-addons-for-elementor' ); ?>">&times;</button>
+					<div class="eas-modal-header">
+						<div class="eas-modal-crown-badge">👑</div>
+						<h2><?php esc_html_e( 'Unlock Apex Addons Pro ⚡', 'apex-addons-for-elementor' ); ?></h2>
+						<p><?php esc_html_e( 'Upgrade to Apex Addons Pro to access 20+ cutting-edge 3D widgets, physics gravity sandboxes, interactive canvas loaders, and premium motion extensions.', 'apex-addons-for-elementor' ); ?></p>
+					</div>
+					<div class="eas-modal-features-list">
+						<div class="eas-modal-feat-item">
+							<span class="dashicons dashicons-yes-alt"></span>
+							<span><?php esc_html_e( 'Spatial 3D Cylinder & Coverflow 3D Carousels', 'apex-addons-for-elementor' ); ?></span>
+						</div>
+						<div class="eas-modal-feat-item">
+							<span class="dashicons dashicons-yes-alt"></span>
+							<span><?php esc_html_e( 'Real-Time Matter.js Physical Gravity Canvas', 'apex-addons-for-elementor' ); ?></span>
+						</div>
+						<div class="eas-modal-feat-item">
+							<span class="dashicons dashicons-yes-alt"></span>
+							<span><?php esc_html_e( 'Apple iOS Liquid Glass Morphism & Refraction', 'apex-addons-for-elementor' ); ?></span>
+						</div>
+						<div class="eas-modal-feat-item">
+							<span class="dashicons dashicons-yes-alt"></span>
+							<span><?php esc_html_e( 'Generative Art & Shatter Particle Loaders', 'apex-addons-for-elementor' ); ?></span>
+						</div>
+						<div class="eas-modal-feat-item">
+							<span class="dashicons dashicons-yes-alt"></span>
+							<span><?php esc_html_e( 'Pinned Vertical Scroll & 3D Card Stack Extensions', 'apex-addons-for-elementor' ); ?></span>
+						</div>
+						<div class="eas-modal-feat-item">
+							<span class="dashicons dashicons-yes-alt"></span>
+							<span><?php esc_html_e( 'macOS Floating Dock & Web Audio Visualizer', 'apex-addons-for-elementor' ); ?></span>
+						</div>
+					</div>
+					<div class="eas-modal-footer">
+						<a href="<?php echo esc_url( apply_filters( 'apexadfo_pro_checkout_url', 'https://checkout.freemius.com/mode/dialog/plugin/36225/' ) ); ?>" target="_blank" rel="noopener noreferrer" class="eas-pro-btn-primary eas-modal-upgrade-btn">
+							<?php esc_html_e( 'Upgrade to Apex Pro →', 'apex-addons-for-elementor' ); ?>
+						</a>
+						<span class="eas-modal-guarantee-note">
+							<span class="dashicons dashicons-shield"></span>
+							<?php esc_html_e( '14-Day Money Back Guarantee • Instant Activation', 'apex-addons-for-elementor' ); ?>
+						</span>
 					</div>
 				</div>
 			</div>

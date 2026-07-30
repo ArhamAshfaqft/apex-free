@@ -219,6 +219,27 @@
 			});
 		});
 
+		// -----------------------------------------------
+		// 7. PRO UPSELL MODAL TRIGGER
+		// -----------------------------------------------
+		$(document).on('click', '.eas-card-pro-locked, .eas-pro-trigger, .eas-pro-trigger-checkbox', function (e) {
+			e.preventDefault();
+			e.stopPropagation();
+			$('#eas-pro-upsell-modal').fadeIn(200);
+		});
+
+		$('#eas-pro-modal-close, #eas-pro-upsell-modal').on('click', function (e) {
+			if (e.target.id === 'eas-pro-upsell-modal' || e.target.id === 'eas-pro-modal-close') {
+				$('#eas-pro-upsell-modal').fadeOut(150);
+			}
+		});
+
+		$(document).on('keyup', function (e) {
+			if (e.key === 'Escape') {
+				$('#eas-pro-upsell-modal, #eas-sig-modal').fadeOut(150);
+			}
+		});
+
 	});
 
 })(jQuery);

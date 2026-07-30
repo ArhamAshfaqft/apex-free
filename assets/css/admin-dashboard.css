@@ -1775,3 +1775,195 @@ body.wp-admin {
   color: #c4b5fd;
   margin-top: 20px;
 }
+
+/* Pro Locked Dashboard Card Styles */
+.eas-card-pro-locked {
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+  border-color: #e2e8f0;
+}
+
+.eas-card-pro-locked:hover {
+  border-color: #a855f7;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.15);
+}
+
+.eas-admin-badge-pro {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.eas-slider-pro-locked {
+  background-color: #e2e8f0 !important;
+  opacity: 0.7;
+}
+
+.eas-card-pro-locked:hover .eas-slider-pro-locked {
+  background-color: #cbd5e1 !important;
+  opacity: 1;
+}
+
+/* Pro Upsell Modal Overlay */
+.eas-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.eas-modal-container {
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 520px;
+  width: 100%;
+  padding: 40px 36px;
+  position: relative;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.35);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  animation: easModalPopIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes easModalPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.eas-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background: #f1f5f9;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.eas-modal-close:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.eas-modal-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.eas-modal-crown-badge {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 16px auto;
+  box-shadow: 0 8px 16px rgba(253, 224, 71, 0.3);
+}
+
+.eas-modal-header h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.eas-modal-header p {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.eas-modal-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 28px;
+}
+
+.eas-modal-feat-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.eas-modal-feat-item .dashicons {
+  color: #7c3aed;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.eas-modal-footer {
+  text-align: center;
+}
+
+.eas-modal-upgrade-btn {
+  width: 100%;
+  justify-content: center;
+  font-size: 16px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: none !important;
+}
+
+.eas-modal-guarantee-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 14px;
+}
+
+.eas-modal-guarantee-note .dashicons {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  color: #10b981;
+}
