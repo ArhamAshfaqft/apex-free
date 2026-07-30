@@ -332,7 +332,7 @@ body.wp-admin {
 
 .eas-admin-card-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 16px;
@@ -340,7 +340,7 @@ body.wp-admin {
 
 .eas-admin-card-title-group {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 14px;
 }
 
@@ -370,8 +370,9 @@ body.wp-admin {
   font-size: 16px;
   font-weight: 700;
   color: #0f172a;
-  margin: 0 0 6px 0;
+  margin: 0;
   letter-spacing: -0.2px;
+  line-height: 1.2;
 }
 
 /* Badges */
