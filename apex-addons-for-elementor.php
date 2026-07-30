@@ -1296,9 +1296,7 @@ final class Loader {
 												<?php endif; ?>
 												<div>
 													<h3 class="eas-admin-card-title"><?php echo esc_html( $data['title'] ); ?></h3>
-													<?php if ( $is_pro_item ) : ?>
-														<span class="eas-admin-badge eas-admin-badge-pro">PRO</span>
-													<?php else : ?>
+													<?php if ( ! $is_pro_item ) : ?>
 														<span class="eas-admin-badge eas-admin-badge-free"><?php esc_html_e( 'FREE', 'apex-addons-for-elementor' ); ?></span>
 													<?php endif; ?>
 													<?php if ( ! empty( $data['icon_count'] ) ) : ?>
@@ -1315,7 +1313,11 @@ final class Loader {
 												<?php checked( $is_active && ! $is_pro_locked ); ?> />
 												<span class="eas-admin-slider<?php echo $is_pro_locked ? ' eas-slider-pro-locked' : ''; ?>">
 													<?php if ( $is_pro_locked ) : ?>
-														<span class="eas-pro-knob-crown">👑</span>
+														<span class="eas-pro-knob-crown">
+															<svg width="12" height="10" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+																<path d="M1 10H13V9.16667L10.6 3.75L7 7.08333L3.4 3.75L1 9.16667V10ZM12.4 1.25C12.4 1.94 11.84 2.5 11.15 2.5C10.46 2.5 9.9 1.94 9.9 1.25C9.9 0.56 10.46 0 11.15 0C11.84 0 12.4 0.56 12.4 1.25ZM4.1 1.25C4.1 1.94 3.54 2.5 2.85 2.5C2.16 2.5 1.6 1.94 1.6 1.25C1.6 0.56 2.16 0 2.85 0C3.54 0 4.1 0.56 4.1 1.25ZM8.25 1.25C8.25 1.94 7.69 2.5 7 2.5C6.31 2.5 5.75 1.94 5.75 1.25C5.75 0.56 6.31 0 7 0C7.69 0 8.25 0.56 8.25 1.25Z" fill="#334155"/>
+															</svg>
+														</span>
 													<?php endif; ?>
 												</span>
 											</label>
@@ -1443,44 +1445,32 @@ final class Loader {
 				<div class="eas-modal-container">
 					<button type="button" class="eas-modal-close" id="eas-pro-modal-close" aria-label="<?php esc_attr_e( 'Close', 'apex-addons-for-elementor' ); ?>">&times;</button>
 					<div class="eas-modal-header">
-						<div class="eas-modal-crown-badge">👑</div>
-						<h2><?php esc_html_e( 'Unlock Apex Addons Pro ⚡', 'apex-addons-for-elementor' ); ?></h2>
-						<p><?php esc_html_e( 'Upgrade to Apex Addons Pro to access 20+ cutting-edge 3D widgets, physics gravity sandboxes, interactive canvas loaders, and premium motion extensions.', 'apex-addons-for-elementor' ); ?></p>
+						<div class="eas-modal-crown-badge">
+							<svg width="24" height="20" viewBox="0 0 14 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M1 10H13V9.16667L10.6 3.75L7 7.08333L3.4 3.75L1 9.16667V10ZM12.4 1.25C12.4 1.94 11.84 2.5 11.15 2.5C10.46 2.5 9.9 1.94 9.9 1.25C9.9 0.56 10.46 0 11.15 0C11.84 0 12.4 0.56 12.4 1.25ZM4.1 1.25C4.1 1.94 3.54 2.5 2.85 2.5C2.16 2.5 1.6 1.94 1.6 1.25C1.6 0.56 2.16 0 2.85 0C3.54 0 4.1 0.56 4.1 1.25ZM8.25 1.25C8.25 1.94 7.69 2.5 7 2.5C6.31 2.5 5.75 1.94 5.75 1.25C5.75 0.56 6.31 0 7 0C7.69 0 8.25 0.56 8.25 1.25Z" fill="#ff9900"/>
+							</svg>
+						</div>
+						<h2><?php esc_html_e( 'Unlock the PRO Features', 'apex-addons-for-elementor' ); ?></h2>
+						<p><?php esc_html_e( 'Upgrade to Apex Addons PRO and gain access to advanced 3D elements, physics sandboxes, and motion extensions to build websites more efficiently.', 'apex-addons-for-elementor' ); ?></p>
 					</div>
 					<div class="eas-modal-features-list">
 						<div class="eas-modal-feat-item">
-							<span class="dashicons dashicons-yes-alt"></span>
-							<span><?php esc_html_e( 'Spatial 3D Cylinder & Coverflow 3D Carousels', 'apex-addons-for-elementor' ); ?></span>
+							<span class="eas-modal-check-badge">✓</span>
+							<span><?php esc_html_e( 'Customization Flexibility in Design with Premium Creative Elements.', 'apex-addons-for-elementor' ); ?></span>
 						</div>
 						<div class="eas-modal-feat-item">
-							<span class="dashicons dashicons-yes-alt"></span>
-							<span><?php esc_html_e( 'Real-Time Matter.js Physical Gravity Canvas', 'apex-addons-for-elementor' ); ?></span>
+							<span class="eas-modal-check-badge">✓</span>
+							<span><?php esc_html_e( 'Advanced 3D & Physics Gravity Canvas Widgets.', 'apex-addons-for-elementor' ); ?></span>
 						</div>
 						<div class="eas-modal-feat-item">
-							<span class="dashicons dashicons-yes-alt"></span>
-							<span><?php esc_html_e( 'Apple iOS Liquid Glass Morphism & Refraction', 'apex-addons-for-elementor' ); ?></span>
-						</div>
-						<div class="eas-modal-feat-item">
-							<span class="dashicons dashicons-yes-alt"></span>
-							<span><?php esc_html_e( 'Generative Art & Shatter Particle Loaders', 'apex-addons-for-elementor' ); ?></span>
-						</div>
-						<div class="eas-modal-feat-item">
-							<span class="dashicons dashicons-yes-alt"></span>
-							<span><?php esc_html_e( 'Pinned Vertical Scroll & 3D Card Stack Extensions', 'apex-addons-for-elementor' ); ?></span>
-						</div>
-						<div class="eas-modal-feat-item">
-							<span class="dashicons dashicons-yes-alt"></span>
-							<span><?php esc_html_e( 'macOS Floating Dock & Web Audio Visualizer', 'apex-addons-for-elementor' ); ?></span>
+							<span class="eas-modal-check-badge">✓</span>
+							<span><?php esc_html_e( 'Cutting-edge Extensions Like Pinned Scroll, 3D Stack & Custom Cursors.', 'apex-addons-for-elementor' ); ?></span>
 						</div>
 					</div>
 					<div class="eas-modal-footer">
 						<a href="<?php echo esc_url( apply_filters( 'apexadfo_pro_checkout_url', 'https://checkout.freemius.com/mode/dialog/plugin/36225/' ) ); ?>" target="_blank" rel="noopener noreferrer" class="eas-pro-btn-primary eas-modal-upgrade-btn">
-							<?php esc_html_e( 'Upgrade to Apex Pro →', 'apex-addons-for-elementor' ); ?>
+							<?php esc_html_e( 'Upgrade to PRO', 'apex-addons-for-elementor' ); ?>
 						</a>
-						<span class="eas-modal-guarantee-note">
-							<span class="dashicons dashicons-shield"></span>
-							<?php esc_html_e( '14-Day Money Back Guarantee • Instant Activation', 'apex-addons-for-elementor' ); ?>
-						</span>
 					</div>
 				</div>
 			</div>

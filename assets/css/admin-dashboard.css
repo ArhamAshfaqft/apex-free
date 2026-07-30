@@ -1811,20 +1811,28 @@ body.wp-admin {
 .eas-slider-pro-locked:before {
   transform: translateX(0) !important;
   background-color: #ffffff !important;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
 }
 
 .eas-pro-knob-crown {
-  font-size: 10px;
-  line-height: 1;
   position: absolute;
-  left: 5px;
-  bottom: 4px;
+  left: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
   z-index: 10;
+}
+
+.eas-pro-knob-crown svg {
+  width: 12px;
+  height: 10px;
+  display: block;
 }
 
 .eas-card-pro-locked:hover .eas-slider-pro-locked {
@@ -1838,9 +1846,9 @@ body.wp-admin {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   z-index: 999999;
   display: flex;
   align-items: center;
@@ -1851,44 +1859,44 @@ body.wp-admin {
 
 .eas-modal-container {
   background: #ffffff;
-  border-radius: 20px;
-  max-width: 520px;
+  border-radius: 16px;
+  max-width: 480px;
   width: 100%;
-  padding: 40px 36px;
+  padding: 36px 32px;
   position: relative;
-  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.35);
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  animation: easModalPopIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.25);
+  border: 1px solid #e2e8f0;
+  animation: easModalPopIn 0.25s ease-out;
 }
 
 @keyframes easModalPopIn {
   from {
     opacity: 0;
-    transform: scale(0.92) translateY(15px);
+    transform: scale(0.95);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(1);
   }
 }
 
 .eas-modal-close {
   position: absolute;
-  top: 18px;
-  right: 20px;
+  top: 16px;
+  right: 16px;
   background: #f1f5f9;
   border: none;
-  font-size: 22px;
+  font-size: 18px;
   line-height: 1;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   color: #64748b;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .eas-modal-close:hover {
@@ -1898,32 +1906,36 @@ body.wp-admin {
 
 .eas-modal-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .eas-modal-crown-badge {
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
-  border-radius: 16px;
+  width: 48px;
+  height: 48px;
+  background: #fff7ed;
+  border: 1px solid #ffedd5;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
   margin: 0 auto 16px auto;
-  box-shadow: 0 8px 16px rgba(253, 224, 71, 0.3);
+}
+
+.eas-modal-crown-badge svg {
+  width: 22px;
+  height: 18px;
 }
 
 .eas-modal-header h2 {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   color: #0f172a;
   margin: 0 0 8px 0;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.3px;
 }
 
 .eas-modal-header p {
-  font-size: 14px;
+  font-size: 13px;
   color: #64748b;
   line-height: 1.5;
   margin: 0;
@@ -1935,25 +1947,28 @@ body.wp-admin {
   gap: 12px;
   background: #f8fafc;
   border: 1px solid #f1f5f9;
-  border-radius: 14px;
-  padding: 20px;
-  margin-bottom: 28px;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 24px;
 }
 
 .eas-modal-feat-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  color: #1e293b;
+  color: #334155;
+  line-height: 1.4;
 }
 
-.eas-modal-feat-item .dashicons {
-  color: #7c3aed;
-  font-size: 18px;
-  width: 18px;
-  height: 18px;
+.eas-modal-check-badge {
+  color: #8b5cf6;
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 1px;
 }
 
 .eas-modal-footer {
@@ -1963,25 +1978,19 @@ body.wp-admin {
 .eas-modal-upgrade-btn {
   width: 100%;
   justify-content: center;
-  font-size: 16px;
-  padding: 16px 24px;
-  border-radius: 12px;
+  font-size: 15px;
+  padding: 14px 24px;
+  border-radius: 10px;
+  background: #ff8a00 !important;
+  color: #ffffff !important;
+  font-weight: 700;
   box-shadow: none !important;
-}
-
-.eas-modal-guarantee-note {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 12px;
-  color: #64748b;
-  margin-top: 14px;
+  text-decoration: none;
+  transition: all 0.2s ease;
 }
 
-.eas-modal-guarantee-note .dashicons {
-  font-size: 14px;
-  width: 14px;
-  height: 14px;
-  color: #10b981;
+.eas-modal-upgrade-btn:hover {
+  background: #e07b00 !important;
 }
