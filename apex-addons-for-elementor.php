@@ -1296,9 +1296,6 @@ final class Loader {
 												<?php endif; ?>
 												<div>
 													<h3 class="eas-admin-card-title"><?php echo esc_html( $data['title'] ); ?></h3>
-													<?php if ( ! $is_pro_item ) : ?>
-														<span class="eas-admin-badge eas-admin-badge-free"><?php esc_html_e( 'FREE', 'apex-addons-for-elementor' ); ?></span>
-													<?php endif; ?>
 													<?php if ( ! empty( $data['icon_count'] ) ) : ?>
 														<span class="eas-admin-badge eas-admin-badge-count"><?php echo esc_html( $data['icon_count'] ); ?></span>
 													<?php endif; ?>
