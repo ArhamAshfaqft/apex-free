@@ -1917,8 +1917,8 @@ body.wp-admin {
 .eas-modal-crown-badge {
   width: 48px;
   height: 48px;
-  background: #fff7ed;
-  border: 1px solid #ffedd5;
+  background: #f3e8ff;
+  border: 1px solid #e9d5ff;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -1968,7 +1968,7 @@ body.wp-admin {
 }
 
 .eas-modal-check-badge {
-  color: #8b5cf6;
+  color: #7c3aed;
   font-weight: 800;
   font-size: 15px;
   line-height: 1;
@@ -1988,7 +1988,7 @@ body.wp-admin {
   font-size: 15px;
   padding: 13px 20px !important;
   border-radius: 10px;
-  background: #ff8a00 !important;
+  background: #7c3aed !important;
   color: #ffffff !important;
   font-weight: 700;
   box-shadow: none !important;
@@ -2000,5 +2000,5 @@ body.wp-admin {
 }
 
 .eas-modal-upgrade-btn:hover {
-  background: #e07b00 !important;
+  background: #6d28d9 !important;
 }
