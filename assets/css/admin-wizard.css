@@ -374,6 +374,14 @@ input[type="checkbox"].apexadfo-toggle-input,
 	transform: translateX(16px);
 }
 
+.apexadfo-toggle-switch.eas-slider-pro-locked {
+	background: #e2e8f0 !important;
+}
+
+.apexadfo-toggle-switch.eas-slider-pro-locked::after {
+	transform: translateX(0) !important;
+}
+
 /* Finish Cards (Step 4) */
 .apexadfo-finish-cards {
 	display: grid;

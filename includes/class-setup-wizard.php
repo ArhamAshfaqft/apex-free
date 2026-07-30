@@ -91,6 +91,21 @@ class Setup_Wizard {
 	public function enqueue_wizard_assets( $hook ) {
 		if ( isset( $_GET['page'] ) && 'apexadfo-setup-wizard' === $_GET['page'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			wp_enqueue_style(
+				'apexadfo-admin-dashboard-css',
+				plugins_url( 'assets/css/admin-dashboard.css', dirname( __FILE__ ) ),
+				[],
+				APEXADFO_VERSION
+			);
+
+			wp_enqueue_script(
+				'apexadfo-admin-dashboard-js',
+				plugins_url( 'assets/js/admin-dashboard.js', dirname( __FILE__ ) ),
+				[ 'jquery' ],
+				APEXADFO_VERSION,
+				true
+			);
+
+			wp_enqueue_style(
 				'apexadfo-wizard-css',
 				plugins_url( 'assets/css/admin-wizard.css', dirname( __FILE__ ) ),
 				[],
@@ -146,14 +161,15 @@ class Setup_Wizard {
 		];
 
 		foreach ( $addons as $id => $data ) {
-			if ( ! empty( $data['pro'] ) && ! defined( 'APEXADFO_PRO_VERSION' ) ) {
-				continue;
-			}
 			$cat = $data['category'] ?? 'widgets';
+			$item_info = [
+				'title' => $data['title'],
+				'pro'   => ! empty( $data['pro'] ),
+			];
 			if ( isset( $categories[ $cat ] ) ) {
-				$categories[ $cat ]['elements'][ $id ] = $data['title'];
+				$categories[ $cat ]['elements'][ $id ] = $item_info;
 			} else {
-				$categories['widgets']['elements'][ $id ] = $data['title'];
+				$categories['widgets']['elements'][ $id ] = $item_info;
 			}
 		}
 
@@ -356,13 +372,22 @@ class Setup_Wizard {
 
 								<div class="apexadfo-elements-grid" data-group-grid="<?php echo esc_attr( $group_key ); ?>">
 									<?php
-									foreach ( $group['elements'] as $element_key => $element_title ) :
-										$is_checked = is_null( $active_addons ) ? true : ( isset( $active_addons[ $element_key ] ) ? (bool) $active_addons[ $element_key ] : true );
+									foreach ( $group['elements'] as $element_key => $element_data ) :
+										$element_title = is_array( $element_data ) ? $element_data['title'] : $element_data;
+										$is_pro_item   = is_array( $element_data ) ? ! empty( $element_data['pro'] ) : false;
+										$is_pro_locked = $is_pro_item && ( ! defined( 'APEXADFO_PRO_VERSION' ) || ! class_exists( '\ArhamAshfaq\ApexAddonsForElementor\Pro\Loader' ) );
+										$is_checked    = $is_pro_locked ? false : ( is_null( $active_addons ) ? true : ( isset( $active_addons[ $element_key ] ) ? (bool) $active_addons[ $element_key ] : true ) );
 										?>
-										<label class="apexadfo-element-item">
+										<label class="apexadfo-element-item<?php echo $is_pro_locked ? ' eas-card-pro-locked eas-pro-trigger' : ''; ?>"<?php echo $is_pro_locked ? ' data-pro-locked="1"' : ''; ?>>
 											<span class="apexadfo-element-name"><?php echo esc_html( $element_title ); ?></span>
-											<input type="checkbox" class="apexadfo-toggle-input" name="apexadfo_elements[]" value="<?php echo esc_attr( $element_key ); ?>" <?php checked( $is_checked ); ?> />
-											<span class="apexadfo-toggle-switch"></span>
+											<input type="checkbox" class="<?php echo $is_pro_locked ? 'eas-pro-trigger-checkbox' : 'apexadfo-toggle-input'; ?>" name="apexadfo_elements[]" value="<?php echo esc_attr( $element_key ); ?>" <?php echo $is_pro_locked ? 'disabled' : ''; ?> <?php checked( $is_checked ); ?> />
+											<span class="apexadfo-toggle-switch<?php echo $is_pro_locked ? ' eas-slider-pro-locked' : ''; ?>">
+												<?php if ( $is_pro_locked ) : ?>
+													<span class="eas-pro-knob-crown">
+														<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#334155" viewBox="0 0 256 256"><path d="M248,80a28,28,0,1,0-51.12,15.77l-26.79,33L146,73.4a28,28,0,1,0-36.06,0L85.91,128.74l-26.79-33a28,28,0,1,0-26.6,12L47,194.63A16,16,0,0,0,62.78,208H193.22A16,16,0,0,0,209,194.63l14.47-86.85A28,28,0,0,0,248,80ZM128,40a12,12,0,1,1-12,12A12,12,0,0,1,128,40ZM24,80A12,12,0,1,1,36,92,12,12,0,0,1,24,80ZM193.22,192H62.78L48.86,108.52,81.79,149A8,8,0,0,0,88,152a7.83,7.83,0,0,0,1.08-.07,8,8,0,0,0,6.26-4.74l29.3-67.4a27,27,0,0,0,6.72,0l29.3,67.4a8,8,0,0,0,6.26,4.74A7.83,7.83,0,0,0,168,152a8,8,0,0,0,6.21-3l32.93-40.52ZM220,92a12,12,0,1,1,12-12A12,12,0,0,1,220,92Z"></path></svg>
+													</span>
+												<?php endif; ?>
+											</span>
 										</label>
 									<?php endforeach; ?>
 								</div>
@@ -412,6 +437,39 @@ class Setup_Wizard {
 					</div>
 				</div>
 
+			</div>
+
+			<!-- Pro Upsell Modal -->
+			<div id="eas-pro-upsell-modal" class="eas-modal-overlay" style="display: none;">
+				<div class="eas-modal-container">
+					<button type="button" class="eas-modal-close" id="eas-pro-modal-close" aria-label="<?php esc_attr_e( 'Close', 'apex-addons-for-elementor' ); ?>">&times;</button>
+					<div class="eas-modal-header">
+						<div class="eas-modal-crown-badge">
+							<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="#7c3aed" viewBox="0 0 256 256"><path d="M248,80a28,28,0,1,0-51.12,15.77l-26.79,33L146,73.4a28,28,0,1,0-36.06,0L85.91,128.74l-26.79-33a28,28,0,1,0-26.6,12L47,194.63A16,16,0,0,0,62.78,208H193.22A16,16,0,0,0,209,194.63l14.47-86.85A28,28,0,0,0,248,80ZM128,40a12,12,0,1,1-12,12A12,12,0,0,1,128,40ZM24,80A12,12,0,1,1,36,92,12,12,0,0,1,24,80ZM193.22,192H62.78L48.86,108.52,81.79,149A8,8,0,0,0,88,152a7.83,7.83,0,0,0,1.08-.07,8,8,0,0,0,6.26-4.74l29.3-67.4a27,27,0,0,0,6.72,0l29.3,67.4a8,8,0,0,0,6.26,4.74A7.83,7.83,0,0,0,168,152a8,8,0,0,0,6.21-3l32.93-40.52ZM220,92a12,12,0,1,1,12-12A12,12,0,0,1,220,92Z"></path></svg>
+						</div>
+						<h2><?php esc_html_e( 'Unlock the PRO Features', 'apex-addons-for-elementor' ); ?></h2>
+						<p><?php esc_html_e( 'Upgrade to Apex Addons PRO and gain access to advanced 3D elements, physics sandboxes, and motion extensions to build websites more efficiently.', 'apex-addons-for-elementor' ); ?></p>
+					</div>
+					<div class="eas-modal-features-list">
+						<div class="eas-modal-feat-item">
+							<span class="eas-modal-check-badge">✓</span>
+							<span><?php esc_html_e( 'Customization Flexibility in Design with Premium Creative Elements.', 'apex-addons-for-elementor' ); ?></span>
+						</div>
+						<div class="eas-modal-feat-item">
+							<span class="eas-modal-check-badge">✓</span>
+							<span><?php esc_html_e( 'Advanced 3D & Physics Gravity Canvas Widgets.', 'apex-addons-for-elementor' ); ?></span>
+						</div>
+						<div class="eas-modal-feat-item">
+							<span class="eas-modal-check-badge">✓</span>
+							<span><?php esc_html_e( 'Cutting-edge Extensions Like Pinned Scroll, 3D Stack & Custom Cursors.', 'apex-addons-for-elementor' ); ?></span>
+						</div>
+					</div>
+					<div class="eas-modal-footer">
+						<a href="<?php echo esc_url( apply_filters( 'apexadfo_pro_checkout_url', 'https://checkout.freemius.com/mode/dialog/plugin/36225/' ) ); ?>" target="_blank" rel="noopener noreferrer" class="eas-pro-btn-primary eas-modal-upgrade-btn">
+							<?php esc_html_e( 'Upgrade to PRO', 'apex-addons-for-elementor' ); ?>
+						</a>
+					</div>
+				</div>
 			</div>
 		</div>
 		<?php
