@@ -510,6 +510,11 @@ final class Loader {
 			$widgets_manager->register( new \ArhamAshfaq\ApexAddonsForElementor\Free\Widgets\Advanced_Timeline_Widget() );
 		}
 
+		if ( self::is_addon_active( 'card_stack_gallery' ) ) {
+			require_once __DIR__ . '/widgets/card-stack-gallery-widget.php';
+			$widgets_manager->register( new \ArhamAshfaq\ApexAddonsForElementor\Free\Widgets\Card_Stack_Gallery_Widget() );
+		}
+
 		// Single Post & WooCommerce Theme Builder Widgets (Registered Last)
 		if ( self::is_addon_active( 'singular_widgets' ) ) {
 			require_once __DIR__ . '/widgets/post-title-widget.php';
@@ -826,6 +831,13 @@ final class Loader {
 				'title' => esc_html__( 'Poker Fan Carousel', 'apex-addons-for-elementor' ),
 				'category' => 'widgets',
 				'desc' => esc_html__( 'Display list items in an interactive, curved hand-fan layout that loops dynamically on scroll or clicks.', 'apex-addons-for-elementor' ),
+				'icon' => 'dashicons-images-alt2',
+				'pro' => false,
+			],
+			'card_stack_gallery' => [
+				'title' => esc_html__( '3D Card Stack Gallery', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc' => esc_html__( 'Interactive 3D depth-layered image card slider with card cycling transitions, autoplay, and swipe gestures.', 'apex-addons-for-elementor' ),
 				'icon' => 'dashicons-images-alt2',
 				'pro' => false,
 			],
@@ -1799,6 +1811,21 @@ final class Loader {
 		wp_register_style(
 			'apexadfo-comparison-table-css',
 			plugins_url( 'assets/css/comparison-table.css', __FILE__ ),
+			[],
+			APEXADFO_VERSION
+		);
+
+		wp_register_script(
+			'apexadfo-card-stack-gallery-js',
+			plugins_url( 'assets/js/card-stack-gallery.js', __FILE__ ),
+			[ 'jquery' ],
+			APEXADFO_VERSION,
+			true
+		);
+
+		wp_register_style(
+			'apexadfo-card-stack-gallery-css',
+			plugins_url( 'assets/css/card-stack-gallery.css', __FILE__ ),
 			[],
 			APEXADFO_VERSION
 		);
