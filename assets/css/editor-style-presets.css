@@ -24,14 +24,6 @@
 	color: #ffffff !important;
 }
 
-.elementor-context-menu-list__item-apex-save .elementor-context-menu-list__item__icon,
-.elementor-context-menu-list__item-apex-apply .elementor-context-menu-list__item__icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: rgb(213, 216, 220);
-}
-
 /* Preset Modal Backdrop & Container */
 .apex-preset-modal-backdrop {
 	position: fixed;
