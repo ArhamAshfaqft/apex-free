@@ -500,6 +500,17 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 			'condition' => [ 'show_arrows' => 'yes' ],
 		] );
 
+		$this->add_control( 'nav_position', [
+			'label'   => esc_html__( 'Arrow Position', 'apex-addons-for-elementor' ),
+			'type'    => Controls_Manager::SELECT,
+			'options' => [
+				'below'         => esc_html__( 'Below Stack (Centered)', 'apex-addons-for-elementor' ),
+				'sides'         => esc_html__( 'Floating Left & Right Sides', 'apex-addons-for-elementor' ),
+				'inside_bottom' => esc_html__( 'Inside Bottom of Card', 'apex-addons-for-elementor' ),
+			],
+			'default' => 'below',
+		] );
+
 		$this->add_control( 'nav_btn_color', [
 			'label'     => esc_html__( 'Button Color', 'apex-addons-for-elementor' ),
 			'type'      => Controls_Manager::COLOR,
@@ -558,9 +569,10 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 			'scaleFactor'   => (float) ( $settings['scale_factor'] ?? 0.94 ),
 		];
 
-		$align_class = ! empty( $settings['align'] ) ? 'eas-align-' . sanitize_html_class( $settings['align'] ) : 'eas-align-center';
+		$align_class   = ! empty( $settings['align'] ) ? 'eas-align-' . sanitize_html_class( $settings['align'] ) : 'eas-align-center';
+		$nav_pos_class = ! empty( $settings['nav_position'] ) ? 'eas-nav-' . sanitize_html_class( $settings['nav_position'] ) : 'eas-nav-below';
 		?>
-		<div class="eas-card-stack-gallery <?php echo esc_attr( $align_class ); ?>" data-eas-stack-config="<?php echo esc_attr( wp_json_encode( $config ) ); ?>">
+		<div class="eas-card-stack-gallery <?php echo esc_attr( $align_class . ' ' . $nav_pos_class ); ?>" data-eas-stack-config="<?php echo esc_attr( wp_json_encode( $config ) ); ?>">
 			<div class="eas-card-stack-viewport">
 				<ul class="eas-card-stack-list">
 					<?php foreach ( $cards as $index => $item ) : ?>
