@@ -57,11 +57,9 @@
       var $apexGroup = $(
         '<div class="elementor-context-menu-list__group elementor-context-menu-list__group-apex" role="group">' +
           '<div class="elementor-context-menu-list__item elementor-context-menu-list__item-apex-save" role="menuitem" tabindex="0">' +
-            '<div class="elementor-context-menu-list__item__icon"></div>' +
             '<div class="elementor-context-menu-list__item__title">Save as Apex Preset</div>' +
           '</div>' +
           '<div class="elementor-context-menu-list__item elementor-context-menu-list__item-apex-apply" role="menuitem" tabindex="0">' +
-            '<div class="elementor-context-menu-list__item__icon"></div>' +
             '<div class="elementor-context-menu-list__item__title">Apply Apex Preset</div>' +
           '</div>' +
         '</div>'
@@ -216,7 +214,7 @@
     },
 
     /**
-     * Modal View: Save Preset
+     * Modal View: Save Preset (Sleek Clean Modal)
      */
     openSaveModal: function () {
       var self = this;
@@ -236,17 +234,9 @@
       var widgetType = model.get("widgetType") || elType;
 
       var bodyHtml =
-        '<div class="apex-preset-field-group">' +
+        '<div class="apex-preset-field-group" style="margin-bottom: 0;">' +
         '  <label class="apex-preset-label">Preset Name</label>' +
-        '  <input type="text" id="apex-preset-name-input" class="apex-preset-input" placeholder="e.g. Section Padding Large (120px/16px)" value="" />' +
-        '</div>' +
-        '<div class="apex-preset-field-group">' +
-        '  <label class="apex-preset-label">Styling Options to Include</label>' +
-        '  <div class="apex-preset-checkbox-grid">' +
-        '    <label class="apex-preset-checkbox-card"><input type="checkbox" id="apex-opt-padding" checked /> Layout & Paddings</label>' +
-        '    <label class="apex-preset-checkbox-card"><input type="checkbox" id="apex-opt-background" checked /> Background & Colors</label>' +
-        '    <label class="apex-preset-checkbox-card"><input type="checkbox" id="apex-opt-border" checked /> Borders & Radius</label>' +
-        '  </div>' +
+        '  <input type="text" id="apex-preset-name-input" class="apex-preset-input" placeholder="e.g. Hero Section (120px Padding)" value="" />' +
         '</div>';
 
       var footerHtml =
@@ -273,16 +263,12 @@
           return;
         }
 
-        var opts = {
-          padding: $("#apex-opt-padding").is(":checked"),
-          background: $("#apex-opt-background").is(":checked"),
-          border: $("#apex-opt-border").is(":checked"),
-        };
-
+        // Save all styling options by default
+        var opts = { padding: true, background: true, border: true };
         var settings = self.extractModelSettings(model, opts);
 
         if ($.isEmptyObject(settings)) {
-          self.showToast("No settings captured. Please select at least one option.", "error");
+          self.showToast("No settings captured from selected element.", "error");
           return;
         }
 
