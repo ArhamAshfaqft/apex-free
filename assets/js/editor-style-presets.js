@@ -54,16 +54,17 @@
         return;
       }
 
-      var iconSvg = '<i class="eicon-favorite"></i>';
+      var saveIcon = '<i class="eicon-library-save"></i>';
+      var applyIcon = '<i class="eicon-sync"></i>';
 
       var $apexGroup = $(
         '<div class="elementor-context-menu-list__group elementor-context-menu-list__group-apex" role="group">' +
           '<div class="elementor-context-menu-list__item elementor-context-menu-list__item-apex-save" role="menuitem" tabindex="0">' +
-            '<div class="elementor-context-menu-list__item__icon">' + iconSvg + '</div>' +
+            '<div class="elementor-context-menu-list__item__icon">' + saveIcon + '</div>' +
             '<div class="elementor-context-menu-list__item__title">Save as Apex Preset</div>' +
           '</div>' +
           '<div class="elementor-context-menu-list__item elementor-context-menu-list__item-apex-apply" role="menuitem" tabindex="0">' +
-            '<div class="elementor-context-menu-list__item__icon">' + iconSvg + '</div>' +
+            '<div class="elementor-context-menu-list__item__icon">' + applyIcon + '</div>' +
             '<div class="elementor-context-menu-list__item__title">Apply Apex Preset</div>' +
           '</div>' +
         '</div>'
