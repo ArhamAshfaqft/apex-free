@@ -104,10 +104,17 @@
     },
 
     /**
-     * Extract ALL styling & design settings from Elementor Model
+     * Extract ALL styling, layout, Grid, and design settings from Elementor Container or Widget
      */
-    extractModelSettings: function (model) {
-      var settings = model.get("settings").toJSON();
+    extractModelSettings: function (activeEl) {
+      if (!activeEl) return {};
+
+      var container = activeEl.getContainer ? activeEl.getContainer() : activeEl;
+      var model = container.model || activeEl.model;
+      if (!model) return {};
+
+      var settingsObj = model.get("settings");
+      var settings = settingsObj && settingsObj.attributes ? settingsObj.attributes : (settingsObj && typeof settingsObj.toJSON === "function" ? settingsObj.toJSON() : {});
       var captured = {};
 
       // Internal structural keys to exclude (content text, IDs, titles)
@@ -121,8 +128,15 @@
           return;
         }
 
-        // Capture all layout, padding, margin, background, border, shadow, flex, position, and typography keys
-        captured[key] = settings[key];
+        var val = settings[key];
+        if (val !== undefined && val !== null) {
+          try {
+            // Deep clone nested objects (Grid columns/rows/gaps, Dimensions, Shadows, Gradients)
+            captured[key] = typeof val === "object" ? JSON.parse(JSON.stringify(val)) : val;
+          } catch (e) {
+            captured[key] = val;
+          }
+        }
       });
 
       return captured;
@@ -196,7 +210,8 @@
         return;
       }
 
-      var model = activeEl.model || (activeEl.getContainer ? activeEl.getContainer().model : null);
+      var container = activeEl.getContainer ? activeEl.getContainer() : activeEl;
+      var model = container.model || activeEl.model;
       if (!model) {
         this.showToast("Could not locate element model.", "error");
         return;
@@ -208,7 +223,7 @@
       var bodyHtml =
         '<div class="apex-preset-field-group" style="margin-bottom: 0;">' +
         '  <label class="apex-preset-label">Preset Name</label>' +
-        '  <input type="text" id="apex-preset-name-input" class="apex-preset-input" placeholder="e.g. Hero Section (120px Padding)" value="" style="background-color: #ffffff !important; color: #000000 !important; border: 1px solid #cbd5e1 !important;" />' +
+        '  <input type="text" id="apex-preset-name-input" class="apex-preset-input" placeholder="e.g. 2 Column Grid (120px Padding)" value="" style="background-color: #ffffff !important; color: #000000 !important; border: 1px solid #cbd5e1 !important;" />' +
         '</div>';
 
       var footerHtml =
@@ -235,8 +250,8 @@
           return;
         }
 
-        // Save all styling & design settings automatically
-        var settings = self.extractModelSettings(model);
+        // Save all styling & layout settings from active element container
+        var settings = self.extractModelSettings(activeEl);
 
         if ($.isEmptyObject(settings)) {
           self.showToast("No settings captured from selected element.", "error");
@@ -348,53 +363,49 @@
     },
 
     /**
-     * Apply Preset Settings to Elementor Model & Re-render Canvas
+     * Apply Preset Settings to Elementor Model & Re-render Canvas (Supports Grid & Flex Containers)
      */
     applyPresetToModel: function (activeEl, preset) {
       if (!activeEl || !preset || !preset.settings) return;
 
-      var model = activeEl.model || (activeEl.getContainer ? activeEl.getContainer().model : null);
+      var container = activeEl.getContainer ? activeEl.getContainer() : activeEl;
+      var model = container.model || activeEl.model;
       if (!model) {
         this.showToast("Could not locate element model.", "error");
         return;
       }
 
       var settings = preset.settings;
-      var container = activeEl.getContainer ? activeEl.getContainer() : activeEl;
 
+      // 1. Update Backbone Model Settings directly
+      var modelSettings = model.get("settings");
+      if (modelSettings) {
+        Object.keys(settings).forEach(function (key) {
+          modelSettings.set(key, settings[key]);
+        });
+        if (typeof modelSettings.trigger === "function") {
+          modelSettings.trigger("change");
+        }
+      }
+
+      // 2. Run Elementor $e Command API to update controls & grid layout structure
       try {
-        // Attempt Elementor Official $e Command API first (Elementor 3.0+)
         if (window.$e && window.$e.run) {
           window.$e.run("document/elements/settings", {
             container: container,
             settings: settings,
             options: { external: true },
           });
-        } else {
-          // Fallback: Model setting iteration
-          var modelSettings = model.get("settings");
-          if (modelSettings) {
-            Object.keys(settings).forEach(function (key) {
-              modelSettings.set(key, settings[key]);
-            });
-            modelSettings.trigger("change");
-          }
-          model.trigger("change");
-          model.trigger("change:settings");
         }
       } catch (err) {
         console.warn("Apex Presets: $e Command fallback...", err);
-        var modelSettings = model.get("settings");
-        if (modelSettings) {
-          Object.keys(settings).forEach(function (key) {
-            modelSettings.set(key, settings[key]);
-          });
-          modelSettings.trigger("change");
-        }
       }
 
-      // Safely trigger view update on canvas without destroying sidebar panel
+      // 3. Trigger change events & view re-render
       try {
+        model.trigger("change");
+        model.trigger("change:settings");
+
         var view = activeEl.render ? activeEl : (container && container.view ? container.view : null);
         if (view && typeof view.render === "function") {
           view.render();
