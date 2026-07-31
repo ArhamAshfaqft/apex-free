@@ -10,72 +10,84 @@
     init: function () {
       this.data = window.apexadfoStylePresetsData || {};
       this.presets = this.data.presets || {};
-      this.bindContextMenu();
+      this.bindContextMenuObserver();
       this.initModalUI();
     },
 
     /**
-     * Listen for right-click context menu opens in Elementor Editor
+     * Use MutationObserver to detect when Elementor Context Menu is injected into the DOM
      */
-    bindContextMenu: function () {
+    bindContextMenuObserver: function () {
       var self = this;
 
-      $(document).on("contextmenu", ".elementor-element, .elementor-navigator__item", function () {
+      // Observe DOM insertions for .elementor-context-menu
+      var observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.addedNodes && mutation.addedNodes.length) {
+            var $menu = $(".elementor-context-menu:visible");
+            if ($menu.length && !$menu.find(".elementor-context-menu-list__group-apex").length) {
+              self.injectContextMenuItems($menu);
+            }
+          }
+        });
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
+
+      // Fallback right-click listener
+      $(document).on("contextmenu", function () {
         setTimeout(function () {
-          self.injectContextMenuItems();
-        }, 50);
+          var $menu = $(".elementor-context-menu:visible");
+          if ($menu.length && !$menu.find(".elementor-context-menu-list__group-apex").length) {
+            self.injectContextMenuItems($menu);
+          }
+        }, 30);
       });
     },
 
     /**
      * Inject "Save as Apex Preset" and "Apply Apex Preset" into Elementor Context Menu
      */
-    injectContextMenuItems: function () {
+    injectContextMenuItems: function ($menu) {
       var self = this;
-      var $contextMenu = $(".elementor-context-menu:visible");
-
-      if (!$contextMenu.length || $contextMenu.find(".apex-context-item").length) {
+      if (!$menu || !$menu.length || $menu.find(".elementor-context-menu-list__group-apex").length) {
         return;
       }
 
-      // Check if an element is currently selected
-      var selectedElements = window.elementor && window.elementor.selection ? window.elementor.selection.getElements() : [];
-      if (!selectedElements.length) {
-        return;
-      }
+      var iconSvg = '<svg style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#7c3aed"></circle></svg>';
 
-      var iconSvg = '<span class="apex-context-icon"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#7c3aed"></circle></svg></span>';
-
-      var $saveItem = $(
-        '<div class="elementor-context-menu-list__item apex-context-item apex-context-save">' +
-          iconSvg +
-          '<span class="elementor-context-menu-list__item__title">Save as Apex Preset</span>' +
-          '</div>'
+      var $apexGroup = $(
+        '<div class="elementor-context-menu-list__group elementor-context-menu-list__group-apex" role="group" style="border-top: 1px solid rgba(0, 0, 0, 0.06); margin-top: 4px; padding-top: 4px;">' +
+          '<div class="elementor-context-menu-list__item elementor-context-menu-list__item-apex-save" role="menuitem" tabindex="0">' +
+            '<div class="elementor-context-menu-list__item__icon">' + iconSvg + '</div>' +
+            '<div class="elementor-context-menu-list__item__title" style="color: #7c3aed; font-weight: 600;">Save as Apex Preset</div>' +
+          '</div>' +
+          '<div class="elementor-context-menu-list__item elementor-context-menu-list__item-apex-apply" role="menuitem" tabindex="0">' +
+            '<div class="elementor-context-menu-list__item__icon">' + iconSvg + '</div>' +
+            '<div class="elementor-context-menu-list__item__title" style="color: #7c3aed; font-weight: 600;">Apply Apex Preset</div>' +
+          '</div>' +
+        '</div>'
       );
 
-      var $applyItem = $(
-        '<div class="elementor-context-menu-list__item apex-context-item apex-context-apply">' +
-          iconSvg +
-          '<span class="elementor-context-menu-list__item__title">Apply Apex Preset</span>' +
-          '</div>'
-      );
+      var $saveGroup = $menu.find(".elementor-context-menu-list__group-save");
+      var $clipboardGroup = $menu.find(".elementor-context-menu-list__group-clipboard");
 
-      // Insert right after "Copy Style" / "Paste Style" group or at the top of the menu
-      var $pasteStyle = $contextMenu.find('.elementor-context-menu-list__item[data-action="paste_style"]').closest(".elementor-context-menu-list__item");
-      if ($pasteStyle.length) {
-        $pasteStyle.after($applyItem).after($saveItem);
+      if ($saveGroup.length) {
+        $saveGroup.after($apexGroup);
+      } else if ($clipboardGroup.length) {
+        $clipboardGroup.after($apexGroup);
       } else {
-        $contextMenu.find(".elementor-context-menu-list").prepend($applyItem).prepend($saveItem);
+        $menu.find(".elementor-context-menu-list").append($apexGroup);
       }
 
-      // Bind click handlers
-      $saveItem.on("click", function (e) {
+      // Bind Click Handlers
+      $apexGroup.find(".elementor-context-menu-list__item-apex-save").on("click", function (e) {
         e.stopPropagation();
         $(".elementor-context-menu").hide();
         self.openSaveModal();
       });
 
-      $applyItem.on("click", function (e) {
+      $apexGroup.find(".elementor-context-menu-list__item-apex-apply").on("click", function (e) {
         e.stopPropagation();
         $(".elementor-context-menu").hide();
         self.openApplyModal();
@@ -96,7 +108,7 @@
     },
 
     /**
-     * Extract attributes from an Elementor Model for preset saving
+     * Extract settings from Elementor Model for preset saving
      */
     extractModelSettings: function (model, options) {
       options = options || { padding: true, background: true, border: true };
@@ -254,7 +266,7 @@
       $("#apex-preset-save-confirm-btn").on("click", function () {
         var name = $("#apex-preset-name-input").val().trim();
         if (!name) {
-          $("#apex-preset-name-input").addClass("apex-input-error").focus();
+          $("#apex-preset-name-input").css("border-color", "#ef4444").focus();
           return;
         }
 
@@ -318,7 +330,6 @@
       }
 
       var model = activeEl.model;
-      var elType = model.get("elType") || "container";
       var presetKeys = Object.keys(self.presets);
 
       var bodyHtml = "";
