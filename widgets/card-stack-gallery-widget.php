@@ -318,6 +318,15 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 			'tab'   => Controls_Manager::TAB_STYLE,
 		] );
 
+		$this->add_control( 'card_bg_color', [
+			'label'     => esc_html__( 'Card Background Color', 'apex-addons-for-elementor' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => 'transparent',
+			'selectors' => [
+				'{{WRAPPER}} .eas-card-stack-item' => 'background-color: {{VALUE}};',
+			],
+		] );
+
 		$this->add_responsive_control( 'object_fit', [
 			'label'     => esc_html__( 'Image Object Fit', 'apex-addons-for-elementor' ),
 			'type'      => Controls_Manager::SELECT,
