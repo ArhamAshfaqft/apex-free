@@ -228,7 +228,12 @@
         return;
       }
 
-      var model = activeEl.model;
+      var model = activeEl.model || (activeEl.getContainer ? activeEl.getContainer().model : null);
+      if (!model) {
+        this.showToast("Could not locate element model.", "error");
+        return;
+      }
+
       var elType = model.get("elType") || "element";
       var widgetType = model.get("widgetType") || elType;
 
@@ -329,9 +334,7 @@
         return;
       }
 
-      var model = activeEl.model;
       var presetKeys = Object.keys(self.presets);
-
       var bodyHtml = "";
 
       if (!presetKeys.length) {
@@ -376,7 +379,7 @@
         var presetId = $(this).data("id");
         var preset = self.presets[presetId];
         if (preset) {
-          self.applyPresetToModel(model, preset);
+          self.applyPresetToModel(activeEl, preset);
         }
       });
 
@@ -390,29 +393,65 @@
     },
 
     /**
-     * Apply Preset Settings to Elementor Model
+     * Apply Preset Settings to Elementor Model & Re-render Canvas
      */
-    applyPresetToModel: function (model, preset) {
-      if (!model || !preset || !preset.settings) return;
+    applyPresetToModel: function (activeEl, preset) {
+      if (!activeEl || !preset || !preset.settings) return;
+
+      var model = activeEl.model || (activeEl.getContainer ? activeEl.getContainer().model : null);
+      if (!model) {
+        this.showToast("Could not locate element model.", "error");
+        return;
+      }
 
       var settings = preset.settings;
-      var modelSettings = model.get("settings");
 
-      // Set each captured setting on the Elementor model
-      Object.keys(settings).forEach(function (key) {
-        modelSettings.set(key, settings[key]);
-      });
-
-      // Trigger Elementor re-render
-      var view = window.elementor.builder.getRegion("content").currentView.children.findByModel(model);
-      if (view && typeof view.render === "function") {
-        view.render();
+      try {
+        // Attempt Elementor Official $e Command API first (Elementor 3.0+)
+        if (window.$e && window.$e.run) {
+          var container = activeEl.getContainer ? activeEl.getContainer() : activeEl;
+          window.$e.run("document/elements/settings", {
+            container: container,
+            settings: settings,
+            options: { external: true },
+          });
+        } else {
+          // Fallback: Model setting iteration
+          var modelSettings = model.get("settings");
+          if (modelSettings) {
+            Object.keys(settings).forEach(function (key) {
+              modelSettings.set(key, settings[key]);
+            });
+            modelSettings.trigger("change");
+          }
+          model.trigger("change");
+          model.trigger("change:settings");
+        }
+      } catch (err) {
+        console.warn("Apex Presets: $e Command fallback...", err);
+        var modelSettings = model.get("settings");
+        if (modelSettings) {
+          Object.keys(settings).forEach(function (key) {
+            modelSettings.set(key, settings[key]);
+          });
+          modelSettings.trigger("change");
+        }
       }
 
-      // Also trigger panel settings update if open
-      if (window.elementor.panel && window.elementor.panel.currentView) {
-        window.elementor.panel.currentView.render();
-      }
+      // Re-render Element View safely
+      try {
+        var view = activeEl.render ? activeEl : (activeEl.getContainer && activeEl.getContainer().view ? activeEl.getContainer().view : null);
+        if (view && typeof view.render === "function") {
+          view.render();
+        }
+      } catch (e) {}
+
+      // Re-render Elementor Left Control Panel safely
+      try {
+        if (window.elementor.panel && window.elementor.panel.currentView && typeof window.elementor.panel.currentView.render === "function") {
+          window.elementor.panel.currentView.render();
+        }
+      } catch (e) {}
 
       this.closeModal();
       this.showToast("Applied preset '" + preset.title + "'!");
