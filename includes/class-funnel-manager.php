@@ -33,6 +33,7 @@ final class Funnel_Manager {
 		add_action( 'wp_ajax_apexadfo_funnel_submit', array( $this, 'submit' ) );
 		add_action( 'wp_ajax_nopriv_apexadfo_funnel_submit', array( $this, 'submit' ) );
 		add_action( 'admin_post_apexadfo_funnel_delete_lead', array( $this, 'delete_lead' ) );
+		add_action( 'admin_post_apexadfo_funnel_bulk_delete', array( $this, 'bulk_delete_leads' ) );
 		add_action( 'admin_post_apexadfo_funnel_export_leads', array( $this, 'export_leads' ) );
 
 		if ( self::DB_VERSION !== get_option( 'apexadfo_funnel_db_version' ) ) {
@@ -682,31 +683,181 @@ final class Funnel_Manager {
 		}
 		global $wpdb;
 		$table = esc_sql( $this->table_name() );
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		$entries    = $wpdb->get_results( "SELECT * FROM {$table} ORDER BY created_at DESC LIMIT 200" );
+
+		// Filters
+		$search        = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
+		$status_filter = isset( $_GET['status_filter'] ) ? sanitize_text_field( wp_unslash( $_GET['status_filter'] ) ) : '';
+		$date_from     = isset( $_GET['date_from'] ) ? sanitize_text_field( wp_unslash( $_GET['date_from'] ) ) : '';
+		$date_to       = isset( $_GET['date_to'] ) ? sanitize_text_field( wp_unslash( $_GET['date_to'] ) ) : '';
+
+		$where = array( '1=1' );
+		$args  = array();
+
+		if ( ! empty( $search ) ) {
+			$where[] = '(submission_data LIKE %s OR meta_data LIKE %s)';
+			$like    = '%' . $wpdb->esc_like( $search ) . '%';
+			$args[]  = $like;
+			$args[]  = $like;
+		}
+
+		if ( ! empty( $status_filter ) ) {
+			$where[] = 'status = %s';
+			$args[]  = $status_filter;
+		}
+
+		if ( ! empty( $date_from ) ) {
+			$where[] = 'created_at >= %s';
+			$args[]  = $date_from . ' 00:00:00';
+		}
+
+		if ( ! empty( $date_to ) ) {
+			$where[] = 'created_at <= %s';
+			$args[]  = $date_to . ' 23:59:59';
+		}
+
+		$where_sql = implode( ' AND ', $where );
+		$sql       = "SELECT * FROM {$table} WHERE {$where_sql} ORDER BY created_at DESC LIMIT 500";
+
+		if ( ! empty( $args ) ) {
+			$entries = $wpdb->get_results( $wpdb->prepare( $sql, $args ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared
+		} else {
+			$entries = $wpdb->get_results( $sql ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared
+		}
+
 		$export_url = wp_nonce_url( admin_url( 'admin-post.php?action=apexadfo_funnel_export_leads' ), 'apexadfo_funnel_export_leads' );
 		?>
-		<div class="wrap"><h1 class="wp-heading-inline"><?php esc_html_e( 'Funnel Leads', 'apex-addons-for-elementor' ); ?></h1> <a class="page-title-action" href="<?php echo esc_url( $export_url ); ?>"><?php esc_html_e( 'Export CSV', 'apex-addons-for-elementor' ); ?></a><hr class="wp-header-end">
-		<p><?php esc_html_e( 'The latest 200 submissions from your Elementor conversational funnels.', 'apex-addons-for-elementor' ); ?></p>
-		<table class="widefat striped"><thead><tr><th><?php esc_html_e( 'Date', 'apex-addons-for-elementor' ); ?></th><th><?php esc_html_e( 'Funnel', 'apex-addons-for-elementor' ); ?></th><th><?php esc_html_e( 'Lead details', 'apex-addons-for-elementor' ); ?></th><th><?php esc_html_e( 'Score', 'apex-addons-for-elementor' ); ?></th><th><?php esc_html_e( 'Action', 'apex-addons-for-elementor' ); ?></th></tr></thead><tbody>
+		<div class="wrap">
+			<h1 class="wp-heading-inline"><?php esc_html_e( 'Funnel Leads', 'apex-addons-for-elementor' ); ?></h1>
+			<a class="page-title-action" href="<?php echo esc_url( $export_url ); ?>"><?php esc_html_e( 'Export CSV', 'apex-addons-for-elementor' ); ?></a>
+			<hr class="wp-header-end">
+
+			<!-- Filter Bar -->
+			<form method="get" style="margin: 15px 0; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; background: #fff; padding: 12px 16px; border: 1px solid #ccd0d4; border-radius: 6px;">
+				<input type="hidden" name="page" value="apexadfo-funnel-leads" />
+
+				<input type="search" name="s" value="<?php echo esc_attr( $search ); ?>" placeholder="<?php esc_attr_e( 'Search leads...', 'apex-addons-for-elementor' ); ?>" style="min-width: 200px;" />
+
+				<select name="status_filter">
+					<option value=""><?php esc_html_e( 'All Statuses', 'apex-addons-for-elementor' ); ?></option>
+					<option value="new" <?php selected( $status_filter, 'new' ); ?>><?php esc_html_e( 'New', 'apex-addons-for-elementor' ); ?></option>
+					<option value="contacted" <?php selected( $status_filter, 'contacted' ); ?>><?php esc_html_e( 'Contacted', 'apex-addons-for-elementor' ); ?></option>
+					<option value="converted" <?php selected( $status_filter, 'converted' ); ?>><?php esc_html_e( 'Converted', 'apex-addons-for-elementor' ); ?></option>
+				</select>
+
+				<label style="font-size: 13px; color: #50575e;"><?php esc_html_e( 'From:', 'apex-addons-for-elementor' ); ?>
+					<input type="date" name="date_from" value="<?php echo esc_attr( $date_from ); ?>" />
+				</label>
+
+				<label style="font-size: 13px; color: #50575e;"><?php esc_html_e( 'To:', 'apex-addons-for-elementor' ); ?>
+					<input type="date" name="date_to" value="<?php echo esc_attr( $date_to ); ?>" />
+				</label>
+
+				<button type="submit" class="button button-secondary"><?php esc_html_e( 'Filter', 'apex-addons-for-elementor' ); ?></button>
+				<?php if ( ! empty( $search ) || ! empty( $status_filter ) || ! empty( $date_from ) || ! empty( $date_to ) ) : ?>
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=apexadfo-funnel-leads' ) ); ?>" class="button button-link" style="color: #d63638;"><?php esc_html_e( 'Reset Filters', 'apex-addons-for-elementor' ); ?></a>
+				<?php endif; ?>
+			</form>
+
+			<!-- Bulk Actions Form -->
+			<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+				<input type="hidden" name="action" value="apexadfo_funnel_bulk_delete" />
+				<?php wp_nonce_field( 'apexadfo_funnel_bulk_action' ); ?>
+
+				<div class="tablenav top">
+					<div class="alignleft actions bulkactions">
+						<select name="bulk_action">
+							<option value=""><?php esc_html_e( 'Bulk Actions', 'apex-addons-for-elementor' ); ?></option>
+							<option value="delete"><?php esc_html_e( 'Delete', 'apex-addons-for-elementor' ); ?></option>
+						</select>
+						<button type="submit" class="button action" onclick="return confirm('<?php echo esc_js( esc_html__( 'Are you sure you want to delete the selected items?', 'apex-addons-for-elementor' ) ); ?>')"><?php esc_html_e( 'Apply', 'apex-addons-for-elementor' ); ?></button>
+					</div>
+					<div class="tablenav-pages">
+						<span class="displaying-num"><?php printf( esc_html__( '%d items', 'apex-addons-for-elementor' ), count( $entries ) ); ?></span>
+					</div>
+				</div>
+
+				<table class="widefat striped">
+					<thead>
+						<tr>
+							<td class="manage-column column-cb check-column"><input type="checkbox" id="cb-select-all" onclick="jQuery('.lead-cb').prop('checked', this.checked);" /></td>
+							<th><?php esc_html_e( 'Date', 'apex-addons-for-elementor' ); ?></th>
+							<th><?php esc_html_e( 'Funnel Name', 'apex-addons-for-elementor' ); ?></th>
+							<th><?php esc_html_e( 'Lead Details', 'apex-addons-for-elementor' ); ?></th>
+							<th><?php esc_html_e( 'Score', 'apex-addons-for-elementor' ); ?></th>
+							<th><?php esc_html_e( 'Status', 'apex-addons-for-elementor' ); ?></th>
+							<th><?php esc_html_e( 'Actions', 'apex-addons-for-elementor' ); ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php if ( empty( $entries ) ) : ?>
+							<tr>
+								<td colspan="7"><?php esc_html_e( 'No funnel leads found.', 'apex-addons-for-elementor' ); ?></td>
+							</tr>
+						<?php else : ?>
+							<?php foreach ( $entries as $entry ) :
+								$data = json_decode( $entry->submission_data, true );
+								$meta = json_decode( $entry->meta_data, true );
+								$name = $meta['funnel_name'] ?? get_the_title( $entry->funnel_id ?: $entry->page_id );
+							?>
+								<tr>
+									<th scope="row" class="check-column"><input type="checkbox" name="lead_ids[]" class="lead-cb" value="<?php echo esc_attr( $entry->id ); ?>" /></th>
+									<td><?php echo esc_html( mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $entry->created_at ) ); ?></td>
+									<td><strong><?php echo esc_html( $name ); ?></strong></td>
+									<td>
+										<?php if ( is_array( $data ) && ! empty( $data ) ) : ?>
+											<details>
+												<summary style="cursor: pointer; color: #2271b1; font-weight: 600;"><?php printf( esc_html__( 'View Lead Data (%d fields)', 'apex-addons-for-elementor' ), count( $data ) ); ?></summary>
+												<div style="margin-top: 8px; font-size: 12px; background: #f6f7f7; padding: 8px 12px; border-radius: 4px; border: 1px solid #dcdcde;">
+													<?php foreach ( (array) $data as $answer ) : 
+														$value = is_array( $answer['value'] ?? '' ) ? $this->flatten_value( $answer['value'] ) : ( $answer['value'] ?? '' );
+													?>
+														<div style="margin-bottom: 4px;"><strong><?php echo esc_html( $answer['label'] ?? '' ); ?>:</strong> <?php echo esc_html( $value ); ?></div>
+													<?php endforeach; ?>
+												</div>
+											</details>
+										<?php else : ?>
+											<span style="color: #a7aaad;"><?php esc_html_e( 'No lead data', 'apex-addons-for-elementor' ); ?></span>
+										<?php endif; ?>
+									</td>
+									<td><span class="badge" style="background: #ecfdf5; color: #047857; padding: 3px 8px; border-radius: 12px; font-weight: 700;"><?php echo esc_html( (int) ( $meta['score'] ?? 0 ) ); ?></span></td>
+									<td>
+										<span class="status-badge" style="background: #f1f5f9; color: #475569; padding: 3px 8px; border-radius: 4px; font-weight: 600; text-transform: uppercase; font-size: 11px;">
+											<?php echo esc_html( $entry->status ?: 'NEW' ); ?>
+										</span>
+									</td>
+									<td>
+										<a class="button-link-delete" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=apexadfo_funnel_delete_lead&id=' . absint( $entry->id ) ), 'apexadfo_funnel_delete_lead_' . absint( $entry->id ) ) ); ?>" onclick="return confirm('<?php echo esc_js( esc_html__( 'Delete this lead permanently?', 'apex-addons-for-elementor' ) ); ?>')">
+											<?php esc_html_e( 'Delete', 'apex-addons-for-elementor' ); ?>
+										</a>
+									</td>
+								</tr>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</tbody>
+				</table>
+			</form>
+		</div>
 		<?php
-		if ( empty( $entries ) ) :
-			?>
-			<tr><td colspan="5"><?php esc_html_e( 'No funnel leads yet.', 'apex-addons-for-elementor' ); ?></td></tr><?php endif; ?>
-		<?php
-		foreach ( $entries as $entry ) :
-			$data = json_decode( $entry->submission_data, true );
-			$meta = json_decode( $entry->meta_data, true );
-			$name = $meta['funnel_name'] ?? get_the_title( $entry->funnel_id ?: $entry->page_id );
-			?>
-		<tr><td><?php echo esc_html( mysql2date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $entry->created_at ) ); ?></td><td><strong><?php echo esc_html( $name ); ?></strong></td><td>
-			<?php
-			foreach ( (array) $data as $answer ) :
-				$value = is_array( $answer['value'] ?? '' ) ? $this->flatten_value( $answer['value'] ) : ( $answer['value'] ?? '' );
-				?>
-			<div><strong><?php echo esc_html( $answer['label'] ?? '' ); ?>:</strong> <?php echo esc_html( $value ); ?></div><?php endforeach; ?></td><td><?php echo esc_html( (int) ( $meta['score'] ?? 0 ) ); ?></td><td><a class="button-link-delete" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=apexadfo_funnel_delete_lead&id=' . absint( $entry->id ) ), 'apexadfo_funnel_delete_lead_' . absint( $entry->id ) ) ); ?>" onclick="return confirm('<?php echo esc_js( esc_html__( 'Delete this lead permanently?', 'apex-addons-for-elementor' ) ); ?>')"><?php esc_html_e( 'Delete', 'apex-addons-for-elementor' ); ?></a></td></tr>
-		<?php endforeach; ?></tbody></table></div>
-		<?php
+	}
+
+	public function bulk_delete_leads() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'Unauthorized request.', 'apex-addons-for-elementor' ) );
+		}
+		check_admin_referer( 'apexadfo_funnel_bulk_action' );
+
+		$action = isset( $_POST['bulk_action'] ) ? sanitize_key( $_POST['bulk_action'] ) : ( isset( $_POST['bulk_action2'] ) ? sanitize_key( $_POST['bulk_action2'] ) : '' );
+		$ids    = isset( $_POST['lead_ids'] ) ? array_map( 'absint', (array) $_POST['lead_ids'] ) : array();
+
+		if ( 'delete' === $action && ! empty( $ids ) ) {
+			global $wpdb;
+			$placeholders = implode( ',', array_fill( 0, count( $ids ), '%d' ) );
+			$table        = esc_sql( $this->table_name() );
+			$wpdb->query( $wpdb->prepare( "DELETE FROM {$table} WHERE id IN ({$placeholders})", $ids ) ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		}
+
+		wp_safe_redirect( admin_url( 'admin.php?page=apexadfo-funnel-leads' ) );
+		exit;
 	}
 
 	public function delete_lead() {
