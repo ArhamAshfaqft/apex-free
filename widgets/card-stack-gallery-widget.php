@@ -427,6 +427,51 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 			'condition' => [ 'show_content' => 'yes' ],
 		] );
 
+		$this->add_responsive_control( 'content_valign', [
+			'label'     => esc_html__( 'Vertical Alignment', 'apex-addons-for-elementor' ),
+			'type'      => Controls_Manager::CHOOSE,
+			'options'   => [
+				'flex-start' => [
+					'title' => esc_html__( 'Top', 'apex-addons-for-elementor' ),
+					'icon'  => 'eicon-v-align-top',
+				],
+				'center'     => [
+					'title' => esc_html__( 'Middle', 'apex-addons-for-elementor' ),
+					'icon'  => 'eicon-v-align-middle',
+				],
+				'flex-end'   => [
+					'title' => esc_html__( 'Bottom', 'apex-addons-for-elementor' ),
+					'icon'  => 'eicon-v-align-bottom',
+				],
+			],
+			'default'   => 'flex-end',
+			'selectors' => [
+				'{{WRAPPER}} .eas-card-stack-content' => 'justify-content: {{VALUE}};',
+			],
+		] );
+
+		$this->add_responsive_control( 'content_gap', [
+			'label'      => esc_html__( 'Spacing Between Items (Gap)', 'apex-addons-for-elementor' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [
+				'px' => [ 'min' => 0, 'max' => 50 ],
+			],
+			'default'    => [ 'unit' => 'px', 'size' => 8 ],
+			'selectors'  => [
+				'{{WRAPPER}} .eas-card-stack-content' => 'gap: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_responsive_control( 'content_padding', [
+			'label'      => esc_html__( 'Content Padding', 'apex-addons-for-elementor' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', '%', 'em' ],
+			'selectors'  => [
+				'{{WRAPPER}} .eas-card-stack-content' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+
 		$this->add_control( 'eyebrow_color', [
 			'label'     => esc_html__( 'Eyebrow Text Color', 'apex-addons-for-elementor' ),
 			'type'      => Controls_Manager::COLOR,
