@@ -13,6 +13,7 @@ use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Image_Size;
+use Elementor\Group_Control_Background;
 use Elementor\Utils;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -378,6 +379,47 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 
 		$this->end_controls_section();
 
+		// Card Image Overlay Section
+		$this->start_controls_section( 'section_style_overlay', [
+			'label' => esc_html__( 'Card Image Overlay', 'apex-addons-for-elementor' ),
+			'tab'   => Controls_Manager::TAB_STYLE,
+		] );
+
+		$this->add_control( 'show_overlay', [
+			'label'        => esc_html__( 'Enable Overlay', 'apex-addons-for-elementor' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'return_value' => 'yes',
+			'default'      => 'yes',
+			'description'  => esc_html__( 'Toggle OFF to completely remove the card image background overlay.', 'apex-addons-for-elementor' ),
+		] );
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'      => 'card_overlay_bg',
+				'label'     => esc_html__( 'Overlay Background', 'apex-addons-for-elementor' ),
+				'types'     => [ 'classic', 'gradient' ],
+				'selector'  => '{{WRAPPER}} .eas-card-stack-overlay',
+				'condition' => [ 'show_overlay' => 'yes' ],
+			]
+		);
+
+		$this->add_responsive_control( 'overlay_opacity', [
+			'label'      => esc_html__( 'Overlay Opacity', 'apex-addons-for-elementor' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [
+				'px' => [ 'min' => 0, 'max' => 1, 'step' => 0.05 ],
+			],
+			'default'    => [ 'unit' => 'px', 'size' => 1 ],
+			'selectors'  => [
+				'{{WRAPPER}} .eas-card-stack-overlay' => 'opacity: {{SIZE}};',
+			],
+			'condition'  => [ 'show_overlay' => 'yes' ],
+		] );
+
+		$this->end_controls_section();
+
 		// Content Overlay & Typography
 		$this->start_controls_section( 'section_style_content', [
 			'label'     => esc_html__( 'Content & Overlay', 'apex-addons-for-elementor' ),
@@ -625,6 +667,7 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 		$settings     = $this->get_settings_for_display();
 		$cards        = $settings['cards'] ?? [];
 		$show_content = 'yes' === ( $settings['show_content'] ?? 'yes' );
+		$show_overlay = 'yes' === ( $settings['show_overlay'] ?? 'yes' );
 
 		if ( empty( $cards ) ) {
 			return;
@@ -665,7 +708,9 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 						<li class="eas-card-stack-item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>" data-link="<?php echo esc_attr( $link_url ); ?>" data-target="<?php echo esc_attr( $link_target ); ?>">
 							<div class="eas-card-stack-media">
 								<img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $title ? $title : $eyebrow ); ?>" class="eas-card-stack-img" loading="lazy" />
-								<div class="eas-card-stack-overlay"></div>
+								<?php if ( $show_overlay ) : ?>
+									<div class="eas-card-stack-overlay"></div>
+								<?php endif; ?>
 							</div>
 							<?php if ( $has_item_content ) : ?>
 								<div class="eas-card-stack-content">
