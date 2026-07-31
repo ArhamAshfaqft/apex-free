@@ -1069,6 +1069,13 @@ final class Loader {
 				'icon'     => 'dashicons-images-alt',
 				'pro'      => true,
 			],
+			'coverflow_gallery' => [
+				'title'    => esc_html__( 'Coverflow Gallery', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Premium 3D Coverflow gallery slider with adjustable side tilt, depth perspective, and text content overlays.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-format-gallery',
+				'pro'      => true,
+			],
 			'liquid_glass' => [
 				'title'    => esc_html__( 'Liquid Glass Morphism', 'apex-addons-for-elementor' ),
 				'category' => 'widgets',
@@ -1088,6 +1095,34 @@ final class Loader {
 				'category' => 'widgets',
 				'desc'     => esc_html__( 'Scroll-linked organic SVG metaball morphing transitions with smooth liquid card morphs.', 'apex-addons-for-elementor' ),
 				'icon'     => 'dashicons-shapes',
+				'pro'      => true,
+			],
+			'kinetic_text' => [
+				'title'    => esc_html__( 'Kinetic Fluid Text', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Premium typography that warps and flows dynamically like liquid on mouse hover.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-editor-textcolor',
+				'pro'      => true,
+			],
+			'infinite_grid' => [
+				'title'    => esc_html__( 'Infinite Canvas Grid', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'An infinite, mouse drag-to-pan project grid showcase with inertia momentum and wrap-around tiling.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-grid-view',
+				'pro'      => true,
+			],
+			'proximity_orbit' => [
+				'title'    => esc_html__( 'Proximity Orbit 3D', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Interactive circular perimeter orbiting showcase with parallax scroll momentum.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-update',
+				'pro'      => true,
+			],
+			'scroll_bloom_orbit' => [
+				'title'    => esc_html__( 'Scroll Bloom Orbit', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Scroll-driven circular expansion showcase that twists open like a blooming flower.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-art',
 				'pro'      => true,
 			],
 			'motion_typography_pro' => [
@@ -1116,6 +1151,20 @@ final class Loader {
 				'category' => 'widgets',
 				'desc'     => esc_html__( 'Interactive canvas particle explosion effect that shatters into physics particles on complete.', 'apex-addons-for-elementor' ),
 				'icon'     => 'dashicons-forms',
+				'pro'      => true,
+			],
+			'text_particle_loader' => [
+				'title'    => esc_html__( 'Text Particle Loader', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Interactive HTML5 canvas particle typography preloader with mouse repulsion physics.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-editor-customchar',
+				'pro'      => true,
+			],
+			'blend_curve_loader' => [
+				'title'    => esc_html__( 'Blend Curve Loader', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'CMYK concentric circles rotating with dynamic color-overlapping blend modes.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-image-filter',
 				'pro'      => true,
 			],
 			'floating_dock' => [
@@ -1151,6 +1200,20 @@ final class Loader {
 				'category' => 'widgets',
 				'desc'     => esc_html__( 'Interactive stack card swiper. Drag, swipe, and rotate cards with smooth gesture controls.', 'apex-addons-for-elementor' ),
 				'icon'     => 'dashicons-images-alt2',
+				'pro'      => true,
+			],
+			'icon_iconify' => [
+				'title'    => esc_html__( 'Iconify 300,000+ Icon Search API', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Dynamic live icon search connecting to Iconify API for 300,000+ open-source icons in Elementor.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-admin-site-alt',
+				'pro'      => true,
+			],
+			'form_studio' => [
+				'title'    => esc_html__( 'Form Studio & Webhook Automation', 'apex-addons-for-elementor' ),
+				'category' => 'widgets',
+				'desc'     => esc_html__( 'Conditional recipient routing, autoresponders, signed webhooks, and submission metadata for Form Builder.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-feedback',
 				'pro'      => true,
 			],
 
@@ -1190,11 +1253,34 @@ final class Loader {
 				'icon'     => 'dashicons-admin-cursor',
 				'pro'      => true,
 			],
-			'kenburns_slideshow_pro' => [
-				'title'    => esc_html__( 'Ken Burns Slideshow Pro', 'apex-addons-for-elementor' ),
+			'container_parallax' => [
+				'title'    => esc_html__( 'Page-Scroll Parallax', 'apex-addons-for-elementor' ),
 				'category' => 'extensions',
-				'desc'     => esc_html__( 'Background pan & zoom Ken Burns slideshow for containers with sleek dot & line navigation.', 'apex-addons-for-elementor' ),
+				'desc'     => esc_html__( 'Link the container carousel movement directly to the webpage scrollbar.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-controls-play',
+				'pro'      => true,
+			],
+
+			// Pro Background Effects
+			'kenburns_slideshow_pro' => [
+				'title'    => esc_html__( 'Cinematic Background Slideshow', 'apex-addons-for-elementor' ),
+				'category' => 'backgrounds',
+				'desc'     => esc_html__( 'Add a slideshow background with Ken Burns panning and interactive side pagination dots to any section, column, or container.', 'apex-addons-for-elementor' ),
 				'icon'     => 'dashicons-format-image',
+				'pro'      => true,
+			],
+			'particles' => [
+				'title'    => esc_html__( 'Interactive 3D Particles', 'apex-addons-for-elementor' ),
+				'category' => 'backgrounds',
+				'desc'     => esc_html__( 'Add responsive 3D floating nodes that warp and connect on mouse hover.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-admin-site-alt3',
+				'pro'      => true,
+			],
+			'parallax_gallery' => [
+				'title'    => esc_html__( 'Parallax Flying Columns', 'apex-addons-for-elementor' ),
+				'category' => 'backgrounds',
+				'desc'     => esc_html__( 'Add flying multi-column scroll gallery behind your container content.', 'apex-addons-for-elementor' ),
+				'icon'     => 'dashicons-format-gallery',
 				'pro'      => true,
 			],
 		];
