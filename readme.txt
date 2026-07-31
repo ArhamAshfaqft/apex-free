@@ -4,7 +4,7 @@ Tags: elementor, widgets, animations, forms, header footer
 Requires at least: 5.8
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -74,6 +74,11 @@ See `THIRD-PARTY-NOTICES.txt` in the plugin folder. All bundled libraries use GP
 The submitted plugin contains the readable PHP, JavaScript, and CSS source used by the plugin. Third-party libraries are identified with their project and source links in `THIRD-PARTY-NOTICES.txt`. The release ZIP is assembled by `build-wordpress-org-package.ps1`, which copies runtime files without compiling or obfuscating them.
 
 == Changelog ==
+
+= 1.3.2 =
+* Feature: Added search input, date range filters, bulk actions, and expandable answer details for Quiz Responses and Funnel Leads.
+* Fix: Enhanced Pro feature crown toggles across all background effects and dashboard categories.
+* Fix: WordPress.org review compliance improvements.
 
 = 1.3.1 =
 * Improved Theme Builder rendering and dynamic context support for single posts, archives, and WooCommerce product archives.

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Apex Addons for Elementor
  * Description: Unique, high-quality interactive widgets and extensions for Elementor.
- * Version:     1.3.1
+ * Version:     1.3.2
  * Author:      arhamashfaq
  * Author URI:  https://www.arhamashfaq.com/
  * Text Domain: apex-addons-for-elementor
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-define( 'APEXADFO_VERSION', '1.3.1' );
+define( 'APEXADFO_VERSION', '1.3.2' );
 
 // Load conditions engine globally (before init) so AJAX handlers can always use it
 require_once __DIR__ . '/class-apex-conditions-engine.php';
