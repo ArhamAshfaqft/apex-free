@@ -214,7 +214,7 @@
     },
 
     /**
-     * Modal View: Save Preset (Sleek Clean Modal)
+     * Modal View: Save Preset (Clean White Input & Black Text)
      */
     openSaveModal: function () {
       var self = this;
@@ -236,7 +236,7 @@
       var bodyHtml =
         '<div class="apex-preset-field-group" style="margin-bottom: 0;">' +
         '  <label class="apex-preset-label">Preset Name</label>' +
-        '  <input type="text" id="apex-preset-name-input" class="apex-preset-input" placeholder="e.g. Hero Section (120px Padding)" value="" />' +
+        '  <input type="text" id="apex-preset-name-input" class="apex-preset-input" placeholder="e.g. Hero Section (120px Padding)" value="" style="background-color: #ffffff !important; color: #000000 !important; border: 1px solid #cbd5e1 !important;" />' +
         '</div>';
 
       var footerHtml =
