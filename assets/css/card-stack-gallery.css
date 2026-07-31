@@ -26,7 +26,7 @@
 .eas-card-stack-viewport {
 	position: relative;
 	width: var(--eas-stack-width, 320px);
-	height: var(--eas-stack-height, 420px);
+	height: var(--eas-stack-height, 473px);
 	perspective: var(--eas-stack-perspective, 1000px);
 	perspective-origin: 50% 50%;
 }

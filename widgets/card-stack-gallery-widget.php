@@ -252,7 +252,7 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 				'px' => [ 'min' => 200, 'max' => 1000 ],
 				'vh' => [ 'min' => 20, 'max' => 90 ],
 			],
-			'default'    => [ 'unit' => 'px', 'size' => 450 ],
+			'default'    => [ 'unit' => 'px', 'size' => 473 ],
 			'selectors'  => [
 				'{{WRAPPER}} .eas-card-stack-viewport' => '--eas-stack-height: {{SIZE}}{{UNIT}};',
 			],
@@ -265,7 +265,7 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 			'range'      => [
 				'px' => [ 'min' => -80, 'max' => 80 ],
 			],
-			'default'    => [ 'unit' => 'px', 'size' => 20 ],
+			'default'    => [ 'unit' => 'px', 'size' => 40 ],
 		] );
 
 		$this->add_responsive_control( 'offset_y', [
@@ -641,7 +641,7 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 			'autoplay'      => 'yes' === ( $settings['autoplay'] ?? 'no' ),
 			'autoplaySpeed' => absint( $settings['autoplay_speed'] ?? 3000 ),
 			'visibleCards'  => absint( $settings['visible_cards'] ?? 4 ),
-			'offsetX'       => (float) ( $settings['offset_x']['size'] ?? 20 ),
+			'offsetX'       => (float) ( $settings['offset_x']['size'] ?? 40 ),
 			'offsetY'       => (float) ( $settings['offset_y']['size'] ?? -20 ),
 			'tilt'          => (float) ( $settings['tilt']['size'] ?? 0 ),
 			'scaleFactor'   => (float) ( $settings['scale_factor'] ?? 0.94 ),
