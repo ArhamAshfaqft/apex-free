@@ -54,17 +54,17 @@
         return;
       }
 
-      var iconSvg = '<svg style="width: 14px; height: 14px; display: inline-block; vertical-align: middle;" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#7c3aed"></circle></svg>';
+      var iconSvg = '<i class="eicon-favorite"></i>';
 
       var $apexGroup = $(
-        '<div class="elementor-context-menu-list__group elementor-context-menu-list__group-apex" role="group" style="border-top: 1px solid rgba(0, 0, 0, 0.06); margin-top: 4px; padding-top: 4px;">' +
+        '<div class="elementor-context-menu-list__group elementor-context-menu-list__group-apex" role="group">' +
           '<div class="elementor-context-menu-list__item elementor-context-menu-list__item-apex-save" role="menuitem" tabindex="0">' +
             '<div class="elementor-context-menu-list__item__icon">' + iconSvg + '</div>' +
-            '<div class="elementor-context-menu-list__item__title" style="color: #7c3aed; font-weight: 600;">Save as Apex Preset</div>' +
+            '<div class="elementor-context-menu-list__item__title">Save as Apex Preset</div>' +
           '</div>' +
           '<div class="elementor-context-menu-list__item elementor-context-menu-list__item-apex-apply" role="menuitem" tabindex="0">' +
             '<div class="elementor-context-menu-list__item__icon">' + iconSvg + '</div>' +
-            '<div class="elementor-context-menu-list__item__title" style="color: #7c3aed; font-weight: 600;">Apply Apex Preset</div>' +
+            '<div class="elementor-context-menu-list__item__title">Apply Apex Preset</div>' +
           '</div>' +
         '</div>'
       );

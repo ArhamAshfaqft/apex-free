@@ -3,31 +3,33 @@
  * Apex Addons for Elementor
  */
 
-/* Context Menu Item Badge */
-.elementor-context-menu-list__item.apex-context-item {
+/* Context Menu Styling - Seamlessly matching Elementor Native Context Menu */
+.elementor-context-menu-list__group-apex {
+	border-top: 1px solid rgba(255, 255, 255, 0.08);
+	margin-top: 4px;
+	padding-top: 4px;
+}
+
+.elementor-context-menu-list__item-apex-save .elementor-context-menu-list__item__title,
+.elementor-context-menu-list__item-apex-apply .elementor-context-menu-list__item__title {
+	font-family: Roboto, Arial, Helvetica, sans-serif !important;
+	font-size: 14px !important;
+	font-weight: 400 !important;
+	line-height: 14px !important;
+	color: rgb(213, 216, 220) !important;
+}
+
+.elementor-context-menu-list__item-apex-save:hover .elementor-context-menu-list__item__title,
+.elementor-context-menu-list__item-apex-apply:hover .elementor-context-menu-list__item__title {
+	color: #ffffff !important;
+}
+
+.elementor-context-menu-list__item-apex-save .elementor-context-menu-list__item__icon,
+.elementor-context-menu-list__item-apex-apply .elementor-context-menu-list__item__icon {
 	display: flex;
 	align-items: center;
-	gap: 8px;
-	color: #6d28d9 !important;
-	font-weight: 600;
-}
-
-.elementor-context-menu-list__item.apex-context-item:hover {
-	background-color: rgba(109, 40, 217, 0.08) !important;
-}
-
-.apex-context-icon {
-	width: 16px;
-	height: 16px;
-	display: inline-flex;
-	align-items: center;
 	justify-content: center;
-}
-
-.apex-context-icon svg {
-	width: 14px;
-	height: 14px;
-	fill: currentColor;
+	color: rgb(213, 216, 220);
 }
 
 /* Preset Modal Backdrop & Container */
