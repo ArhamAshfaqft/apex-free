@@ -172,8 +172,8 @@
 }
 
 .eas-card-stack-btn {
-	width: 44px;
-	height: 44px;
+	width: var(--eas-nav-btn-size, 44px);
+	height: var(--eas-nav-btn-size, 44px);
 	border-radius: 50%;
 	border: 1px solid rgba(0, 0, 0, 0.08);
 	background: var(--eas-nav-btn-bg, #ffffff);
@@ -193,8 +193,8 @@
 }
 
 .eas-card-stack-btn svg {
-	width: 18px;
-	height: 18px;
+	width: var(--eas-nav-icon-size, 18px);
+	height: var(--eas-nav-icon-size, 18px);
 	fill: currentColor;
 }
 

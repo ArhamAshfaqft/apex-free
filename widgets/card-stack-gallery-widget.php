@@ -511,10 +511,72 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 			'default' => 'below',
 		] );
 
+		$this->add_responsive_control( 'nav_btn_size', [
+			'label'      => esc_html__( 'Button Size', 'apex-addons-for-elementor' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [
+				'px' => [ 'min' => 24, 'max' => 90 ],
+			],
+			'default'    => [ 'unit' => 'px', 'size' => 44 ],
+			'selectors'  => [
+				'{{WRAPPER}} .eas-card-stack-btn' => '--eas-nav-btn-size: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_responsive_control( 'nav_icon_size', [
+			'label'      => esc_html__( 'Icon Size', 'apex-addons-for-elementor' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [
+				'px' => [ 'min' => 10, 'max' => 50 ],
+			],
+			'default'    => [ 'unit' => 'px', 'size' => 18 ],
+			'selectors'  => [
+				'{{WRAPPER}} .eas-card-stack-btn' => '--eas-nav-icon-size: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_responsive_control( 'nav_btn_gap', [
+			'label'      => esc_html__( 'Gap Between Buttons', 'apex-addons-for-elementor' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [
+				'px' => [ 'min' => 0, 'max' => 60 ],
+			],
+			'default'    => [ 'unit' => 'px', 'size' => 16 ],
+			'selectors'  => [
+				'{{WRAPPER}} .eas-card-stack-nav' => 'gap: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_responsive_control( 'nav_btn_offset', [
+			'label'      => esc_html__( 'Top Margin / Offset', 'apex-addons-for-elementor' ),
+			'type'       => Controls_Manager::SLIDER,
+			'size_units' => [ 'px' ],
+			'range'      => [
+				'px' => [ 'min' => 0, 'max' => 100 ],
+			],
+			'default'    => [ 'unit' => 'px', 'size' => 24 ],
+			'selectors'  => [
+				'{{WRAPPER}} .eas-card-stack-nav' => 'margin-top: {{SIZE}}{{UNIT}};',
+			],
+		] );
+
+		$this->add_responsive_control( 'nav_border_radius', [
+			'label'      => esc_html__( 'Border Radius', 'apex-addons-for-elementor' ),
+			'type'       => Controls_Manager::DIMENSIONS,
+			'size_units' => [ 'px', '%', 'em' ],
+			'selectors'  => [
+				'{{WRAPPER}} .eas-card-stack-btn' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+			],
+		] );
+
 		$this->add_control( 'nav_btn_color', [
-			'label'     => esc_html__( 'Button Color', 'apex-addons-for-elementor' ),
+			'label'     => esc_html__( 'Button Icon Color', 'apex-addons-for-elementor' ),
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#111111',
+			'separator' => 'before',
 			'selectors' => [
 				'{{WRAPPER}} .eas-card-stack-btn' => '--eas-nav-btn-color: {{VALUE}};',
 			],
@@ -530,7 +592,7 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 		] );
 
 		$this->add_control( 'nav_btn_hover_color', [
-			'label'     => esc_html__( 'Hover Button Color', 'apex-addons-for-elementor' ),
+			'label'     => esc_html__( 'Hover Icon Color', 'apex-addons-for-elementor' ),
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#ffffff',
 			'selectors' => [
@@ -546,6 +608,22 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 				'{{WRAPPER}} .eas-card-stack-btn' => '--eas-nav-btn-hover-bg: {{VALUE}};',
 			],
 		] );
+
+		$this->add_group_control(
+			Group_Control_Border::get_type(),
+			[
+				'name'     => 'nav_btn_border',
+				'selector' => '{{WRAPPER}} .eas-card-stack-btn',
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name'     => 'nav_btn_shadow',
+				'selector' => '{{WRAPPER}} .eas-card-stack-btn',
+			]
+		);
 
 		$this->end_controls_section();
 	}
