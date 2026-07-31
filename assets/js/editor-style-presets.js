@@ -1,0 +1,453 @@
+/**
+ * Apex Style Presets / Design System Manager - Editor Engine
+ * Apex Addons for Elementor
+ */
+
+(function ($) {
+  "use strict";
+
+  var PresetsManager = {
+    init: function () {
+      this.data = window.apexadfoStylePresetsData || {};
+      this.presets = this.data.presets || {};
+      this.bindContextMenu();
+      this.initModalUI();
+    },
+
+    /**
+     * Listen for right-click context menu opens in Elementor Editor
+     */
+    bindContextMenu: function () {
+      var self = this;
+
+      $(document).on("contextmenu", ".elementor-element, .elementor-navigator__item", function () {
+        setTimeout(function () {
+          self.injectContextMenuItems();
+        }, 50);
+      });
+    },
+
+    /**
+     * Inject "Save as Apex Preset" and "Apply Apex Preset" into Elementor Context Menu
+     */
+    injectContextMenuItems: function () {
+      var self = this;
+      var $contextMenu = $(".elementor-context-menu:visible");
+
+      if (!$contextMenu.length || $contextMenu.find(".apex-context-item").length) {
+        return;
+      }
+
+      // Check if an element is currently selected
+      var selectedElements = window.elementor && window.elementor.selection ? window.elementor.selection.getElements() : [];
+      if (!selectedElements.length) {
+        return;
+      }
+
+      var iconSvg = '<span class="apex-context-icon"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#7c3aed"></circle></svg></span>';
+
+      var $saveItem = $(
+        '<div class="elementor-context-menu-list__item apex-context-item apex-context-save">' +
+          iconSvg +
+          '<span class="elementor-context-menu-list__item__title">Save as Apex Preset</span>' +
+          '</div>'
+      );
+
+      var $applyItem = $(
+        '<div class="elementor-context-menu-list__item apex-context-item apex-context-apply">' +
+          iconSvg +
+          '<span class="elementor-context-menu-list__item__title">Apply Apex Preset</span>' +
+          '</div>'
+      );
+
+      // Insert right after "Copy Style" / "Paste Style" group or at the top of the menu
+      var $pasteStyle = $contextMenu.find('.elementor-context-menu-list__item[data-action="paste_style"]').closest(".elementor-context-menu-list__item");
+      if ($pasteStyle.length) {
+        $pasteStyle.after($applyItem).after($saveItem);
+      } else {
+        $contextMenu.find(".elementor-context-menu-list").prepend($applyItem).prepend($saveItem);
+      }
+
+      // Bind click handlers
+      $saveItem.on("click", function (e) {
+        e.stopPropagation();
+        $(".elementor-context-menu").hide();
+        self.openSaveModal();
+      });
+
+      $applyItem.on("click", function (e) {
+        e.stopPropagation();
+        $(".elementor-context-menu").hide();
+        self.openApplyModal();
+      });
+    },
+
+    /**
+     * Get currently selected Elementor view & model
+     */
+    getSelectedElement: function () {
+      if (window.elementor && window.elementor.selection) {
+        var elements = window.elementor.selection.getElements();
+        if (elements && elements.length > 0) {
+          return elements[0];
+        }
+      }
+      return null;
+    },
+
+    /**
+     * Extract attributes from an Elementor Model for preset saving
+     */
+    extractModelSettings: function (model, options) {
+      options = options || { padding: true, background: true, border: true };
+      var settings = model.get("settings").toJSON();
+      var captured = {};
+
+      // Padding & Margin keys across all viewports (Desktop, Tablet, Mobile)
+      if (options.padding) {
+        var layoutKeys = [
+          "padding", "padding_tablet", "padding_mobile",
+          "margin", "margin_tablet", "margin_mobile",
+          "padding_unit", "margin_unit",
+          "align_items", "align_items_tablet", "align_items_mobile",
+          "justify_content", "justify_content_tablet", "justify_content_mobile",
+          "flex_direction", "flex_direction_tablet", "flex_direction_mobile",
+          "gap", "gap_tablet", "gap_mobile", "gap_unit"
+        ];
+        layoutKeys.forEach(function (key) {
+          if (settings[key] !== undefined) {
+            captured[key] = settings[key];
+          }
+        });
+      }
+
+      // Background keys
+      if (options.background) {
+        var bgKeys = [
+          "background_background", "background_color", "background_color_stop",
+          "background_color_b", "background_color_b_stop", "background_gradient_type",
+          "background_gradient_angle", "background_position", "background_repeat",
+          "background_size", "background_attachment"
+        ];
+        bgKeys.forEach(function (key) {
+          if (settings[key] !== undefined) {
+            captured[key] = settings[key];
+          }
+        });
+      }
+
+      // Border & Box Shadow keys
+      if (options.border) {
+        var borderKeys = [
+          "border_border", "border_width", "border_color",
+          "border_radius", "border_radius_tablet", "border_radius_mobile",
+          "box_shadow_box_shadow", "box_shadow_position"
+        ];
+        borderKeys.forEach(function (key) {
+          if (settings[key] !== undefined) {
+            captured[key] = settings[key];
+          }
+        });
+      }
+
+      return captured;
+    },
+
+    /**
+     * Build and inject Modal UI structure into DOM
+     */
+    initModalUI: function () {
+      if ($("#apex-preset-modal-wrap").length) return;
+
+      var modalHtml =
+        '<div id="apex-preset-modal-wrap">' +
+        '  <div class="apex-preset-modal-backdrop" id="apex-preset-modal-backdrop">' +
+        '    <div class="apex-preset-modal">' +
+        '      <div class="apex-preset-modal-header">' +
+        '        <h3 class="apex-preset-modal-title" id="apex-preset-modal-header-title">Apex Style Preset</h3>' +
+        '        <button class="apex-preset-modal-close" id="apex-preset-modal-close">&times;</button>' +
+        '      </div>' +
+        '      <div class="apex-preset-modal-body" id="apex-preset-modal-body"></div>' +
+        '      <div class="apex-preset-modal-footer" id="apex-preset-modal-footer"></div>' +
+        '    </div>' +
+        '  </div>' +
+        '  <div class="apex-preset-toast" id="apex-preset-toast"></div>' +
+        '</div>';
+
+      $("body").append(modalHtml);
+
+      $("#apex-preset-modal-close, #apex-preset-modal-backdrop").on("click", function (e) {
+        if (e.target === this) {
+          PresetsManager.closeModal();
+        }
+      });
+    },
+
+    openModal: function () {
+      $("#apex-preset-modal-backdrop").addClass("apex-modal-active");
+    },
+
+    closeModal: function () {
+      $("#apex-preset-modal-backdrop").removeClass("apex-modal-active");
+    },
+
+    showToast: function (msg, type) {
+      type = type || "success";
+      var $toast = $("#apex-preset-toast");
+      $toast
+        .removeClass("apex-toast-success apex-toast-error")
+        .addClass("apex-toast-" + type)
+        .text(msg)
+        .addClass("apex-toast-active");
+
+      setTimeout(function () {
+        $toast.removeClass("apex-toast-active");
+      }, 3000);
+    },
+
+    /**
+     * Modal View: Save Preset
+     */
+    openSaveModal: function () {
+      var self = this;
+      var activeEl = this.getSelectedElement();
+      if (!activeEl) {
+        this.showToast("Please select a container or widget first.", "error");
+        return;
+      }
+
+      var model = activeEl.model;
+      var elType = model.get("elType") || "element";
+      var widgetType = model.get("widgetType") || elType;
+
+      var bodyHtml =
+        '<div class="apex-preset-field-group">' +
+        '  <label class="apex-preset-label">Preset Name</label>' +
+        '  <input type="text" id="apex-preset-name-input" class="apex-preset-input" placeholder="e.g. Section Padding Large (120px/16px)" value="" />' +
+        '</div>' +
+        '<div class="apex-preset-field-group">' +
+        '  <label class="apex-preset-label">Styling Options to Include</label>' +
+        '  <div class="apex-preset-checkbox-grid">' +
+        '    <label class="apex-preset-checkbox-card"><input type="checkbox" id="apex-opt-padding" checked /> Layout & Paddings</label>' +
+        '    <label class="apex-preset-checkbox-card"><input type="checkbox" id="apex-opt-background" checked /> Background & Colors</label>' +
+        '    <label class="apex-preset-checkbox-card"><input type="checkbox" id="apex-opt-border" checked /> Borders & Radius</label>' +
+        '  </div>' +
+        '</div>';
+
+      var footerHtml =
+        '<button class="apex-preset-btn-secondary" id="apex-preset-cancel-btn">Cancel</button>' +
+        '<button class="apex-preset-btn-primary" id="apex-preset-save-confirm-btn">Save Preset</button>';
+
+      $("#apex-preset-modal-header-title").text("Save as Apex Preset");
+      $("#apex-preset-modal-body").html(bodyHtml);
+      $("#apex-preset-modal-footer").html(footerHtml);
+
+      this.openModal();
+      setTimeout(function () {
+        $("#apex-preset-name-input").focus();
+      }, 150);
+
+      $("#apex-preset-cancel-btn").on("click", function () {
+        self.closeModal();
+      });
+
+      $("#apex-preset-save-confirm-btn").on("click", function () {
+        var name = $("#apex-preset-name-input").val().trim();
+        if (!name) {
+          $("#apex-preset-name-input").addClass("apex-input-error").focus();
+          return;
+        }
+
+        var opts = {
+          padding: $("#apex-opt-padding").is(":checked"),
+          background: $("#apex-opt-background").is(":checked"),
+          border: $("#apex-opt-border").is(":checked"),
+        };
+
+        var settings = self.extractModelSettings(model, opts);
+
+        if ($.isEmptyObject(settings)) {
+          self.showToast("No settings captured. Please select at least one option.", "error");
+          return;
+        }
+
+        self.savePresetAJAX({
+          title: name,
+          target_type: elType,
+          element_name: widgetType,
+          settings: settings,
+        });
+      });
+    },
+
+    /**
+     * Send Save Preset AJAX Request
+     */
+    savePresetAJAX: function (payload) {
+      var self = this;
+      var postData = {
+        action: "apexadfo_save_style_preset",
+        security: self.data.nonce,
+        title: payload.title,
+        target_type: payload.target_type,
+        element_name: payload.element_name,
+        settings_json: JSON.stringify(payload.settings),
+      };
+
+      $.post(self.data.ajax_url, postData, function (response) {
+        if (response && response.success) {
+          self.presets = response.data.presets || self.presets;
+          self.closeModal();
+          self.showToast("Preset '" + payload.title + "' saved successfully!");
+        } else {
+          var errMsg = response && response.data && response.data.message ? response.data.message : "Failed to save preset.";
+          self.showToast(errMsg, "error");
+        }
+      });
+    },
+
+    /**
+     * Modal View: Apply Preset
+     */
+    openApplyModal: function () {
+      var self = this;
+      var activeEl = this.getSelectedElement();
+      if (!activeEl) {
+        this.showToast("Please select a container or widget first.", "error");
+        return;
+      }
+
+      var model = activeEl.model;
+      var elType = model.get("elType") || "container";
+      var presetKeys = Object.keys(self.presets);
+
+      var bodyHtml = "";
+
+      if (!presetKeys.length) {
+        bodyHtml =
+          '<div style="text-align: center; padding: 30px 10px; color: #64748b;">' +
+          '  <p style="font-size: 15px; font-weight: 600; margin-bottom: 6px; color: #1e293b;">No Presets Saved Yet</p>' +
+          '  <p style="font-size: 13px; margin: 0;">Right-click any container or widget and choose <strong>Save as Apex Preset</strong> to create your first preset.</p>' +
+          '</div>';
+      } else {
+        bodyHtml = '<div class="apex-preset-list">';
+        presetKeys.forEach(function (id) {
+          var item = self.presets[id];
+          bodyHtml +=
+            '<div class="apex-preset-item" data-id="' + item.id + '">' +
+            '  <div class="apex-preset-item-info">' +
+            '    <div class="apex-preset-item-name">' + self.escapeHtml(item.title) + "</div>" +
+            '    <div class="apex-preset-item-meta">' + self.escapeHtml(item.target_type.toUpperCase()) + " • " + (item.created_at || "Saved") + "</div>" +
+            "  </div>" +
+            '  <div class="apex-preset-item-actions">' +
+            '    <button class="apex-preset-apply-btn" data-id="' + item.id + '">Apply Preset</button>' +
+            '    <button class="apex-preset-delete-btn" data-id="' + item.id + '">Delete</button>' +
+            "  </div>" +
+            "</div>";
+        });
+        bodyHtml += "</div>";
+      }
+
+      var footerHtml = '<button class="apex-preset-btn-secondary" id="apex-preset-apply-close-btn">Close</button>';
+
+      $("#apex-preset-modal-header-title").text("Apply Apex Preset");
+      $("#apex-preset-modal-body").html(bodyHtml);
+      $("#apex-preset-modal-footer").html(footerHtml);
+
+      this.openModal();
+
+      $("#apex-preset-apply-close-btn").on("click", function () {
+        self.closeModal();
+      });
+
+      // Bind Apply Buttons
+      $(".apex-preset-apply-btn").on("click", function () {
+        var presetId = $(this).data("id");
+        var preset = self.presets[presetId];
+        if (preset) {
+          self.applyPresetToModel(model, preset);
+        }
+      });
+
+      // Bind Delete Buttons
+      $(".apex-preset-delete-btn").on("click", function () {
+        var presetId = $(this).data("id");
+        if (confirm("Are you sure you want to delete this preset?")) {
+          self.deletePresetAJAX(presetId);
+        }
+      });
+    },
+
+    /**
+     * Apply Preset Settings to Elementor Model
+     */
+    applyPresetToModel: function (model, preset) {
+      if (!model || !preset || !preset.settings) return;
+
+      var settings = preset.settings;
+      var modelSettings = model.get("settings");
+
+      // Set each captured setting on the Elementor model
+      Object.keys(settings).forEach(function (key) {
+        modelSettings.set(key, settings[key]);
+      });
+
+      // Trigger Elementor re-render
+      var view = window.elementor.builder.getRegion("content").currentView.children.findByModel(model);
+      if (view && typeof view.render === "function") {
+        view.render();
+      }
+
+      // Also trigger panel settings update if open
+      if (window.elementor.panel && window.elementor.panel.currentView) {
+        window.elementor.panel.currentView.render();
+      }
+
+      this.closeModal();
+      this.showToast("Applied preset '" + preset.title + "'!");
+    },
+
+    /**
+     * Delete Preset via AJAX
+     */
+    deletePresetAJAX: function (presetId) {
+      var self = this;
+      var postData = {
+        action: "apexadfo_delete_style_preset",
+        security: self.data.nonce,
+        preset_id: presetId,
+      };
+
+      $.post(self.data.ajax_url, postData, function (response) {
+        if (response && response.success) {
+          delete self.presets[presetId];
+          self.showToast("Preset deleted.");
+          self.openApplyModal(); // re-render list
+        } else {
+          self.showToast("Failed to delete preset.", "error");
+        }
+      });
+    },
+
+    escapeHtml: function (str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    },
+  };
+
+  $(window).on("elementor/init", function () {
+    PresetsManager.init();
+  });
+
+  // Fallback poll initialization
+  var initTimer = setInterval(function () {
+    if (window.elementor && window.elementor.selection) {
+      clearInterval(initTimer);
+      PresetsManager.init();
+    }
+  }, 1000);
+
+})(jQuery);

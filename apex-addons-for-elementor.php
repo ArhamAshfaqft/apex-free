@@ -94,6 +94,8 @@ final class Loader {
 		\ArhamAshfaq\ApexAddonsForElementor\Free\Quiz_Manager::get_instance();
 		require_once __DIR__ . '/includes/class-setup-wizard.php';
 		\ArhamAshfaq\ApexAddonsForElementor\Free\Setup_Wizard::get_instance();
+		require_once __DIR__ . '/includes/class-style-preset-manager.php';
+		\ArhamAshfaq\ApexAddonsForElementor\Free\Includes\Style_Preset_Manager::get_instance();
 
 		// Register categories
 		add_action( 'elementor/elements/categories_registered', [ $this, 'register_categories' ] );
