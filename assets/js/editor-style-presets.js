@@ -363,7 +363,7 @@
     },
 
     /**
-     * Apply Preset Settings to Elementor Model & Re-render Canvas (Supports Grid & Flex Containers)
+     * Apply Preset Settings to Elementor Model & Re-render Canvas (Elementor 4.1+ Compatible)
      */
     applyPresetToModel: function (activeEl, preset) {
       if (!activeEl || !preset || !preset.settings) return;
@@ -377,35 +377,32 @@
 
       var settings = preset.settings;
 
-      // 1. Update Backbone Model Settings directly
-      var modelSettings = model.get("settings");
-      if (modelSettings) {
-        Object.keys(settings).forEach(function (key) {
-          modelSettings.set(key, settings[key]);
-        });
-        if (typeof modelSettings.trigger === "function") {
-          modelSettings.trigger("change");
-        }
-      }
-
-      // 2. Run Elementor $e Command API to update controls & grid layout structure
-      try {
-        if (window.$e && window.$e.run) {
+      // 1. Run Elementor Official $e Command API (Elementor 3.0+)
+      // $e.run document/elements/settings handles model updates, undo/redo history, and change triggers cleanly
+      if (window.$e && window.$e.run) {
+        try {
           window.$e.run("document/elements/settings", {
             container: container,
             settings: settings,
             options: { external: true },
           });
+        } catch (err) {
+          console.warn("Apex Presets: $e command error, falling back...", err);
+          var modelSettings = model.get("settings");
+          if (modelSettings) {
+            modelSettings.set(settings);
+          }
         }
-      } catch (err) {
-        console.warn("Apex Presets: $e Command fallback...", err);
+      } else {
+        // Fallback: Model settings set
+        var modelSettings = model.get("settings");
+        if (modelSettings) {
+          modelSettings.set(settings);
+        }
       }
 
-      // 3. Trigger change events & view re-render
+      // 2. Safely trigger view update on canvas
       try {
-        model.trigger("change");
-        model.trigger("change:settings");
-
         var view = activeEl.render ? activeEl : (container && container.view ? container.view : null);
         if (view && typeof view.render === "function") {
           view.render();
