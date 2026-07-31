@@ -104,59 +104,26 @@
     },
 
     /**
-     * Extract settings from Elementor Model for preset saving
+     * Extract ALL styling & design settings from Elementor Model
      */
-    extractModelSettings: function (model, options) {
-      options = options || { padding: true, background: true, border: true };
+    extractModelSettings: function (model) {
       var settings = model.get("settings").toJSON();
       var captured = {};
 
-      // Padding & Margin keys across all viewports (Desktop, Tablet, Mobile)
-      if (options.padding) {
-        var layoutKeys = [
-          "padding", "padding_tablet", "padding_mobile",
-          "margin", "margin_tablet", "margin_mobile",
-          "padding_unit", "margin_unit",
-          "align_items", "align_items_tablet", "align_items_mobile",
-          "justify_content", "justify_content_tablet", "justify_content_mobile",
-          "flex_direction", "flex_direction_tablet", "flex_direction_mobile",
-          "gap", "gap_tablet", "gap_mobile", "gap_unit"
-        ];
-        layoutKeys.forEach(function (key) {
-          if (settings[key] !== undefined) {
-            captured[key] = settings[key];
-          }
-        });
-      }
+      // Internal structural keys to exclude (content text, IDs, titles)
+      var excludeKeys = [
+        "id", "_id", "title", "editor", "elType", "widgetType", "elements", "is_inner",
+        "custom_css_prefix", "_element_id", "content", "description", "eyebrow_text"
+      ];
 
-      // Background keys
-      if (options.background) {
-        var bgKeys = [
-          "background_background", "background_color", "background_color_stop",
-          "background_color_b", "background_color_b_stop", "background_gradient_type",
-          "background_gradient_angle", "background_position", "background_repeat",
-          "background_size", "background_attachment"
-        ];
-        bgKeys.forEach(function (key) {
-          if (settings[key] !== undefined) {
-            captured[key] = settings[key];
-          }
-        });
-      }
+      Object.keys(settings).forEach(function (key) {
+        if (excludeKeys.indexOf(key) !== -1) {
+          return;
+        }
 
-      // Border & Box Shadow keys
-      if (options.border) {
-        var borderKeys = [
-          "border_border", "border_width", "border_color",
-          "border_radius", "border_radius_tablet", "border_radius_mobile",
-          "box_shadow_box_shadow", "box_shadow_position"
-        ];
-        borderKeys.forEach(function (key) {
-          if (settings[key] !== undefined) {
-            captured[key] = settings[key];
-          }
-        });
-      }
+        // Capture all layout, padding, margin, background, border, shadow, flex, position, and typography keys
+        captured[key] = settings[key];
+      });
 
       return captured;
     },
@@ -268,9 +235,8 @@
           return;
         }
 
-        // Save all styling options by default
-        var opts = { padding: true, background: true, border: true };
-        var settings = self.extractModelSettings(model, opts);
+        // Save all styling & design settings automatically
+        var settings = self.extractModelSettings(model);
 
         if ($.isEmptyObject(settings)) {
           self.showToast("No settings captured from selected element.", "error");
