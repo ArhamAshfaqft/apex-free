@@ -405,11 +405,11 @@
       }
 
       var settings = preset.settings;
+      var container = activeEl.getContainer ? activeEl.getContainer() : activeEl;
 
       try {
         // Attempt Elementor Official $e Command API first (Elementor 3.0+)
         if (window.$e && window.$e.run) {
-          var container = activeEl.getContainer ? activeEl.getContainer() : activeEl;
           window.$e.run("document/elements/settings", {
             container: container,
             settings: settings,
@@ -438,18 +438,11 @@
         }
       }
 
-      // Re-render Element View safely
+      // Safely trigger view update on canvas without destroying sidebar panel
       try {
-        var view = activeEl.render ? activeEl : (activeEl.getContainer && activeEl.getContainer().view ? activeEl.getContainer().view : null);
+        var view = activeEl.render ? activeEl : (container && container.view ? container.view : null);
         if (view && typeof view.render === "function") {
           view.render();
-        }
-      } catch (e) {}
-
-      // Re-render Elementor Left Control Panel safely
-      try {
-        if (window.elementor.panel && window.elementor.panel.currentView && typeof window.elementor.panel.currentView.render === "function") {
-          window.elementor.panel.currentView.render();
         }
       } catch (e) {}
 
