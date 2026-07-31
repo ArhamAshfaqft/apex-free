@@ -42,7 +42,7 @@ class Setup_Wizard {
 	 */
 	private function __construct() {
 		add_action( 'admin_menu', [ $this, 'register_wizard_page' ], 25 );
-		add_action( 'admin_head', [ $this, 'hide_wizard_menu_item' ] );
+		add_action( 'admin_menu', [ $this, 'hide_wizard_menu_item' ], 99 );
 		add_action( 'admin_init', [ $this, 'maybe_redirect_to_wizard' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_wizard_assets' ] );
 		add_action( 'wp_ajax_apexadfo_save_wizard', [ $this, 'ajax_save_wizard' ] );
@@ -66,7 +66,7 @@ class Setup_Wizard {
 	 * Hide Setup Wizard item from WP Admin sidebar menu
 	 */
 	public function hide_wizard_menu_item() {
-		echo '<style>#adminmenu a[href$="page=apexadfo-setup-wizard"] { display: none !important; }</style>';
+		remove_submenu_page( 'apexadfo-addons', 'apexadfo-setup-wizard' );
 	}
 
 	/**
