@@ -1291,9 +1291,6 @@ final class Loader {
 									<div class="eas-admin-lock-container">
 										<div class="eas-admin-card-header">
 											<div class="eas-admin-card-title-group">
-												<?php if ( ! empty( $data['icon'] ) ) : ?>
-													<span class="dashicons <?php echo esc_attr( $data['icon'] ); ?> eas-admin-card-icon"></span>
-												<?php endif; ?>
 												<div>
 													<h3 class="eas-admin-card-title"><?php echo esc_html( $data['title'] ); ?></h3>
 													<?php if ( ! empty( $data['icon_count'] ) ) : ?>
@@ -4885,10 +4882,9 @@ final class Loader {
 				<?php foreach ( $pro_widgets as $id => $widget ) : ?>
 					<div class="eas-pro-widget-card" data-category="<?php echo esc_attr( $widget['category'] ); ?>">
 						<div class="eas-pro-card-header">
-							<div class="eas-pro-card-icon"><span class="dashicons <?php echo esc_attr( $widget['icon'] ); ?>"></span></div>
+							<h3 class="eas-pro-card-title"><?php echo esc_html( $widget['title'] ); ?></h3>
 							<span class="eas-pro-card-badge">PRO</span>
 						</div>
-						<h3 class="eas-pro-card-title"><?php echo esc_html( $widget['title'] ); ?></h3>
 						<p class="eas-pro-card-desc"><?php echo esc_html( $widget['desc'] ); ?></p>
 						<div class="eas-pro-card-tags">
 							<?php foreach ( $widget['tags'] as $tag ) : ?>
