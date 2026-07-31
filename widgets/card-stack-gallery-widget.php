@@ -68,6 +68,13 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 			],
 		] );
 
+		$repeater->add_control( 'eyebrow', [
+			'label'       => esc_html__( 'Eyebrow / Category', 'apex-addons-for-elementor' ),
+			'type'        => Controls_Manager::TEXT,
+			'default'     => esc_html__( 'Design', 'apex-addons-for-elementor' ),
+			'label_block' => true,
+		] );
+
 		$repeater->add_control( 'title', [
 			'label'       => esc_html__( 'Title', 'apex-addons-for-elementor' ),
 			'type'        => Controls_Manager::TEXT,
@@ -75,15 +82,22 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 			'label_block' => true,
 		] );
 
-		$repeater->add_control( 'subtitle', [
-			'label'       => esc_html__( 'Subtitle / Category', 'apex-addons-for-elementor' ),
+		$repeater->add_control( 'description', [
+			'label'       => esc_html__( 'Description', 'apex-addons-for-elementor' ),
+			'type'        => Controls_Manager::TEXTAREA,
+			'rows'        => 3,
+			'default'     => esc_html__( 'High-quality interactive visual design for modern websites.', 'apex-addons-for-elementor' ),
+		] );
+
+		$repeater->add_control( 'button_text', [
+			'label'       => esc_html__( 'Button Text', 'apex-addons-for-elementor' ),
 			'type'        => Controls_Manager::TEXT,
-			'default'     => esc_html__( 'Design', 'apex-addons-for-elementor' ),
+			'default'     => esc_html__( 'View Project', 'apex-addons-for-elementor' ),
 			'label_block' => true,
 		] );
 
 		$repeater->add_control( 'link', [
-			'label'       => esc_html__( 'Link', 'apex-addons-for-elementor' ),
+			'label'       => esc_html__( 'Link URL', 'apex-addons-for-elementor' ),
 			'type'        => Controls_Manager::URL,
 			'placeholder' => 'https://your-link.com',
 		] );
@@ -94,27 +108,28 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 			'fields'      => $repeater->get_controls(),
 			'default'     => [
 				[
-					'title'    => esc_html__( 'Modern Architecture', 'apex-addons-for-elementor' ),
-					'subtitle' => esc_html__( 'Design 01', 'apex-addons-for-elementor' ),
-					'image'    => [ 'url' => Utils::get_placeholder_image_src() ],
+					'eyebrow'     => esc_html__( 'Architecture', 'apex-addons-for-elementor' ),
+					'title'       => esc_html__( 'Modern Structure', 'apex-addons-for-elementor' ),
+					'description' => esc_html__( 'Clean geometric forms with sustainable materials.', 'apex-addons-for-elementor' ),
+					'button_text' => esc_html__( 'Explore Project', 'apex-addons-for-elementor' ),
+					'image'       => [ 'url' => Utils::get_placeholder_image_src() ],
 				],
 				[
-					'title'    => esc_html__( 'Creative Concept', 'apex-addons-for-elementor' ),
-					'subtitle' => esc_html__( 'Design 02', 'apex-addons-for-elementor' ),
-					'image'    => [ 'url' => Utils::get_placeholder_image_src() ],
+					'eyebrow'     => esc_html__( 'Branding', 'apex-addons-for-elementor' ),
+					'title'       => esc_html__( 'Creative Identity', 'apex-addons-for-elementor' ),
+					'description' => esc_html__( 'Bold visual systems crafted for modern digital brands.', 'apex-addons-for-elementor' ),
+					'button_text' => esc_html__( 'View Case Study', 'apex-addons-for-elementor' ),
+					'image'       => [ 'url' => Utils::get_placeholder_image_src() ],
 				],
 				[
-					'title'    => esc_html__( 'Minimalist Workspace', 'apex-addons-for-elementor' ),
-					'subtitle' => esc_html__( 'Design 03', 'apex-addons-for-elementor' ),
-					'image'    => [ 'url' => Utils::get_placeholder_image_src() ],
-				],
-				[
-					'title'    => esc_html__( 'Digital Portfolio', 'apex-addons-for-elementor' ),
-					'subtitle' => esc_html__( 'Design 04', 'apex-addons-for-elementor' ),
-					'image'    => [ 'url' => Utils::get_placeholder_image_src() ],
+					'eyebrow'     => esc_html__( 'UI/UX Design', 'apex-addons-for-elementor' ),
+					'title'       => esc_html__( 'Fluid Workspace', 'apex-addons-for-elementor' ),
+					'description' => esc_html__( 'Intuitive interface experience engineered for speed.', 'apex-addons-for-elementor' ),
+					'button_text' => esc_html__( 'Discover More', 'apex-addons-for-elementor' ),
+					'image'       => [ 'url' => Utils::get_placeholder_image_src() ],
 				],
 			],
-			'title_field' => '{{{ title }}}',
+			'title_field' => '{{{ title || eyebrow || "Card Item" }}}',
 		] );
 
 		$this->add_group_control(
@@ -132,6 +147,14 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 		$this->start_controls_section( 'section_settings', [
 			'label' => esc_html__( 'Slider Settings', 'apex-addons-for-elementor' ),
 			'tab'   => Controls_Manager::TAB_CONTENT,
+		] );
+
+		$this->add_control( 'show_content', [
+			'label'        => esc_html__( 'Show Card Content / Text', 'apex-addons-for-elementor' ),
+			'type'         => Controls_Manager::SWITCHER,
+			'return_value' => 'yes',
+			'default'      => 'yes',
+			'description'  => esc_html__( 'Toggle OFF to completely hide all text overlays across every card.', 'apex-addons-for-elementor' ),
 		] );
 
 		$this->add_control( 'autoplay', [
@@ -208,7 +231,7 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 				'%'  => [ 'min' => 20, 'max' => 100 ],
 				'vw' => [ 'min' => 20, 'max' => 90 ],
 			],
-			'default'    => [ 'unit' => 'px', 'size' => 320 ],
+			'default'    => [ 'unit' => 'px', 'size' => 340 ],
 			'selectors'  => [
 				'{{WRAPPER}} .eas-card-stack-viewport' => '--eas-stack-width: {{SIZE}}{{UNIT}};',
 			],
@@ -222,7 +245,7 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 				'px' => [ 'min' => 200, 'max' => 1000 ],
 				'vh' => [ 'min' => 20, 'max' => 90 ],
 			],
-			'default'    => [ 'unit' => 'px', 'size' => 420 ],
+			'default'    => [ 'unit' => 'px', 'size' => 450 ],
 			'selectors'  => [
 				'{{WRAPPER}} .eas-card-stack-viewport' => '--eas-stack-height: {{SIZE}}{{UNIT}};',
 			],
@@ -348,14 +371,42 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 
 		// Content Overlay & Typography
 		$this->start_controls_section( 'section_style_content', [
-			'label' => esc_html__( 'Content & Overlay', 'apex-addons-for-elementor' ),
-			'tab'   => Controls_Manager::TAB_STYLE,
+			'label'     => esc_html__( 'Content & Overlay', 'apex-addons-for-elementor' ),
+			'tab'       => Controls_Manager::TAB_STYLE,
+			'condition' => [ 'show_content' => 'yes' ],
 		] );
+
+		$this->add_control( 'eyebrow_color', [
+			'label'     => esc_html__( 'Eyebrow Text Color', 'apex-addons-for-elementor' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#ffffff',
+			'selectors' => [
+				'{{WRAPPER}} .eas-card-stack-eyebrow' => '--eas-eyebrow-color: {{VALUE}};',
+			],
+		] );
+
+		$this->add_control( 'eyebrow_bg_color', [
+			'label'     => esc_html__( 'Eyebrow Background Color', 'apex-addons-for-elementor' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => 'rgba(255, 255, 255, 0.2)',
+			'selectors' => [
+				'{{WRAPPER}} .eas-card-stack-eyebrow' => '--eas-eyebrow-bg: {{VALUE}};',
+			],
+		] );
+
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'eyebrow_typography',
+				'selector' => '{{WRAPPER}} .eas-card-stack-eyebrow',
+			]
+		);
 
 		$this->add_control( 'title_color', [
 			'label'     => esc_html__( 'Title Color', 'apex-addons-for-elementor' ),
 			'type'      => Controls_Manager::COLOR,
 			'default'   => '#ffffff',
+			'separator' => 'before',
 			'selectors' => [
 				'{{WRAPPER}} .eas-card-stack-title' => 'color: {{VALUE}};',
 			],
@@ -369,32 +420,60 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 			]
 		);
 
-		$this->add_control( 'subtitle_color', [
-			'label'     => esc_html__( 'Badge Text Color', 'apex-addons-for-elementor' ),
+		$this->add_control( 'desc_color', [
+			'label'     => esc_html__( 'Description Color', 'apex-addons-for-elementor' ),
 			'type'      => Controls_Manager::COLOR,
-			'default'   => '#ffffff',
+			'default'   => 'rgba(255, 255, 255, 0.85)',
 			'separator' => 'before',
 			'selectors' => [
-				'{{WRAPPER}} .eas-card-stack-badge' => '--eas-badge-color: {{VALUE}};',
-			],
-		] );
-
-		$this->add_control( 'badge_bg_color', [
-			'label'     => esc_html__( 'Badge Background Color', 'apex-addons-for-elementor' ),
-			'type'      => Controls_Manager::COLOR,
-			'default'   => 'rgba(255, 255, 255, 0.2)',
-			'selectors' => [
-				'{{WRAPPER}} .eas-card-stack-badge' => '--eas-badge-bg: {{VALUE}};',
+				'{{WRAPPER}} .eas-card-stack-desc' => '--eas-desc-color: {{VALUE}};',
 			],
 		] );
 
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'subtitle_typography',
-				'selector' => '{{WRAPPER}} .eas-card-stack-badge',
+				'name'     => 'desc_typography',
+				'selector' => '{{WRAPPER}} .eas-card-stack-desc',
 			]
 		);
+
+		$this->add_control( 'btn_color', [
+			'label'     => esc_html__( 'Button Text Color', 'apex-addons-for-elementor' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#111111',
+			'separator' => 'before',
+			'selectors' => [
+				'{{WRAPPER}} .eas-card-stack-btn-link' => '--eas-btn-color: {{VALUE}};',
+			],
+		] );
+
+		$this->add_control( 'btn_bg_color', [
+			'label'     => esc_html__( 'Button Background Color', 'apex-addons-for-elementor' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#ffffff',
+			'selectors' => [
+				'{{WRAPPER}} .eas-card-stack-btn-link' => '--eas-btn-bg: {{VALUE}};',
+			],
+		] );
+
+		$this->add_control( 'btn_hover_color', [
+			'label'     => esc_html__( 'Button Hover Color', 'apex-addons-for-elementor' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#ffffff',
+			'selectors' => [
+				'{{WRAPPER}} .eas-card-stack-btn-link' => '--eas-btn-hover-color: {{VALUE}};',
+			],
+		] );
+
+		$this->add_control( 'btn_hover_bg_color', [
+			'label'     => esc_html__( 'Button Hover Background', 'apex-addons-for-elementor' ),
+			'type'      => Controls_Manager::COLOR,
+			'default'   => '#6d28d9',
+			'selectors' => [
+				'{{WRAPPER}} .eas-card-stack-btn-link' => '--eas-btn-hover-bg: {{VALUE}};',
+			],
+		] );
 
 		$this->end_controls_section();
 
@@ -445,8 +524,9 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 	}
 
 	protected function render() {
-		$settings = $this->get_settings_for_display();
-		$cards    = $settings['cards'] ?? [];
+		$settings     = $this->get_settings_for_display();
+		$cards        = $settings['cards'] ?? [];
+		$show_content = 'yes' === ( $settings['show_content'] ?? 'yes' );
 
 		if ( empty( $cards ) ) {
 			return;
@@ -469,27 +549,40 @@ class Card_Stack_Gallery_Widget extends Widget_Base {
 				<ul class="eas-card-stack-list">
 					<?php foreach ( $cards as $index => $item ) : ?>
 						<?php
-						$title    = sanitize_text_field( $item['title'] ?? '' );
-						$subtitle = sanitize_text_field( $item['subtitle'] ?? '' );
-						$img_url  = ! empty( $item['image']['url'] ) ? Group_Control_Image_Size::get_attachment_image_src( $item['image']['id'], 'image_size', $settings ) : Utils::get_placeholder_image_src();
+						$eyebrow     = sanitize_text_field( $item['eyebrow'] ?? '' );
+						$title       = sanitize_text_field( $item['title'] ?? '' );
+						$description = sanitize_textarea_field( $item['description'] ?? '' );
+						$button_text = sanitize_text_field( $item['button_text'] ?? '' );
+						
+						$img_url = ! empty( $item['image']['url'] ) ? Group_Control_Image_Size::get_attachment_image_src( $item['image']['id'], 'image_size', $settings ) : Utils::get_placeholder_image_src();
 						if ( ! $img_url ) {
 							$img_url = $item['image']['url'] ?? Utils::get_placeholder_image_src();
 						}
 						$link_url    = ! empty( $item['link']['url'] ) ? esc_url( $item['link']['url'] ) : '';
 						$link_target = ! empty( $item['link']['is_external'] ) ? '_blank' : '_self';
+
+						$has_item_content = $show_content && ( '' !== $eyebrow || '' !== $title || '' !== $description || ( '' !== $button_text && '' !== $link_url ) );
 						?>
 						<li class="eas-card-stack-item elementor-repeater-item-<?php echo esc_attr( $item['_id'] ); ?>" data-link="<?php echo esc_attr( $link_url ); ?>" data-target="<?php echo esc_attr( $link_target ); ?>">
 							<div class="eas-card-stack-media">
-								<img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $title ); ?>" class="eas-card-stack-img" loading="lazy" />
+								<img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $title ? $title : $eyebrow ); ?>" class="eas-card-stack-img" loading="lazy" />
 								<div class="eas-card-stack-overlay"></div>
 							</div>
-							<?php if ( '' !== $title || '' !== $subtitle ) : ?>
+							<?php if ( $has_item_content ) : ?>
 								<div class="eas-card-stack-content">
-									<?php if ( '' !== $subtitle ) : ?>
-										<span class="eas-card-stack-badge"><?php echo esc_html( $subtitle ); ?></span>
+									<?php if ( '' !== $eyebrow ) : ?>
+										<span class="eas-card-stack-eyebrow"><?php echo esc_html( $eyebrow ); ?></span>
 									<?php endif; ?>
 									<?php if ( '' !== $title ) : ?>
 										<h4 class="eas-card-stack-title"><?php echo esc_html( $title ); ?></h4>
+									<?php endif; ?>
+									<?php if ( '' !== $description ) : ?>
+										<p class="eas-card-stack-desc"><?php echo esc_html( $description ); ?></p>
+									<?php endif; ?>
+									<?php if ( '' !== $button_text && '' !== $link_url ) : ?>
+										<a href="<?php echo esc_url( $link_url ); ?>" target="<?php echo esc_attr( $link_target ); ?>" class="eas-card-stack-btn-link">
+											<?php echo esc_html( $button_text ); ?>
+										</a>
 									<?php endif; ?>
 								</div>
 							<?php endif; ?>
